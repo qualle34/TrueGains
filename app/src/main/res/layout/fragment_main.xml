@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1d232e"
+    android:orientation="vertical"
+    tools:context=".MainFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/main_button_settings"
+                android:layout_width="54dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#d7dde5"
+                android:text="O"
+                android:textColor="#1D232E"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/main_button_save_workout"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="128dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#d7dde5"
+                android:text="Добавить \n тренеровку"
+                android:textColor="#1D232E"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_button_settings" />
+
+            <Button
+                android:id="@+id/main_button_profile"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:backgroundTint="#d7dde5"
+                android:text="Профиль"
+                android:textColor="#1D232E"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_button_save_workout" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/main_chart_list_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:background="#d7dde5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_button_profile" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
