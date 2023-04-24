@@ -37,9 +37,24 @@
         android:layout_marginTop="24dp"
         android:background="#d7dde5"
         android:orientation="vertical"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_text_title"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/settings_text_title">
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Единицы измерения" />
+
+        <Button
+            android:id="@+id/settings_button_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="Logout" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,9 @@ public class SettingsFragment extends Fragment {
 
             view.findViewById(R.id.settings_button).setOnClickListener(v ->
                     navController.popBackStack());
+
+        view.findViewById(R.id.settings_button_logout).setOnClickListener(v ->
+                navController.navigate(R.id.action_settings_fragment_to_greetingFragment));
             return view;
     }
 

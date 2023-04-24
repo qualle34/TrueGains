@@ -3,44 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/main_fragment">
+    app:startDestination="@id/nav_main_fragment">
 
     <fragment
-        android:id="@+id/main_fragment"
+        android:id="@+id/nav_main_fragment"
         android:name="com.qualle.shapeup.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settings_fragment" />
+            app:destination="@id/nav_settings_fragment" />
         <action
             android:id="@+id/action_main_fragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/nav_profile_fragment" />
         <action
             android:id="@+id/action_main_fragment_to_saveWorkoutResultFragment"
-            app:destination="@id/saveWorkoutResultFragment" />
+            app:destination="@id/nav_save_workout_result_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/settings_fragment"
+        android:id="@+id/nav_settings_fragment"
         android:name="com.qualle.shapeup.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_mainFragment"
-            app:destination="@id/main_fragment" />
+            app:destination="@id/nav_main_fragment" />
+        <action
+            android:id="@+id/action_settings_fragment_to_greetingFragment"
+            app:destination="@id/nav_greeting_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/nav_profile_fragment"
         android:name="com.qualle.shapeup.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_main_fragment"
-            app:destination="@id/main_fragment" />
+            app:destination="@id/nav_main_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/saveWorkoutResultFragment"
+        android:id="@+id/nav_save_workout_result_fragment"
         android:name="com.qualle.shapeup.SaveWorkoutResultFragment"
         android:label="fragment_save_workout_result"
         tools:layout="@layout/fragment_save_workout_result" />
+
+
+    <fragment
+        android:id="@+id/nav_greeting_fragment"
+        android:name="com.qualle.shapeup.GreetingFragment"
+        android:label="fragment_greeting"
+        tools:layout="@layout/fragment_greeting" >
+        <action
+            android:id="@+id/action_greetingFragment_to_registrationFragment"
+            app:destination="@id/nav_registration_fragment" />
+        <action
+            android:id="@+id/action_greetingFragment_to_loginFragment"
+            app:destination="@id/nav_login_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_login_fragment"
+        android:name="com.qualle.shapeup.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_greetingFragment"
+            app:destination="@id/nav_greeting_fragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_registration_fragment"
+        android:name="com.qualle.shapeup.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_greetingFragment"
+            app:destination="@id/nav_greeting_fragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+    </fragment>
 </navigation>

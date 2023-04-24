@@ -18,14 +18,12 @@ public class MainFragment extends Fragment {
         NavController navController = NavHostFragment.findNavController(this);
 
         view.findViewById(R.id.main_button_settings).setOnClickListener(v ->
-                navController.navigate(R.id.settings_fragment));
+                navController.navigate(R.id.action_mainFragment_to_settingsFragment));
         view.findViewById(R.id.main_button_profile).setOnClickListener(v ->
-                navController.navigate(R.id.profileFragment));
+                navController.navigate(R.id.action_main_fragment_to_profileFragment));
 
-//        view.findViewById(R.id.main_button_save_workout).setOnClickListener(v ->
-//                navController.navigate(R.id.saveWorkoutResultFragment));
         view.findViewById(R.id.main_button_save_workout).setOnClickListener(v ->
-                navController.navigate(R.id.saveWorkoutResultFragment));
+                navController.navigate(R.id.action_main_fragment_to_saveWorkoutResultFragment));
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
