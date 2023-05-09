@@ -33,11 +33,12 @@
                 android:id="@+id/main_button_save_workout"
                 android:layout_width="170dp"
                 android:layout_height="70dp"
+                android:layout_gravity="right"
                 android:layout_marginTop="128dp"
                 android:layout_marginEnd="16dp"
-                android:backgroundTint="#d7dde5"
+                android:backgroundTint="@color/secondary"
                 android:text="Добавить \n тренеровку"
-                android:textColor="#1D232E"
+                android:textColor="@color/primary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_button_settings" />
 
@@ -47,9 +48,9 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="64dp"
-                android:backgroundTint="#d7dde5"
+                android:backgroundTint="@color/secondary"
                 android:text="Профиль"
-                android:textColor="#1D232E"
+                android:textColor="@color/primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_button_save_workout" />
 
@@ -65,6 +66,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_button_profile" />
+
+            <Button
+                android:id="@+id/main_button_chart_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:backgroundTint="@color/secondary"
+                android:text="Посмотреть все графики"
+                android:textColor="@color/primary" />
 
 
         </LinearLayout>

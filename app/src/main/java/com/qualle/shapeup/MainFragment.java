@@ -25,6 +25,9 @@ public class MainFragment extends Fragment {
         view.findViewById(R.id.main_button_save_workout).setOnClickListener(v ->
                 navController.navigate(R.id.action_main_fragment_to_saveWorkoutResultFragment));
 
+        view.findViewById(R.id.main_button_chart_menu).setOnClickListener(v ->
+                navController.navigate(R.id.action_nav_main_fragment_to_сhartMenuFragment));
+
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .add(R.id.main_chart_list_container, ChartListFragment.class, null)
