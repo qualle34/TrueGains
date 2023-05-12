@@ -25,21 +25,19 @@ import java.util.ArrayList;
 
 public class ChartFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private int mParam1;
-    private int mParam2;
+    private static final String ARG_EXERCISE = "exercise";
+
+    private long exercise;
 
     private LineChart chart;
 
     public ChartFragment() {
     }
 
-    public static ChartFragment newInstance(int param1, int param2) {
+    public static ChartFragment newInstance(long exercise) {
         ChartFragment fragment = new ChartFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
-        args.putInt(ARG_PARAM2, param2);
+        args.putLong(ARG_EXERCISE, exercise);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,8 +46,7 @@ public class ChartFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getInt(ARG_PARAM2);
+            exercise = getArguments().getLong(ARG_EXERCISE);
         }
     }
 
@@ -67,7 +64,7 @@ public class ChartFragment extends Fragment {
 
         chart = v.findViewById(R.id.chart1);
         chart.setViewPortOffsets(0, 0, 0, 0);
-        chart.setBackgroundColor(Color.rgb(215, 221, 229));
+        chart.setBackgroundColor(Color.rgb(215, 221, 229)); // todo
 
         chart.getDescription().setEnabled(false);
         chart.setTouchEnabled(false);
@@ -96,24 +93,19 @@ public class ChartFragment extends Fragment {
 
         chart.invalidate();
 
-        setData(mParam1, mParam2);
+        ArrayList<Entry> values = getData(exercise);
+
+        setData(values);
 
         return v;
     }
 
-    private void setData(int count, float range) {
 
-        ArrayList<Entry> values = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            float val = (float) (Math.random() * (range + 1)) + 20;
-            values.add(new Entry(i, val));
-        }
+    private void setData(ArrayList<Entry> values) {
 
         LineDataSet set1;
 
-        if (chart.getData() != null &&
-                chart.getData().getDataSetCount() > 0) {
+        if (chart.getData() != null && chart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
             set1.setValues(values);
             chart.getData().notifyDataChanged();
@@ -150,4 +142,20 @@ public class ChartFragment extends Fragment {
             chart.setData(data);
         }
     }
+
+    private ArrayList<Entry> getData(long exercise) {
+
+        int count = 12;
+        float range = 25;
+
+        ArrayList<Entry> values = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            float val = (float) (Math.random() * (range + 1)) + 20;
+            values.add(new Entry(i, val));
+        }
+
+        return values;
+    }
+
 }

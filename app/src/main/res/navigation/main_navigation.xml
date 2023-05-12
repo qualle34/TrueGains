@@ -89,7 +89,15 @@
     </fragment>
     <fragment
         android:id="@+id/nav_chart_menu_fragment"
-        android:name="com.qualle.shapeup.СhartMenuFragment"
+        android:name="com.qualle.shapeup.ChartMenuFragment"
         android:label="fragment_chart_menu"
-        tools:layout="@layout/fragment_chart_menu" />
+        tools:layout="@layout/fragment_chart_menu" >
+        <action
+            android:id="@+id/action_nav_chart_menu_fragment_to_chartListFragment"
+            app:destination="@id/nav_chart_list_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_chart_list_fragment"
+        android:name="com.qualle.shapeup.ChartListFragment"
+        android:label="ChartListFragment" />
 </navigation>

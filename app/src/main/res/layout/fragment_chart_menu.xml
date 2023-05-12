@@ -4,48 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".СhartMenuFragment">
+    tools:context=".ChartMenuFragment">
 
     <TableRow
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:weightSum="1">
 
-
-        <TextView
-            android:id="@+id/chart_menu_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:gravity="center"
+        <soup.neumorphism.NeumorphTextView
+            android:id="@+id/textview"
+            style="@style/Widget.Neumorph.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="Charts menu"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold" />
     </TableRow>
-
 
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/chart_menu_button_body"
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/chart_menu_button_size"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dip"
             android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/background_round_corners"
+            android:drawablePadding="8dp"
             android:text="Размеры \nтела" />
 
-        <Button
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/chart_menu_button_base"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dip"
             android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/background_round_corners"
+            android:drawablePadding="8dp"
             android:text="Базовые \nупражнения" />
     </TableRow>
 
@@ -53,22 +55,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <Button
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/chart_menu_button_chest"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dip"
             android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/background_round_corners"
+            android:drawablePadding="8dp"
             android:text="Грудь" />
 
-        <Button
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/chart_menu_button_back"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dip"
             android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/background_round_corners"
+            android:drawablePadding="8dp"
             android:text="Спина" />
 
     </TableRow>
@@ -77,22 +81,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <Button
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/chart_menu_button_biceps"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dip"
             android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/background_round_corners"
+            android:drawablePadding="8dp"
             android:text="Бицепс" />
 
-        <Button
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/chart_menu_button_triceps"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dip"
             android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/background_round_corners"
+            android:drawablePadding="8dp"
             android:text="Трицепс" />
     </TableRow>
 
@@ -100,23 +106,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <Button
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/chart_menu_button_shoulders"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dip"
             android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/background_round_corners"
+            android:drawablePadding="8dp"
             android:text="Плечи" />
 
-        <Button
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/chart_menu_button_legs"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dip"
             android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/background_round_corners"
-            android:text="Ноги " />
+            android:drawablePadding="8dp"
+            android:text="Ноги" />
     </TableRow>
 
 </TableLayout>

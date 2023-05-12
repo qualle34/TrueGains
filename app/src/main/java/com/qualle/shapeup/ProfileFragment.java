@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment {
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
 
-        Fragment fragment = ChartFragment.newInstance(45, 100);
+        Fragment fragment = ChartFragment.newInstance(1);
 
 //        ft.add(R.id.profile_weight_chart, fragment, null);
         ft.commit();

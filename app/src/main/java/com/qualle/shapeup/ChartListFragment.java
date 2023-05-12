@@ -15,31 +15,81 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.qualle.shapeup.placeholder.PlaceholderContent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChartListFragment extends Fragment {
+
+    private static final String ARG_TYPE = "type";
+    private ChartListType type;
+
+    public ChartListFragment() {
+    }
+
+    public static ChartFragment newInstance(ChartListType type) {
+        ChartFragment fragment = new ChartFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_TYPE, type.name());
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            type = ChartListType.valueOf(getArguments().getString(ARG_TYPE));
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_chart_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_chart_list, container, false);
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
 
-        Fragment fragment = ChartFragment.newInstance(45, 100);
-        Fragment fragment2 = ChartFragment.newInstance(20, 100);
-        Fragment fragment3 = ChartFragment.newInstance(70, 100);
+        LinearLayout linearLayout = view.findViewById(R.id.chart_list_container);
+        List<String> s = new ArrayList<>();
 
-        ft.add(R.id.chart_container_first, fragment, null);
-        ft.add(R.id.chart_container_second, fragment2, null);
-        ft.add(R.id.chart_container_third, fragment3, null);
 
-//        for (String catalog : mCatalogs) {
-//            Fragment fragment = HighlightedProductFragment.newInstance(catalog);
-//            ft.add(R.id.container, fragment, catalog);
-//        }
+        if (ChartListType.BASE.equals(type)) {
+            s.add("first");
+            s.add("second");
+            s.add("third");
+        }
+
+        if (!ChartListType.BASE.equals(type)) {
+            s.add("first");
+        }
+
+        for (int i = 0; i < s.size(); i++) {
+            FrameLayout chart = new FrameLayout(view.getContext());
+            chart.setId(i + 1);
+
+            ft.replace(chart.getId(), ChartFragment.newInstance(i));
+
+            linearLayout.addView(chart);
+        }
+
         ft.commit();
 
-        return v;
+        return view;
+    }
+
+    static enum ChartListType {
+        SIZE,
+        BASE,
+        BACK,
+        CHEST,
+        BICEPS,
+        TRICEPS,
+        SHOULDERS,
+        LEGS
     }
 }
