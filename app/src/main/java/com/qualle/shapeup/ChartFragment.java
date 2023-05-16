@@ -1,6 +1,7 @@
 package com.qualle.shapeup;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -62,9 +64,9 @@ public class ChartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
 
-        chart = v.findViewById(R.id.chart1);
+        chart = v.findViewById(R.id.chart);
         chart.setViewPortOffsets(0, 0, 0, 0);
-        chart.setBackgroundColor(Color.rgb(215, 221, 229)); // todo
+        chart.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.white, null)); // todo
 
         chart.getDescription().setEnabled(false);
         chart.setTouchEnabled(false);
@@ -78,10 +80,14 @@ public class ChartFragment extends Fragment {
         chart.getLegend().setEnabled(false);
 
         XAxis x = chart.getXAxis();
-        x.setEnabled(false);
+        x.setLabelCount(4, false);
+        x.setTextColor(Color.DKGRAY);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+        x.setDrawGridLines(false);
+        x.setAxisLineColor(Color.DKGRAY);
 
         YAxis y = chart.getAxisLeft();
-        y.setLabelCount(6, false);
+        y.setLabelCount(4, false);
         y.setTextColor(Color.DKGRAY);
         y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
         y.setDrawGridLines(false);

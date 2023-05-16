@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:layout_height="wrap_content">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart1"
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/card"
+        style="@style/Widget.Neumorph.CardView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:elevation="2dp"
-        android:background="@drawable/shadow_black"
-        />
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"/>
+
+    </soup.neumorphism.NeumorphCardView>
 
 </RelativeLayout>
