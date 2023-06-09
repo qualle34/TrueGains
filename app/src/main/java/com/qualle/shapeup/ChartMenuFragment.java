@@ -9,35 +9,36 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.qualle.shapeup.databinding.FragmentChartMenuBinding;
+
 public class ChartMenuFragment extends Fragment {
 
+    private FragmentChartMenuBinding binding;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentChartMenuBinding.inflate(inflater, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_chart_menu, container, false);
+        binding.chartMenuButtonSize.setOnClickListener(buildListener(ChartListFragment.ChartListType.SIZE));
+        binding.chartMenuButtonBase.setOnClickListener(buildListener(ChartListFragment.ChartListType.BASE));
+        binding.chartMenuButtonChest.setOnClickListener(buildListener(ChartListFragment.ChartListType.CHEST));
+        binding.chartMenuButtonBack.setOnClickListener(buildListener(ChartListFragment.ChartListType.BACK));
+        binding.chartMenuButtonBiceps.setOnClickListener(buildListener(ChartListFragment.ChartListType.BICEPS));
+        binding.chartMenuButtonTriceps.setOnClickListener(buildListener(ChartListFragment.ChartListType.TRICEPS));
+        binding.chartMenuButtonShoulders.setOnClickListener(buildListener(ChartListFragment.ChartListType.SHOULDERS));
+        binding.chartMenuButtonLegs.setOnClickListener(buildListener(ChartListFragment.ChartListType.LEGS));
 
-        view.findViewById(R.id.chart_menu_button_size).setOnClickListener(buildListener(ChartListFragment.ChartListType.SIZE));
-        view.findViewById(R.id.chart_menu_button_base).setOnClickListener(buildListener(ChartListFragment.ChartListType.BASE));
-        view.findViewById(R.id.chart_menu_button_chest).setOnClickListener(buildListener(ChartListFragment.ChartListType.CHEST));
-        view.findViewById(R.id.chart_menu_button_back).setOnClickListener(buildListener(ChartListFragment.ChartListType.BACK));
-        view.findViewById(R.id.chart_menu_button_biceps).setOnClickListener(buildListener(ChartListFragment.ChartListType.BICEPS));
-        view.findViewById(R.id.chart_menu_button_triceps).setOnClickListener(buildListener(ChartListFragment.ChartListType.TRICEPS));
-        view.findViewById(R.id.chart_menu_button_shoulders).setOnClickListener(buildListener(ChartListFragment.ChartListType.SHOULDERS));
-        view.findViewById(R.id.chart_menu_button_legs).setOnClickListener(buildListener(ChartListFragment.ChartListType.LEGS));
-
-        return view;
+        return binding.getRoot();
     }
 
     private View.OnClickListener buildListener(ChartListFragment.ChartListType type) {
-
         NavController navController = NavHostFragment.findNavController(this);
 
         Bundle bundle = new Bundle();
 
         return (v -> {
             bundle.putString("type", type.name());
-            navController.navigate(R.id.action_nav_chart_menu_fragment_to_chartListFragment, bundle);
+            navController.navigate(R.id.action_nav_chart_menu_fragment_to_nav_chart_list_fragment, bundle);
         }
         );
     }

@@ -8,96 +8,120 @@
     <fragment
         android:id="@+id/nav_main_fragment"
         android:name="com.qualle.shapeup.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/nav_settings_fragment" />
-        <action
-            android:id="@+id/action_main_fragment_to_profileFragment"
+            android:id="@+id/action_nav_main_fragment_to_nav_profile_fragment"
             app:destination="@id/nav_profile_fragment" />
         <action
-            android:id="@+id/action_main_fragment_to_saveWorkoutResultFragment"
-            app:destination="@id/nav_save_workout_result_fragment" />
+            android:id="@+id/action_nav_main_fragment_to_nav_save_workout_fragment"
+            app:destination="@id/nav_save_workout_fragment" />
         <action
-            android:id="@+id/action_nav_main_fragment_to_сhartMenuFragment"
+            android:id="@+id/action_nav_main_fragment_to_nav_chart_menu_fragment"
             app:destination="@id/nav_chart_menu_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_settings_fragment"
         android:name="com.qualle.shapeup.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        tools:layout="@layout/fragment_settings">
         <action
-            android:id="@+id/action_settingsFragment_to_mainFragment"
-            app:destination="@id/nav_main_fragment" />
-        <action
-            android:id="@+id/action_settings_fragment_to_greetingFragment"
+            android:id="@+id/action_nav_settings_fragment_to_nav_greeting_fragment"
             app:destination="@id/nav_greeting_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_profile_fragment"
         android:name="com.qualle.shapeup.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_main_fragment"
+            android:id="@+id/action_nav_profile_fragment_to_nav_main_fragment"
             app:destination="@id/nav_main_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_settings_fragment"
+            app:destination="@id/nav_settings_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_profile_security_fragment"
+            app:destination="@id/nav_profile_security_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_profile_data_fragment"
+            app:destination="@id/nav_profile_data_fragment" />
     </fragment>
-    <fragment
-        android:id="@+id/nav_save_workout_result_fragment"
-        android:name="com.qualle.shapeup.SaveWorkoutResultFragment"
-        android:label="fragment_save_workout_result"
-        tools:layout="@layout/fragment_save_workout_result" />
 
+    <fragment
+        android:id="@+id/nav_save_workout_fragment"
+        android:name="com.qualle.shapeup.SaveWorkoutFragment"
+        tools:layout="@layout/fragment_save_workout">
+        <action
+            android:id="@+id/action_nav_save_workout_fragment_to_nav_save_exercise_fragment"
+            app:destination="@id/nav_save_exercise_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_greeting_fragment"
         android:name="com.qualle.shapeup.GreetingFragment"
-        android:label="fragment_greeting"
-        tools:layout="@layout/fragment_greeting" >
+        tools:layout="@layout/fragment_greeting">
         <action
-            android:id="@+id/action_greetingFragment_to_registrationFragment"
+            android:id="@+id/action_nav_greeting_fragment_to_nav_registration_fragment"
             app:destination="@id/nav_registration_fragment" />
         <action
-            android:id="@+id/action_greetingFragment_to_loginFragment"
+            android:id="@+id/action_nav_greeting_fragment_to_nav_login_fragment"
             app:destination="@id/nav_login_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_login_fragment"
         android:name="com.qualle.shapeup.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_greetingFragment"
+            android:id="@+id/action_nav_login_fragment_to_nav_greeting_fragment"
             app:destination="@id/nav_greeting_fragment" />
         <action
-            android:id="@+id/action_loginFragment_to_main_fragment"
+            android:id="@+id/action_nav_login_fragment_to_nav_main_fragment"
             app:destination="@id/nav_main_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_registration_fragment"
         android:name="com.qualle.shapeup.RegistrationFragment"
-        android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
-            android:id="@+id/action_registrationFragment_to_greetingFragment"
+            android:id="@+id/action_nav_registration_fragment_to_nav_greeting_fragment"
             app:destination="@id/nav_greeting_fragment" />
         <action
-            android:id="@+id/action_registrationFragment_to_main_fragment"
+            android:id="@+id/action_nav_registration_fragment_to_nav_main_fragment"
             app:destination="@id/nav_main_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_chart_menu_fragment"
         android:name="com.qualle.shapeup.ChartMenuFragment"
-        android:label="fragment_chart_menu"
-        tools:layout="@layout/fragment_chart_menu" >
+        tools:layout="@layout/fragment_chart_menu">
         <action
-            android:id="@+id/action_nav_chart_menu_fragment_to_chartListFragment"
+            android:id="@+id/action_nav_chart_menu_fragment_to_nav_chart_list_fragment"
             app:destination="@id/nav_chart_list_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_chart_list_fragment"
-        android:name="com.qualle.shapeup.ChartListFragment"
-        android:label="ChartListFragment" />
+        android:name="com.qualle.shapeup.ChartListFragment" />
+
+    <fragment
+        android:id="@+id/nav_save_exercise_fragment"
+        android:name="com.qualle.shapeup.SaveExerciseFragment"
+        tools:layout="@layout/fragment_save_exercise">
+        <action
+            android:id="@+id/action_nav_save_exercise_fragment_to_nav_save_workout_fragment"
+            app:destination="@id/nav_save_workout_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_profile_data_fragment"
+        android:name="com.qualle.shapeup.ProfileDataFragment"
+        tools:layout="@layout/fragment_profile_data" />
+
+    <fragment
+        android:id="@+id/nav_profile_security_fragment"
+        android:name="com.qualle.shapeup.ProfileSecurityFragment"
+        tools:layout="@layout/fragment_profile_security" />
+
 </navigation>

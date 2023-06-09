@@ -22,7 +22,7 @@ public class SettingsFragment extends Fragment {
                     navController.popBackStack());
 
         view.findViewById(R.id.settings_button_logout).setOnClickListener(v ->
-                navController.navigate(R.id.action_settings_fragment_to_greetingFragment));
+                navController.navigate(R.id.action_nav_settings_fragment_to_nav_greeting_fragment));
             return view;
     }
 

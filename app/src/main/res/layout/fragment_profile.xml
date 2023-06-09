@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="none"
     tools:context=".ProfileFragment">
 
     <LinearLayout
         android:id="@+id/profile_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/flat_card"
@@ -24,8 +25,7 @@
                 android:id="@+id/profile_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                tools:src="@tools:sample/avatars" />
+                android:scaleType="centerCrop" />
 
         </soup.neumorphism.NeumorphCardView>
 
@@ -44,184 +44,175 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
             android:text="Количество тренировок: 20"
             android:textColor="#87949A"
-            android:layout_marginBottom="16dp"
             android:textSize="12sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="8dp"
-            android:text="Name"
-            android:textColor="@color/primary_dark"
-            android:textStyle="bold" />
-
-        <soup.neumorphism.NeumorphCardView
-            android:id="@+id/edittext_card01"
-            style="@style/Widget.Neumorph.CardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="24dp">
-
-            <EditText
-                android:id="@+id/profile_edit_name"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@null"
-                android:inputType="text"
-                android:singleLine="true"
-                android:text="Антон" />
-
-        </soup.neumorphism.NeumorphCardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="8dp"
-            android:text="Gender"
-            android:textColor="@color/primary_dark"
-            android:textStyle="bold" />
-
-        <soup.neumorphism.NeumorphCardView
-            android:id="@+id/edittext_card"
-            style="@style/Widget.Neumorph.CardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="24dp">
-
-            <Spinner
-                android:id="@+id/profile_spinner_gender"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="16dp"
-                android:spinnerMode="dropdown" />
-
-        </soup.neumorphism.NeumorphCardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="8dp"
-            android:text="Birthdate"
-            android:textColor="@color/primary_dark"
-            android:textStyle="bold" />
-
-        <soup.neumorphism.NeumorphCardView
-            android:id="@+id/edittext_card1"
-            style="@style/Widget.Neumorph.CardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="24dp">
-
-            <EditText
-                android:id="@+id/profile_edit_birthdate"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@null"
-                android:singleLine="true"
-                android:text="01/06/2001" />
-
-        </soup.neumorphism.NeumorphCardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="8dp"
-            android:text="Height"
-            android:textColor="@color/primary_dark"
-            android:textStyle="bold" />
-
-        <soup.neumorphism.NeumorphCardView
-            android:id="@+id/edittext_card3"
-            style="@style/Widget.Neumorph.CardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="24dp">
-
-            <EditText
-                android:id="@+id/profile_edit_height"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@null"
-                android:singleLine="true"
-                android:text="174 см" />
-
-        </soup.neumorphism.NeumorphCardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="8dp"
-            android:text="Weight"
-            android:textColor="@color/primary_dark"
-            android:textStyle="bold" />
-
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/profile_chart_container"
+            android:id="@+id/profile_chart_weight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="8dp"
-            android:text="Email"
-            android:textColor="@color/primary_dark"
-            android:textStyle="bold" />
+            android:minHeight="120dp"/>
 
         <soup.neumorphism.NeumorphCardView
-            android:id="@+id/edittext_card2"
             style="@style/Widget.Neumorph.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="24dp">
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp">
 
-            <EditText
-                android:id="@+id/profile_edit_email"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@null"
-                android:singleLine="true"
-                android:text="antonsamoilo@gmail.com" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        </soup.neumorphism.NeumorphCardView>
+                <LinearLayout
+                    android:id="@+id/profile_card_user_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="6dp"
+                    android:layout_marginBottom="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="8dp"
-            android:text="Password"
-            android:textColor="@color/primary_dark"
-            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="User data"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
 
-        <soup.neumorphism.NeumorphCardView
-            android:id="@+id/edittext_card21"
-            style="@style/Widget.Neumorph.CardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="24dp">
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1" />
 
-            <EditText
-                android:id="@+id/profile_edit_password"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@null"
-                android:singleLine="true"
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="centerCrop"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_arrow_right" />
 
-                android:text="* * * * * * * * * *" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_gray"/>
+
+                <LinearLayout
+                    android:id="@+id/profile_card_security"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="6dp"
+                    android:layout_marginVertical="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="Security"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="centerCrop"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_arrow_right" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_gray"/>
+
+                <LinearLayout
+                    android:id="@+id/profile_card_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="6dp"
+                    android:layout_marginVertical="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="Settings"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="centerCrop"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_arrow_right" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_gray"/>
+
+                <LinearLayout
+                    android:id="@+id/profile_card_additional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="6dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="Additional"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="centerCrop"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_arrow_right" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
 
         </soup.neumorphism.NeumorphCardView>
 

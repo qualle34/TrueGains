@@ -18,9 +18,9 @@ public class GreetingFragment extends Fragment {
         NavController navController = NavHostFragment.findNavController(this);
 
         view.findViewById(R.id.greeting_button_login).setOnClickListener(v ->
-                navController.navigate(R.id.action_greetingFragment_to_loginFragment));
+                navController.navigate(R.id.action_nav_greeting_fragment_to_nav_login_fragment));
         view.findViewById(R.id.greeting_button_registration).setOnClickListener(v ->
-                navController.navigate(R.id.action_greetingFragment_to_registrationFragment));
+                navController.navigate(R.id.action_nav_greeting_fragment_to_nav_registration_fragment));
         return view;
     }
 }

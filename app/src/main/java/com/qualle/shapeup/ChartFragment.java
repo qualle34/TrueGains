@@ -1,7 +1,5 @@
 package com.qualle.shapeup;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -18,28 +15,35 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IFillFormatter;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.qualle.shapeup.databinding.FragmentChartBinding;
+import com.qualle.shapeup.model.enums.ChartType;
+import com.qualle.shapeup.util.ChartValueFormatter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class ChartFragment extends Fragment {
+    private static final String ARG_TITLE = "title";
+    private static final String ARG_DATA = "data";
+    private static final String ARG_TYPE = "type";
 
-    private static final String ARG_EXERCISE = "exercise";
+    private FragmentChartBinding binding;
 
-    private long exercise;
-
-    private LineChart chart;
+    private String title;
+    private ChartType type;
+    private ArrayList<Entry> data;
 
     public ChartFragment() {
     }
 
-    public static ChartFragment newInstance(long exercise) {
+    public static ChartFragment newInstance(String title, ChartType type, Map<Float, Float> data) {
         ChartFragment fragment = new ChartFragment();
         Bundle args = new Bundle();
-        args.putLong(ARG_EXERCISE, exercise);
+        args.putString(ARG_TITLE, title);
+        args.putSerializable(ARG_TYPE, type);
+        args.putSerializable(ARG_DATA, (Serializable) data);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,66 +52,60 @@ public class ChartFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            exercise = getArguments().getLong(ARG_EXERCISE);
+            title = getArguments().getString(ARG_TITLE);
+            type = (ChartType) getArguments().getSerializable(ARG_TYPE);
+            data = convertData((Map<Float, Float>) getArguments().getSerializable(ARG_DATA));
         }
-    }
-
-    protected Context context;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_chart, container, false);
+        binding = FragmentChartBinding.inflate(inflater, container, false);
 
-        chart = v.findViewById(R.id.chart);
-        chart.setViewPortOffsets(0, 0, 0, 0);
-        chart.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.white, null)); // todo
+        binding.chartTextTitle.setText(title);
+        LineChart chart = binding.chart;
 
+        // no description text
         chart.getDescription().setEnabled(false);
+
         chart.setTouchEnabled(false);
         chart.setDragEnabled(false);
-        chart.setScaleEnabled(false); // todo
-        chart.setPinchZoom(false); // if disabled, scaling can be done on x- and y-axis separately
+        chart.setScaleEnabled(false);
+        chart.setPinchZoom(false);
 
         chart.setDrawGridBackground(false);
         chart.setMaxHighlightDistance(300);
 
-        chart.getLegend().setEnabled(false);
-
         XAxis x = chart.getXAxis();
-        x.setLabelCount(4, false);
-        x.setTextColor(Color.DKGRAY);
-        x.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
-        x.setDrawGridLines(false);
-        x.setAxisLineColor(Color.DKGRAY);
+        x.setEnabled(true);
+        x.setLabelCount(4, true);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x.setDrawGridLines(true);
+
+        if (ChartType.DATE.equals(type)) {
+            x.setValueFormatter(ChartValueFormatter.getDateValueFormatter());
+        }
 
         YAxis y = chart.getAxisLeft();
-        y.setLabelCount(4, false);
-        y.setTextColor(Color.DKGRAY);
-        y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
         y.setDrawGridLines(false);
-        y.setAxisLineColor(Color.DKGRAY);
+        y.setGranularity(1f);
+        y.setAxisMinimum(0f);
+        y.setAxisMaximum(7f);
 
         chart.getAxisRight().setEnabled(false);
+        chart.getLegend().setEnabled(false);
 
         chart.animateXY(2000, 2000);
 
         chart.invalidate();
 
-        ArrayList<Entry> values = getData(exercise);
+        setData(chart, data);
 
-        setData(values);
-
-        return v;
+        return binding.getRoot();
     }
 
 
-    private void setData(ArrayList<Entry> values) {
+    private void setData(LineChart chart, ArrayList<Entry> values) {
 
         LineDataSet set1;
 
@@ -116,28 +114,24 @@ public class ChartFragment extends Fragment {
             set1.setValues(values);
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
+
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(values, "DataSet 1");
+            set1 = new LineDataSet(values, "DataSet");
 
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-            set1.setCubicIntensity(0.2f);
+            set1.setCubicIntensity(0.05f);
             set1.setDrawFilled(true);
-            set1.setDrawCircles(false);
+            set1.setDrawCircles(true);
             set1.setLineWidth(1.8f);
-            set1.setCircleRadius(4f);
+            set1.setCircleRadius(2f);
             set1.setCircleColor(Color.WHITE);
-            set1.setHighLightColor(Color.rgb(244, 117, 117));
             set1.setColor(Color.WHITE);
             set1.setFillColor(Color.WHITE);
             set1.setFillAlpha(100);
             set1.setDrawHorizontalHighlightIndicator(false);
-            set1.setFillFormatter(new IFillFormatter() {
-                @Override
-                public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-                    return chart.getAxisLeft().getAxisMinimum();
-                }
-            });
+
+            set1.setFillFormatter((dataSet, dataProvider) -> chart.getAxisLeft().getAxisMinimum());
 
             // create a data object with the data sets
             LineData data = new LineData(set1);
@@ -149,10 +143,10 @@ public class ChartFragment extends Fragment {
         }
     }
 
-    private ArrayList<Entry> getData(long exercise) {
+    private ArrayList<Entry> getData() {
 
-        int count = 12;
-        float range = 25;
+        int count = 10;
+        float range = 100;
 
         ArrayList<Entry> values = new ArrayList<>();
 
@@ -161,6 +155,19 @@ public class ChartFragment extends Fragment {
             values.add(new Entry(i, val));
         }
 
+        return values;
+    }
+
+    private ArrayList<Entry> convertData(Map<Float, Float> data) {
+        ArrayList<Entry> values = new ArrayList<>();
+        getData();
+        if (data == null) { // todo throw exception
+            return getData();
+        }
+
+        data.forEach((k, v) -> {
+            values.add(new Entry(k, v));
+        });
         return values;
     }
 

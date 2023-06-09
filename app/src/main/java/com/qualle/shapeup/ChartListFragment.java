@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.qualle.shapeup.model.enums.ChartType;
 import com.qualle.shapeup.placeholder.PlaceholderContent;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class ChartListFragment extends Fragment {
             FrameLayout chart = new FrameLayout(view.getContext());
             chart.setId(i + 1);
 
-            ft.replace(chart.getId(), ChartFragment.newInstance(i));
+            ft.replace(chart.getId(), ChartFragment.newInstance("Bench press", ChartType.NUMBER, null));
 
             linearLayout.addView(chart);
         }

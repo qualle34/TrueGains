@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SaveExerciseFragment">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <soup.neumorphism.NeumorphTextView
+                android:id="@+id/textview"
+                style="@style/Widget.Neumorph.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Save exercise"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:text="Exercise"
+                android:textColor="@color/primary_dark"
+                android:textStyle="bold" />
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/edittext_card"
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                tools:layout_editor_absoluteY="24dp">
+
+                <Spinner
+                    android:id="@+id/save_exercise_spinner_exercise"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:spinnerMode="dropdown" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:text="Type"
+                android:textColor="@color/primary_dark"
+                android:textStyle="bold" />
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/edittext_card1"
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                tools:layout_editor_absoluteY="24dp">
+
+                <Spinner
+                    android:id="@+id/save_exercise_spinner_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:spinnerMode="dropdown" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:text="Value"
+                android:textColor="@color/primary_dark"
+                android:textStyle="bold" />
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/edittext_card2"
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                tools:layout_editor_absoluteY="24dp">
+
+                <EditText
+                    android:id="@+id/save_exercise_edit_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:inputType="number"
+                    android:singleLine="true" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/save_exercise_button_save"
+                style="@style/Widget.Neumorph.Button"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="26dp"
+                android:drawablePadding="8dp"
+                android:text="Save" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

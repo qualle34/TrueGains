@@ -15,12 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.qualle.shapeup.databinding.FragmentProfileBinding;
+import com.qualle.shapeup.model.enums.ChartType;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 public class ProfileFragment extends Fragment {
     private static final String USER_PARAM = "user";
     private String user;
+
+    private FragmentProfileBinding binding;
 
     public ProfileFragment() {
     }
@@ -44,9 +49,19 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        NavController navController = NavHostFragment.findNavController(this);
 
-        ImageView imageView = view.findViewById(R.id.profile_image_view);
+        binding.profileCardUserData.setOnClickListener(v ->
+                navController.navigate(R.id.action_nav_profile_fragment_to_nav_profile_data_fragment));
+
+        binding.profileCardSettings.setOnClickListener(v ->
+                navController.navigate(R.id.action_nav_profile_fragment_to_nav_settings_fragment));
+
+        binding.profileCardSecurity.setOnClickListener(v ->
+                navController.navigate(R.id.action_nav_profile_fragment_to_nav_profile_security_fragment));
+
+        ImageView imageView = binding.profileImageView;
 
         InputStream ims = null;
         try {
@@ -59,18 +74,9 @@ public class ProfileFragment extends Fragment {
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.profile_chart_container, ChartListFragment.class, null)
+                .add(binding.profileChartWeight.getId(), ChartFragment.newInstance("Weight", ChartType.NUMBER, null), null)
                 .commit();
 
-
-        String[] types = { "Male", "Female"};
-
-        Spinner spinner = view.findViewById(R.id.profile_spinner_gender);
-
-        ArrayAdapter adapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, types);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        return view;
+        return binding.getRoot();
     }
 }

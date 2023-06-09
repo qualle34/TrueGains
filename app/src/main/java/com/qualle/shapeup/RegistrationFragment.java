@@ -18,7 +18,7 @@ public class RegistrationFragment extends Fragment {
         NavController navController = NavHostFragment.findNavController(this);
 
         view.findViewById(R.id.registration_button_next).setOnClickListener(v ->
-                navController.navigate(R.id.action_registrationFragment_to_main_fragment));
+                navController.navigate(R.id.action_nav_registration_fragment_to_nav_main_fragment));
         return view;
     }
 }
