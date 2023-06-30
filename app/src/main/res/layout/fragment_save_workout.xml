@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="Save workout"
-            android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold" />
 

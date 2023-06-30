@@ -21,7 +21,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="Регистрация"
-            android:textColor="@color/white"
             android:textSize="35sp"
             android:textStyle="bold" />
 
@@ -31,7 +30,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Name"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
@@ -58,7 +56,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Gender"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
@@ -84,7 +81,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Birthday"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
@@ -111,7 +107,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Height"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
@@ -137,7 +132,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Weight"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
@@ -163,7 +157,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Email"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
@@ -189,7 +182,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Password"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView

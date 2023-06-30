@@ -1,16 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Platform.Theme.Neumorphism" parent="Theme.Neumorph.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:navigationBarColor">@color/white</item>
+    <style name="Base.Theme.ShapeUp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pearl_bush</item>
+        <item name="colorPrimaryDark">@color/pearl_bush</item>
+        <item name="colorAccent">@color/black_russian</item>
+
+        <item name="android:windowBackground">@color/pearl_bush</item>
+        <item name="android:navigationBarColor">@color/pearl_bush</item>
+        <item name="android:statusBarColor">@color/pearl_bush</item>
+
+        <item name="android:buttonStyle">@style/Theme.ShapeUp.Button</item>
     </style>
 
-    <style name="AppTheme" parent="Platform.Theme.Neumorphism">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/white</item>
+    <style name="Theme.ShapeUp" parent="Base.Theme.ShapeUp"/>
 
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:navigationBarColor">@color/white</item>
+
+    <style name="Theme.ShapeUp.Button" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/black_russian</item>
+        <item name="colorControlHighlight">@color/black_russian_highlight</item>
     </style>
+
+
 </resources>

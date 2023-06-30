@@ -1,25 +1,23 @@
 package com.qualle.shapeup;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.qualle.shapeup.databinding.FragmentLoginBinding;
+import com.qualle.shapeup.client.InMemoryBackendClient;
 import com.qualle.shapeup.databinding.FragmentMainBinding;
-import com.qualle.shapeup.model.enums.ChartType;
+import com.qualle.shapeup.model.dto.Workout;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class MainFragment extends Fragment {
 
@@ -37,20 +35,57 @@ public class MainFragment extends Fragment {
         binding.mainButtonChartMenu.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_main_fragment_to_nav_chart_menu_fragment));
 
-        binding.mainButtonSaveWorkout.setOnClickListener(v ->
-                navController.navigate(R.id.action_nav_main_fragment_to_nav_save_workout_fragment));
 
-
-        Map<Float, Float> data = new TreeMap<>();
-        data.put(20f, 2f);
-        data.put(21f, 5f);
-        data.put(22f, 1f);
-        data.put(23f, 3f);
+        Map<Float, Float> testChartData = InMemoryBackendClient.getChart();
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.main_chart_container, ChartFragment.newInstance("Workouts per week", ChartType.DATE, data), null)
+                .add(R.id.main_chart_container, BarChartFragment.newInstance(testChartData), null)
                 .commit();
+
+
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        LinearLayout linearLayout = binding.mainLinearLayoutWorkout;
+
+        List<Workout> workouts = InMemoryBackendClient.getWorkouts();
+
+        FrameLayout addWorkoutCard = new FrameLayout(binding.getRoot().getContext());
+        addWorkoutCard.setId(-1 + 2);
+        ft.replace(addWorkoutCard.getId(), WorkoutCardFragment.newInstance("Add", 0, 0));
+        linearLayout.addView(addWorkoutCard);
+
+        for (int i = 1; i < workouts.size(); i++) {
+            Workout workout = workouts.get(i);
+            FrameLayout card = new FrameLayout(binding.getRoot().getContext());
+            card.setId(i + 1);
+
+            ft.replace(card.getId(), WorkoutCardFragment.newInstance(workout.getFormattedDate(), workout.getRecords().size(), workout.getAchievementsCount()));
+
+            linearLayout.addView(card);
+        }
+        ft.commit();
+
+
+        getChildFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .add(R.id.main_radar_chart_container, new RadarChartFragment(), null)
+                .commit();
+
+
+//        getChildFragmentManager().beginTransaction()
+//                .setReorderingAllowed(true)
+//                .add(binding.mainButtonWorkoutTest1.getId(), new WorkoutCardFragment(), null)
+//                .commit();
+//
+//        getChildFragmentManager().beginTransaction()
+//                .setReorderingAllowed(true)
+//                .add(binding.mainButtonSaveWorkout.getId(), new WorkoutCardFragment(), null)
+//                .commit();
+//
+//        getChildFragmentManager().beginTransaction()
+//                .setReorderingAllowed(true)
+//                .add(binding.mainButtonAllWorkouts.getId(), new WorkoutCardFragment(), null)
+//                .commit();
 
         return binding.getRoot();
     }

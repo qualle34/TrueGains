@@ -65,7 +65,6 @@ public class ChartFragment extends Fragment {
         binding.chartTextTitle.setText(title);
         LineChart chart = binding.chart;
 
-        // no description text
         chart.getDescription().setEnabled(false);
 
         chart.setTouchEnabled(false);
@@ -95,7 +94,7 @@ public class ChartFragment extends Fragment {
         chart.getAxisRight().setEnabled(false);
         chart.getLegend().setEnabled(false);
 
-        chart.animateXY(2000, 2000);
+        chart.animateX(3000);
 
         chart.invalidate();
 
@@ -120,13 +119,13 @@ public class ChartFragment extends Fragment {
             set1 = new LineDataSet(values, "DataSet");
 
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-            set1.setCubicIntensity(0.05f);
+            set1.setCubicIntensity(0.2f);
             set1.setDrawFilled(true);
             set1.setDrawCircles(true);
             set1.setLineWidth(1.8f);
-            set1.setCircleRadius(2f);
-            set1.setCircleColor(Color.WHITE);
-            set1.setColor(Color.WHITE);
+            set1.setCircleRadius(2.3f);
+            set1.setCircleColor(R.color.zircon);
+            set1.setColor(R.color.zircon);
             set1.setFillColor(Color.WHITE);
             set1.setFillAlpha(100);
             set1.setDrawHorizontalHighlightIndicator(false);
@@ -160,7 +159,7 @@ public class ChartFragment extends Fragment {
 
     private ArrayList<Entry> convertData(Map<Float, Float> data) {
         ArrayList<Entry> values = new ArrayList<>();
-        getData();
+
         if (data == null) { // todo throw exception
             return getData();
         }

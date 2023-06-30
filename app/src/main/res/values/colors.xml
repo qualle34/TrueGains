@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_dark">#1d232e</color>
-    <color name="primary_light">#2A303A</color>
 
-    <color name="secondary_dark">#d7dde5</color>
-    <color name="secondary_light">#F6F7FA</color>
+    <color name="zircon">#f2f0f3</color>
+    <color name="pearl_bush">#e1d5c9</color>
+    <color name="twine">#c09551</color>
+    <color name="black_russian">#212224</color>
+    <color name="black_russian_highlight">#212224</color>
 
-
-    <color name="black">#0E0E0E</color>
-    <color name="light_gray">#CCCCCC</color>
-    <color name="gray">#3E3E3E</color>
-    <color name="white">#EFEEEE</color>
-
-
+    <color name="gray">#B6B6B6</color>
 
 </resources>

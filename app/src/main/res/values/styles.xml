@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.ShapeUp.Text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="TextAppearance.ShapeUp.SecondaryBold" parent="Theme.ShapeUp.Text">
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/zircon</item>
+    </style>
+
+    <style name="TextAppearance.ShapeUp.PrimaryBold" parent="Theme.ShapeUp.Text">
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/black_russian</item>
+    </style>
+
+    <style name="TextAppearance.ShapeUp.SecondaryMedium" parent="Theme.ShapeUp.Text">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/zircon</item>
+    </style>
+
+    <style name="TextAppearance.ShapeUp.PrimaryMedium" parent="Theme.ShapeUp.Text">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/black_russian</item>
+    </style>
+
+    <style name="TextAppearance.ShapeUp.SecondaryLight" parent="Theme.ShapeUp.Text">
+        <item name="android:textColor">@color/zircon</item>
+    </style>
+
+    <style name="TextAppearance.ShapeUp.GrayLight" parent="Theme.ShapeUp.Text">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="TextAppearance.ShapeUp.PrimaryLight" parent="Theme.ShapeUp.Text">
+        <item name="android:textColor">@color/black_russian</item>
+    </style>
+
+
+</resources>

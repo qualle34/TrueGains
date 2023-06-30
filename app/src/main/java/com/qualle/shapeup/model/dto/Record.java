@@ -6,6 +6,16 @@ public class Record {
     private int value;
     private String type;
 
+    public Record(){
+
+    }
+
+    public Record(Exercise exercise, int value, String type) {
+        this.exercise = exercise;
+        this.value = value;
+        this.type = type;
+    }
+
     public Exercise getExercise() {
         return exercise;
     }

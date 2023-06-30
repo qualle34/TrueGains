@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.qualle.shapeup.databinding.FragmentChartMenuBinding;
+import com.qualle.shapeup.databinding.FragmentExerciseMenuBinding;
 
-public class ChartMenuFragment extends Fragment {
+public class ExerciseMenuFragment extends Fragment {
 
-    private FragmentChartMenuBinding binding;
+    private FragmentExerciseMenuBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentChartMenuBinding.inflate(inflater, container, false);
+        binding = FragmentExerciseMenuBinding.inflate(inflater, container, false);
 
         binding.chartMenuButtonSize.setOnClickListener(buildListener(ChartListFragment.ChartListType.SIZE));
         binding.chartMenuButtonBase.setOnClickListener(buildListener(ChartListFragment.ChartListType.BASE));

@@ -1,13 +1,17 @@
 package com.qualle.shapeup.model.dto;
 
+import com.qualle.shapeup.util.DateFormatterUtil;
+
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Workout {
 
     private List<Record> records;
     private LocalDateTime date;
+    private int achievementsCount;
 
     public List<Record> getRecords() {
         return records;
@@ -21,7 +25,19 @@ public class Workout {
         return date;
     }
 
+    public String getFormattedDate(){
+        return DateFormatterUtil.formatToSimpleDate(date);
+    }
+
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public int getAchievementsCount() {
+        return achievementsCount;
+    }
+
+    public void setAchievementsCount(int achievementsCount) {
+        this.achievementsCount = achievementsCount;
     }
 }

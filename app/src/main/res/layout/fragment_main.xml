@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,7 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="14dp"
             android:layout_weight="1">
 
             <TextView
@@ -24,100 +24,72 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Your training achievements"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#131313"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold" />
 
-            <soup.neumorphism.NeumorphImageButton
+            <ImageView
                 android:id="@+id/main_button_profile"
-                style="@style/Widget.Neumorph.ImageButton"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_profile"
-                app:neumorph_shapeType="pressed" />
+                android:src="@drawable/ic_profile" />
 
         </LinearLayout>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:text="Workouts"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#131313"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <soup.neumorphism.NeumorphButton
-                    android:id="@+id/main_button_workout_test_1"
-                    style="@style/Widget.Neumorph.Button"
-                    android:layout_width="160dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="6dp"
-                    android:text="6 june"
-                    android:textAllCaps="false"
-                    android:textColor="#001729"
-                    android:textSize="16sp" />
-
-                <soup.neumorphism.NeumorphButton
-                    android:id="@+id/main_button_save_workout"
-                    style="@style/Widget.Neumorph.Button"
-                    android:layout_width="160dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="6dp"
-                    android:text="Add \n Workout"
-                    android:textAllCaps="false"
-                    android:textColor="#001729"
-                    android:textSize="16sp" />
-
-                <soup.neumorphism.NeumorphButton
-                    android:id="@+id/main_button_all_workouts"
-                    style="@style/Widget.Neumorph.Button"
-                    android:layout_width="160dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="6dp"
-                    android:text="All "
-                    android:textAllCaps="false"
-                    android:textColor="#001729"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
-
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_chart_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="150dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="16dp"
-            android:layout_marginHorizontal="8dp"/>
+            android:minHeight="200dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="14dp"
+            android:text="Workouts"
+            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+            android:textSize="24sp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="155dp"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/main_linear_layout_workout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </HorizontalScrollView>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_radar_chart_container"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="14dp"
             android:text="Achievements"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#131313"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+            android:textSize="24sp" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"

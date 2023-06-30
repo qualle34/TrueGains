@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qualle.shapeup.adapter.ExerciseAdapter;
-import com.qualle.shapeup.client.ShapeUpClient;
+import com.qualle.shapeup.client.InMemoryBackendClient;
 import com.qualle.shapeup.databinding.FragmentSaveWorkoutBinding;
 import com.qualle.shapeup.model.SaveWorkoutViewModel;
-import com.qualle.shapeup.model.dto.Exercise;
 import com.qualle.shapeup.model.dto.Record;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class SaveWorkoutFragment extends Fragment {
         Record record = new Record();
         record.setType("asfd");
         record.setValue(12);
-        record.setExercise( ShapeUpClient.getExercises().get(0));
+        record.setExercise( InMemoryBackendClient.getExercises().get(0));
 
         List<Record> records = new ArrayList<>();
         records.add(record);

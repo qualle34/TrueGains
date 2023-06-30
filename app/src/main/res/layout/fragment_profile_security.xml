@@ -29,7 +29,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Email"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
@@ -55,7 +54,6 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="8dp"
             android:text="Password"
-            android:textColor="@color/primary_dark"
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView

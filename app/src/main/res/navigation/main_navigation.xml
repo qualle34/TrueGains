@@ -94,8 +94,8 @@
 
     <fragment
         android:id="@+id/nav_chart_menu_fragment"
-        android:name="com.qualle.shapeup.ChartMenuFragment"
-        tools:layout="@layout/fragment_chart_menu">
+        android:name="com.qualle.shapeup.ExerciseMenuFragment"
+        tools:layout="@layout/fragment_exercise_menu">
         <action
             android:id="@+id/action_nav_chart_menu_fragment_to_nav_chart_list_fragment"
             app:destination="@id/nav_chart_list_fragment" />

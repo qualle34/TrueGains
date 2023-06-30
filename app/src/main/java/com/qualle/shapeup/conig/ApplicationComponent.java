@@ -1,0 +1,19 @@
+package com.qualle.shapeup.conig;
+
+import com.qualle.shapeup.ProfileFragment;
+import com.qualle.shapeup.client.BackendClient;
+import com.qualle.shapeup.client.ClientModule;
+
+import javax.inject.Singleton;
+
+import dagger.Component;
+
+@Singleton
+@Component(modules = ClientModule.class)
+public interface ApplicationComponent {
+
+    void inject(ProfileFragment fragment);
+
+    BackendClient backendClient();
+
+}

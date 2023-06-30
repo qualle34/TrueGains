@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Антон, 22"
+            android:text="User, 0"
             android:textColor="#3c545e"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
-            android:text="Количество тренировок: 20"
+            android:text="Workout count: 0"
             android:textColor="#87949A"
             android:textSize="12sp" />
 
@@ -83,7 +83,6 @@
                         android:gravity="center"
                         android:text="User data"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <Space
@@ -103,7 +102,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/light_gray"/>
+                    android:background="@color/gray"/>
 
                 <LinearLayout
                     android:id="@+id/profile_card_security"
@@ -120,7 +119,6 @@
                         android:gravity="center"
                         android:text="Security"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <Space
@@ -140,7 +138,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/light_gray"/>
+                    android:background="@color/gray"/>
 
                 <LinearLayout
                     android:id="@+id/profile_card_settings"
@@ -157,7 +155,6 @@
                         android:gravity="center"
                         android:text="Settings"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <Space
@@ -177,7 +174,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/light_gray"/>
+                    android:background="@color/gray"/>
 
                 <LinearLayout
                     android:id="@+id/profile_card_additional"
@@ -194,7 +191,6 @@
                         android:gravity="center"
                         android:text="Additional"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <Space
