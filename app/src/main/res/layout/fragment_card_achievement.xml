@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:paddingVertical="16dp"
     android:paddingHorizontal="20dp"
-    tools:context=".AchievementCardFragment">
+    tools:context=".ui.card.CardAchievementFragment">
 
     <TextView
         android:id="@+id/achievement_card_upper_text"

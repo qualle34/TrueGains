@@ -1,16 +1,11 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.chart;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.ListFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +13,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.qualle.shapeup.R;
 import com.qualle.shapeup.model.enums.ChartType;
-import com.qualle.shapeup.placeholder.PlaceholderContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +27,8 @@ public class ChartListFragment extends Fragment {
     public ChartListFragment() {
     }
 
-    public static ChartFragment newInstance(ChartListType type) {
-        ChartFragment fragment = new ChartFragment();
+    public static ChartLineFragment newInstance(ChartListType type) {
+        ChartLineFragment fragment = new ChartLineFragment();
         Bundle args = new Bundle();
         args.putString(ARG_TYPE, type.name());
         fragment.setArguments(args);
@@ -73,7 +67,7 @@ public class ChartListFragment extends Fragment {
             FrameLayout chart = new FrameLayout(view.getContext());
             chart.setId(i + 1);
 
-            ft.replace(chart.getId(), ChartFragment.newInstance("Bench press", ChartType.NUMBER, null));
+            ft.replace(chart.getId(), ChartLineFragment.newInstance("Bench press", ChartType.NUMBER, null));
 
             linearLayout.addView(chart);
         }
@@ -83,7 +77,7 @@ public class ChartListFragment extends Fragment {
         return view;
     }
 
-    static enum ChartListType {
+    public enum ChartListType {
         SIZE,
         BASE,
         BACK,

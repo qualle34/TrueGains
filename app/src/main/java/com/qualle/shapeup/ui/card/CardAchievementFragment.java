@@ -1,4 +1,4 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.card;
 
 import android.os.Bundle;
 
@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qualle.shapeup.databinding.FragmentAchievementCardBinding;
+import com.qualle.shapeup.databinding.FragmentCardAchievementBinding;
 
-public class AchievementCardFragment extends Fragment {
+public class CardAchievementFragment extends Fragment {
 
     private static final String ARG_NAME = "name";
     private static final String ARG_COUNT = "count";
@@ -18,13 +18,13 @@ public class AchievementCardFragment extends Fragment {
     private String name;
     private int count;
 
-    private FragmentAchievementCardBinding binding;
+    private FragmentCardAchievementBinding binding;
 
-    public AchievementCardFragment() {
+    public CardAchievementFragment() {
     }
 
-    public static AchievementCardFragment newInstance(String name, int count) {
-        AchievementCardFragment fragment = new AchievementCardFragment();
+    public static CardAchievementFragment newInstance(String name, int count) {
+        CardAchievementFragment fragment = new CardAchievementFragment();
         Bundle args = new Bundle();
         args.putString(ARG_NAME, name);
         args.putInt(ARG_COUNT, count);
@@ -43,7 +43,7 @@ public class AchievementCardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentAchievementCardBinding.inflate(inflater, container, false);
+        binding = FragmentCardAchievementBinding.inflate(inflater, container, false);
 
         binding.achievementCardUpperText.setText(name);
         binding.achievementCardLowerText.setText(count + " Records");

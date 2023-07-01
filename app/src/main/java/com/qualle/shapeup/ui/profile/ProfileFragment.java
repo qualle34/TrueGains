@@ -1,10 +1,8 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.profile;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -13,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.qualle.shapeup.R;
 import com.qualle.shapeup.conig.ApplicationComponent;
 import com.qualle.shapeup.client.BackendClient;
 import com.qualle.shapeup.client.api.UserDto;
 import com.qualle.shapeup.conig.DaggerApplicationComponent;
 import com.qualle.shapeup.databinding.FragmentProfileBinding;
 import com.qualle.shapeup.model.enums.ChartType;
+import com.qualle.shapeup.ui.chart.ChartLineFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,7 +73,7 @@ public class ProfileFragment extends Fragment {
 
                 getChildFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
-                        .add(binding.profileChartWeight.getId(), ChartFragment.newInstance("Weight", ChartType.NUMBER, null), null)
+                        .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance("Weight", ChartType.NUMBER, null), null)
                         .commit();
 
             }

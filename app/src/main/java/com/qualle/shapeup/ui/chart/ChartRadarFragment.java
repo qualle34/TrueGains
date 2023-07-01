@@ -1,47 +1,38 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.chart;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
-import com.github.mikephil.charting.utils.MPPointF;
-import com.qualle.shapeup.databinding.FragmentRadarChartBinding;
+import com.qualle.shapeup.R;
+import com.qualle.shapeup.databinding.FragmentChartRadarBinding;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
-public class RadarChartFragment extends Fragment {
+public class ChartRadarFragment extends Fragment {
 
-    private FragmentRadarChartBinding binding;
+    private FragmentChartRadarBinding binding;
 
-    public RadarChartFragment() {
+    public ChartRadarFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentRadarChartBinding.inflate(inflater, container, false);
+        binding = FragmentChartRadarBinding.inflate(inflater, container, false);
 
         RadarChart chart = binding.radarChart;
 

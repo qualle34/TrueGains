@@ -1,4 +1,4 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.card;
 
 import android.os.Bundle;
 
@@ -8,32 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.mikephil.charting.data.Entry;
-import com.qualle.shapeup.databinding.FragmentChartBinding;
-import com.qualle.shapeup.databinding.FragmentWorkoutCardBinding;
-import com.qualle.shapeup.model.enums.ChartType;
+import com.qualle.shapeup.databinding.FragmentCardWorkoutBinding;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Map;
-
-public class WorkoutCardFragment extends Fragment {
+public class CardWorkoutFragment extends Fragment {
 
     private static final String ARG_DATE = "date";
     private static final String ARG_RECORDS = "records";
     private static final String ARG_ACHIEVEMENTS = "achievements";
 
-    private FragmentWorkoutCardBinding binding;
+    private FragmentCardWorkoutBinding binding;
 
     private String date;
     private int records;
     private int achievements;
 
-    public WorkoutCardFragment() {
+    public CardWorkoutFragment() {
     }
 
-    public static WorkoutCardFragment newInstance(String date, int records, int achievements) {
-        WorkoutCardFragment fragment = new WorkoutCardFragment();
+    public static CardWorkoutFragment newInstance(String date, int records, int achievements) {
+        CardWorkoutFragment fragment = new CardWorkoutFragment();
         Bundle args = new Bundle();
         args.putString(ARG_DATE, date);
         args.putSerializable(ARG_RECORDS, records);
@@ -54,10 +47,10 @@ public class WorkoutCardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentWorkoutCardBinding.inflate(inflater, container, false);
+        binding = FragmentCardWorkoutBinding.inflate(inflater, container, false);
 
         binding.workoutCardUpperText.setText(date);
-        binding.workoutCardMiddleText.setText(records + " Excercises");
+        binding.workoutCardMiddleText.setText(records + " Exercises");
         binding.workoutCardLowerText.setText(achievements + " new achievements");
 
         return binding.getRoot();

@@ -1,4 +1,4 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.chart;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.qualle.shapeup.R;
 import com.qualle.shapeup.databinding.FragmentChartBinding;
 import com.qualle.shapeup.model.enums.ChartType;
 import com.qualle.shapeup.util.ChartValueFormatter;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
-public class ChartFragment extends Fragment {
+public class ChartLineFragment extends Fragment {
     private static final String ARG_TITLE = "title";
     private static final String ARG_DATA = "data";
     private static final String ARG_TYPE = "type";
@@ -35,11 +36,11 @@ public class ChartFragment extends Fragment {
     private ChartType type;
     private ArrayList<Entry> data;
 
-    public ChartFragment() {
+    public ChartLineFragment() {
     }
 
-    public static ChartFragment newInstance(String title, ChartType type, Map<Float, Float> data) {
-        ChartFragment fragment = new ChartFragment();
+    public static ChartLineFragment newInstance(String title, ChartType type, Map<Float, Float> data) {
+        ChartLineFragment fragment = new ChartLineFragment();
         Bundle args = new Bundle();
         args.putString(ARG_TITLE, title);
         args.putSerializable(ARG_TYPE, type);

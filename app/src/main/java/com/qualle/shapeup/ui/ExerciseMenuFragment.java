@@ -1,4 +1,4 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.qualle.shapeup.R;
 import com.qualle.shapeup.databinding.FragmentExerciseMenuBinding;
+import com.qualle.shapeup.ui.chart.ChartListFragment;
 
 public class ExerciseMenuFragment extends Fragment {
 

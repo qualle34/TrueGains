@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_main_fragment"
-        android:name="com.qualle.shapeup.MainFragment"
+        android:name="com.qualle.shapeup.ui.MainFragment"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_nav_main_fragment_to_nav_profile_fragment"
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/nav_settings_fragment"
-        android:name="com.qualle.shapeup.SettingsFragment"
+        android:name="com.qualle.shapeup.ui.profile.SettingsFragment"
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_nav_settings_fragment_to_nav_greeting_fragment"
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/nav_profile_fragment"
-        android:name="com.qualle.shapeup.ProfileFragment"
+        android:name="com.qualle.shapeup.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_nav_profile_fragment_to_nav_main_fragment"
@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/nav_save_workout_fragment"
-        android:name="com.qualle.shapeup.SaveWorkoutFragment"
+        android:name="com.qualle.shapeup.ui.SaveWorkoutFragment"
         tools:layout="@layout/fragment_save_workout">
         <action
             android:id="@+id/action_nav_save_workout_fragment_to_nav_save_exercise_fragment"
@@ -58,7 +58,7 @@
 
     <fragment
         android:id="@+id/nav_greeting_fragment"
-        android:name="com.qualle.shapeup.GreetingFragment"
+        android:name="com.qualle.shapeup.ui.GreetingFragment"
         tools:layout="@layout/fragment_greeting">
         <action
             android:id="@+id/action_nav_greeting_fragment_to_nav_registration_fragment"
@@ -82,7 +82,7 @@
 
     <fragment
         android:id="@+id/nav_registration_fragment"
-        android:name="com.qualle.shapeup.RegistrationFragment"
+        android:name="com.qualle.shapeup.ui.RegistrationFragment"
         tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_nav_registration_fragment_to_nav_greeting_fragment"
@@ -94,7 +94,7 @@
 
     <fragment
         android:id="@+id/nav_chart_menu_fragment"
-        android:name="com.qualle.shapeup.ExerciseMenuFragment"
+        android:name="com.qualle.shapeup.ui.ExerciseMenuFragment"
         tools:layout="@layout/fragment_exercise_menu">
         <action
             android:id="@+id/action_nav_chart_menu_fragment_to_nav_chart_list_fragment"
@@ -103,11 +103,11 @@
 
     <fragment
         android:id="@+id/nav_chart_list_fragment"
-        android:name="com.qualle.shapeup.ChartListFragment" />
+        android:name="com.qualle.shapeup.ui.chart.ChartListFragment" />
 
     <fragment
         android:id="@+id/nav_save_exercise_fragment"
-        android:name="com.qualle.shapeup.SaveExerciseFragment"
+        android:name="com.qualle.shapeup.ui.SaveExerciseFragment"
         tools:layout="@layout/fragment_save_exercise">
         <action
             android:id="@+id/action_nav_save_exercise_fragment_to_nav_save_workout_fragment"
@@ -116,12 +116,12 @@
 
     <fragment
         android:id="@+id/nav_profile_data_fragment"
-        android:name="com.qualle.shapeup.ProfileDataFragment"
+        android:name="com.qualle.shapeup.ui.profile.ProfileDataFragment"
         tools:layout="@layout/fragment_profile_data" />
 
     <fragment
         android:id="@+id/nav_profile_security_fragment"
-        android:name="com.qualle.shapeup.ProfileSecurityFragment"
+        android:name="com.qualle.shapeup.ui.profile.ProfileSecurityFragment"
         tools:layout="@layout/fragment_profile_security" />
 
 </navigation>

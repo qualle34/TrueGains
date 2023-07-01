@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
     android:paddingVertical="16dp"
-    tools:context=".WorkoutCardFragment">
+    tools:context=".ui.card.CardWorkoutFragment">
 
     <TextView
         android:id="@+id/workout_card_upper_text"
@@ -27,9 +27,14 @@
         android:id="@+id/workout_card_middle_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="10 Excercises"
+        android:text="10 Exercises"
         android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
         android:textSize="20sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="4dp" />
+
 
     <TextView
         android:id="@+id/workout_card_lower_text"

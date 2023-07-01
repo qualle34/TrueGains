@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qualle.shapeup.R;
-import com.qualle.shapeup.model.dto.Exercise;
 import com.qualle.shapeup.model.dto.Record;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     @Override
     public ExerciseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.exercise_card, parent, false);
+                .inflate(R.layout.fragment_card_exercise, parent, false);
 
         return new ExerciseViewHolder(view).withAdapter(this);
     }

@@ -7,7 +7,7 @@
     android:paddingHorizontal="18dp"
     android:paddingTop="14dp"
     android:paddingBottom="18dp"
-    tools:context=".ChartFragment">
+    tools:context=".ui.chart.ChartLineFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

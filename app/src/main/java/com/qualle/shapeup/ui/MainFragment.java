@@ -1,4 +1,4 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +12,15 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.qualle.shapeup.R;
 import com.qualle.shapeup.client.InMemoryBackendClient;
 import com.qualle.shapeup.databinding.FragmentMainBinding;
 import com.qualle.shapeup.model.dto.RecordSummary;
 import com.qualle.shapeup.model.dto.Workout;
+import com.qualle.shapeup.ui.card.CardAchievementFragment;
+import com.qualle.shapeup.ui.card.CardWorkoutFragment;
+import com.qualle.shapeup.ui.chart.ChartBarFragment;
+import com.qualle.shapeup.ui.chart.ChartRadarFragment;
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +48,7 @@ public class MainFragment extends Fragment {
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.main_chart_container, BarChartFragment.newInstance(testChartData), null)
+                .add(R.id.main_chart_container, ChartBarFragment.newInstance(testChartData), null)
                 .commit();
 
 
@@ -56,7 +61,7 @@ public class MainFragment extends Fragment {
             FrameLayout card = new FrameLayout(getContext());
             card.setId(i + 1);
 
-            ft.replace(card.getId(), WorkoutCardFragment.newInstance(workout.getFormattedDate(), workout.getRecords().size(), workout.getAchievementsCount()));
+            ft.replace(card.getId(), CardWorkoutFragment.newInstance(workout.getFormattedDate(), workout.getRecords().size(), workout.getAchievementsCount()));
             linearLayout.addView(card);
         }
 
@@ -65,7 +70,7 @@ public class MainFragment extends Fragment {
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.main_radar_chart_container, new RadarChartFragment(), null)
+                .add(R.id.main_radar_chart_container, new ChartRadarFragment(), null)
                 .commit();
 
 
@@ -78,7 +83,7 @@ public class MainFragment extends Fragment {
             FrameLayout card = new FrameLayout(getContext());
             card.setId(i + 10);
 
-            ft1.replace(card.getId(), AchievementCardFragment.newInstance(recordSummary.getExercise().getName(), recordSummary.getCount()));
+            ft1.replace(card.getId(), CardAchievementFragment.newInstance(recordSummary.getExercise().getName(), recordSummary.getCount()));
             linearLayout1.addView(card);
         }
 

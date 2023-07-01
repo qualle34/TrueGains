@@ -1,4 +1,4 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.chart;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,30 +14,29 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.DefaultValueFormatter;
-import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.qualle.shapeup.databinding.FragmentBarChartBinding;
+import com.qualle.shapeup.R;
+import com.qualle.shapeup.databinding.FragmentChartBarBinding;
 import com.qualle.shapeup.util.ChartValueFormatter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class BarChartFragment extends Fragment {
+public class ChartBarFragment extends Fragment {
 
     private static final String ARG_DATA = "data";
 
-    private FragmentBarChartBinding binding;
+    private FragmentChartBarBinding binding;
 
     private ArrayList<BarEntry> data;
 
-    public BarChartFragment() {
+    public ChartBarFragment() {
     }
 
-    public static BarChartFragment newInstance(Map<Float, Float> data) {
-        BarChartFragment fragment = new BarChartFragment();
+    public static ChartBarFragment newInstance(Map<Float, Float> data) {
+        ChartBarFragment fragment = new ChartBarFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATA, (Serializable) data);
         fragment.setArguments(args);
@@ -55,7 +54,7 @@ public class BarChartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentBarChartBinding.inflate(inflater, container, false);
+        binding = FragmentChartBarBinding.inflate(inflater, container, false);
 
         BarChart chart = binding.barChart;
         chart.getDescription().setEnabled(false);
@@ -74,7 +73,9 @@ public class BarChartFragment extends Fragment {
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setDrawGridLines(false);
         x.setValueFormatter(ChartValueFormatter.getDateValueFormatter());
+        x.setAxisLineColor(getResources().getColor(R.color.black_russian));
         x.setLabelCount(4);
+        x.setTextSize(9f);
 
         chart.getAxisRight().setEnabled(false);
 
@@ -82,6 +83,7 @@ public class BarChartFragment extends Fragment {
         y.setDrawLabels(false);
         y.setDrawGridLines(false);
         y.setGranularity(1f);
+        y.setAxisLineColor(getResources().getColor(R.color.black_russian));
         y.setAxisMinimum(0f);
 
         chart.animateY(1500);

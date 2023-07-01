@@ -1,6 +1,6 @@
 package com.qualle.shapeup.conig;
 
-import com.qualle.shapeup.ProfileFragment;
+import com.qualle.shapeup.ui.profile.ProfileFragment;
 import com.qualle.shapeup.client.BackendClient;
 import com.qualle.shapeup.client.ClientModule;
 

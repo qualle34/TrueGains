@@ -1,4 +1,4 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.profile;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.qualle.shapeup.R;
 
 public class SettingsFragment extends Fragment {
 
