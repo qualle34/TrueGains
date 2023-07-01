@@ -2,40 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Theme.ShapeUp.Button"
-    android:layout_width="200dp"
-    android:layout_height="145dp"
+    android:layout_width="180dp"
+    android:layout_height="125dp"
     android:layout_marginHorizontal="8dp"
     android:background="@drawable/background_round_corners"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp"
     android:paddingVertical="16dp"
-    tools:context=".WorkoutCardFragment">
+    android:paddingHorizontal="20dp"
+    tools:context=".AchievementCardFragment">
 
     <TextView
-        android:id="@+id/workout_card_upper_text"
+        android:id="@+id/achievement_card_upper_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="6 June"
-        android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight" />
+        android:text="Bench press"
+        android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
     <TextView
-        android:id="@+id/workout_card_middle_text"
+        android:id="@+id/achievement_card_lower_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="10 Excercises"
+        android:text="10 Records"
         android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/workout_card_lower_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2 new achievements"
-        android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
-        android:textSize="10sp" />
 </LinearLayout>

@@ -2,9 +2,7 @@ package com.qualle.shapeup;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,61 +40,49 @@ public class RadarChartFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRadarChartBinding.inflate(inflater, container, false);
 
         RadarChart chart = binding.radarChart;
 
-        chart.getDescription().setEnabled(false);
-
         chart.setWebLineWidth(1f);
         chart.setWebLineWidthInner(1f);
         chart.setWebAlpha(100);
+        chart.setWebColor(getResources().getColor(R.color.black_russian));
 
-        chart.getLegend().setEnabled(false);
-
-        // create a custom MarkerView (extend MarkerView) and specify the layout
-        // to use for it
-        MarkerView mv = new RadarMarkerView(binding.radarChart.getContext(), R.layout.radar_makerview);
-        mv.setChartView(chart); // For bounds control
-        chart.setMarker(mv); // Set the marker to the chart
-
-        chart.setData(getData());
-        chart.invalidate();
-
-        chart.animateXY(1400, 1400, Easing.EaseInOutQuad);
-
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setTextSize(9f);
-        xAxis.setYOffset(0f);
-        xAxis.setXOffset(0f);
-        xAxis.setValueFormatter(new ValueFormatter() {
-
-            private final String[] activities = new String[]{"Chest", "Back", "Legs", "Arms", "Shoulders"};
-
-            @Override
-            public String getRadarLabel(RadarEntry radarEntry) {
-                return activities[(int) radarEntry.getValue() % activities.length];
-            }
-        });
-
-
-        YAxis yAxis = chart.getYAxis();
-        yAxis.setLabelCount(5, false);
-        yAxis.setTextSize(9f);
-        yAxis.setAxisMinimum(0f);
-        yAxis.setAxisMaximum(80f);
-        yAxis.setDrawLabels(false);
+        chart.getDescription().setEnabled(false);
 
         Legend l = chart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(5f);
-        l.setTextColor(Color.WHITE);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(true);
+        l.setXOffset(14f);
+        l.setYOffset(-38f);
+        l.setForm(Legend.LegendForm.CIRCLE);
+        l.setTextColor(getResources().getColor(R.color.black_russian));
+
+
+        XAxis x = chart.getXAxis();
+        x.setTextSize(10f);
+        x.setValueFormatter(new ValueFormatter() {
+
+            private final String[] activities = new String[]{"Chest", "Back", "Legs", "Arms", "Shoulders"};
+
+            public String getFormattedValue(float value) {
+                return activities[(int) value % activities.length];
+            }
+        });
+
+        YAxis y = chart.getYAxis();
+        y.setLabelCount(5, true);
+        y.setDrawLabels(false);
+
+
+        chart.setData(getData());
+        chart.invalidate();
+        chart.animateXY(1400, 1400, Easing.EaseInOutQuad);
+
 
         return binding.getRoot();
     }
@@ -124,7 +110,7 @@ public class RadarChartFragment extends Fragment {
         set1.setColor(getResources().getColor(R.color.black_russian));
         set1.setFillColor(getResources().getColor(R.color.black_russian));
         set1.setDrawFilled(true);
-        set1.setFillAlpha(180);
+        set1.setFillAlpha(200);
         set1.setLineWidth(2f);
         set1.setDrawHighlightCircleEnabled(true);
         set1.setDrawHighlightIndicators(false);
@@ -133,7 +119,7 @@ public class RadarChartFragment extends Fragment {
         set2.setColor(getResources().getColor(R.color.twine));
         set2.setFillColor(getResources().getColor(R.color.twine));
         set2.setDrawFilled(true);
-        set2.setFillAlpha(180);
+        set2.setFillAlpha(200);
         set2.setLineWidth(2f);
         set2.setDrawHighlightCircleEnabled(true);
         set2.setDrawHighlightIndicators(false);
@@ -146,35 +132,9 @@ public class RadarChartFragment extends Fragment {
         data.setValueTextSize(8f);
 
         data.setDrawValues(false);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(getResources().getColor(R.color.black_russian));
 
         return data;
-    }
-
-    @SuppressLint("ViewConstructor")
-    public class RadarMarkerView extends MarkerView {
-
-        private final TextView tvContent;
-        private final DecimalFormat format = new DecimalFormat("##0");
-
-        public RadarMarkerView(Context context, int layoutResource) {
-            super(context, layoutResource);
-
-            tvContent = findViewById(R.id.tvContent);
-        }
-
-
-        @Override
-        public void refreshContent(Entry e, Highlight highlight) {
-            tvContent.setText(String.format("%s %%", format.format(e.getY())));
-
-            super.refreshContent(e, highlight);
-        }
-
-        @Override
-        public MPPointF getOffset() {
-            return new MPPointF(-(getWidth() / 2), -getHeight() - 10);
-        }
     }
 
 }

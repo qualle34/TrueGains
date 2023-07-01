@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.qualle.shapeup.client.InMemoryBackendClient;
 import com.qualle.shapeup.databinding.FragmentMainBinding;
+import com.qualle.shapeup.model.dto.RecordSummary;
 import com.qualle.shapeup.model.dto.Workout;
 
 import java.util.List;
@@ -32,9 +33,11 @@ public class MainFragment extends Fragment {
         binding.mainButtonProfile.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_main_fragment_to_nav_profile_fragment));
 
-        binding.mainButtonChartMenu.setOnClickListener(v ->
+        binding.mainButtonAllAchievements.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_main_fragment_to_nav_chart_menu_fragment));
 
+        binding.mainButtonStartWorkout.setOnClickListener(v ->
+                navController.navigate(R.id.action_nav_main_fragment_to_nav_save_workout_fragment));
 
         Map<Float, Float> testChartData = InMemoryBackendClient.getChart();
 
@@ -46,23 +49,17 @@ public class MainFragment extends Fragment {
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         LinearLayout linearLayout = binding.mainLinearLayoutWorkout;
-
         List<Workout> workouts = InMemoryBackendClient.getWorkouts();
 
-        FrameLayout addWorkoutCard = new FrameLayout(binding.getRoot().getContext());
-        addWorkoutCard.setId(-1 + 2);
-        ft.replace(addWorkoutCard.getId(), WorkoutCardFragment.newInstance("Add", 0, 0));
-        linearLayout.addView(addWorkoutCard);
-
-        for (int i = 1; i < workouts.size(); i++) {
+        for (int i = 0; i < workouts.size(); i++) {
             Workout workout = workouts.get(i);
-            FrameLayout card = new FrameLayout(binding.getRoot().getContext());
+            FrameLayout card = new FrameLayout(getContext());
             card.setId(i + 1);
 
             ft.replace(card.getId(), WorkoutCardFragment.newInstance(workout.getFormattedDate(), workout.getRecords().size(), workout.getAchievementsCount()));
-
             linearLayout.addView(card);
         }
+
         ft.commit();
 
 
@@ -70,6 +67,22 @@ public class MainFragment extends Fragment {
                 .setReorderingAllowed(true)
                 .add(R.id.main_radar_chart_container, new RadarChartFragment(), null)
                 .commit();
+
+
+        FragmentTransaction ft1 = getChildFragmentManager().beginTransaction();
+        LinearLayout linearLayout1 = binding.mainLinearLayoutAchievements;
+        List<RecordSummary> recordSummaries = InMemoryBackendClient.getRecordsGroupByExercise();
+
+        for (int i = 0; i < recordSummaries.size(); i++) {
+            RecordSummary recordSummary = recordSummaries.get(i);
+            FrameLayout card = new FrameLayout(getContext());
+            card.setId(i + 10);
+
+            ft1.replace(card.getId(), AchievementCardFragment.newInstance(recordSummary.getExercise().getName(), recordSummary.getCount()));
+            linearLayout1.addView(card);
+        }
+
+        ft1.commit();
 
 
 //        getChildFragmentManager().beginTransaction()

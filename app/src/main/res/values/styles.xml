@@ -19,6 +19,12 @@
         <item name="android:textColor">@color/black_russian</item>
     </style>
 
+    <style name="TextAppearance.ShapeUp.TwineBold" parent="Theme.ShapeUp.Text">
+        <item name="android:textSize">25sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/twine</item>
+    </style>
+
     <style name="TextAppearance.ShapeUp.SecondaryMedium" parent="Theme.ShapeUp.Text">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textColor">@color/zircon</item>

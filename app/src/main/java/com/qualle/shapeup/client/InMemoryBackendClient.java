@@ -2,6 +2,7 @@ package com.qualle.shapeup.client;
 
 import com.qualle.shapeup.model.dto.Exercise;
 import com.qualle.shapeup.model.dto.Record;
+import com.qualle.shapeup.model.dto.RecordSummary;
 import com.qualle.shapeup.model.dto.Workout;
 
 import java.time.LocalDateTime;
@@ -86,6 +87,17 @@ public class InMemoryBackendClient {
 
     public static List<Workout> getWorkouts() {
         return workouts;
+    }
+
+    public static List<RecordSummary> getRecordsGroupByExercise() {
+        List<RecordSummary> recordSummaries = new ArrayList<>();
+
+        recordSummaries.add(new RecordSummary(exercises.get(0), 12));
+        recordSummaries.add(new RecordSummary(exercises.get(2), 3));
+        recordSummaries.add(new RecordSummary(exercises.get(4), 8));
+        recordSummaries.add(new RecordSummary(exercises.get(6), 5));
+
+        return recordSummaries;
     }
 
     public static void saveWorkout(Workout workout) {
