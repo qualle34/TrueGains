@@ -3,8 +3,8 @@ package com.qualle.shapeup.model;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.qualle.shapeup.model.dto.Record;
-import com.qualle.shapeup.model.dto.Workout;
+import com.qualle.shapeup.client.api.Record;
+import com.qualle.shapeup.client.api.Workout;
 
 import java.time.LocalDateTime;
 import java.util.List;

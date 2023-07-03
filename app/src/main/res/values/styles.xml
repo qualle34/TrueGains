@@ -43,9 +43,22 @@
         <item name="android:textColor">@color/gray</item>
     </style>
 
+    <style name="TextAppearance.ShapeUp.RedLight" parent="Theme.ShapeUp.Text">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
     <style name="TextAppearance.ShapeUp.PrimaryLight" parent="Theme.ShapeUp.Text">
         <item name="android:textColor">@color/black_russian</item>
     </style>
 
+    <style name="ModalBottomSheetDialog" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@color/pearl_bush</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.LargeComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 
 </resources>

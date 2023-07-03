@@ -74,13 +74,15 @@
                     android:id="@+id/main_button_start_workout"
                     android:layout_width="120dp"
                     android:layout_height="145dp"
-                    android:background="@drawable/background_round_corners"
                     android:drawableTop="@drawable/add_circle"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:paddingTop="22sp"
                     android:text="Start new\nworkout"
                     android:textAllCaps="false"
-                    android:textColor="@color/zircon"
-                    app:backgroundTint="@null" />
+                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    app:backgroundTint="@color/black_russian"
+                    app:cornerRadius="16dp" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -102,13 +104,15 @@
                     android:layout_width="120dp"
                     android:layout_height="145dp"
                     android:layout_marginEnd="40dp"
-                    android:background="@drawable/background_round_corners"
                     android:drawableTop="@drawable/ic_arrow_right_2"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:paddingTop="22sp"
                     android:text="Show all\nworkouts"
                     android:textAllCaps="false"
-                    android:textColor="@color/zircon"
-                    app:backgroundTint="@null" />
+                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    app:backgroundTint="@color/black_russian"
+                    app:cornerRadius="16dp" />
 
             </LinearLayout>
 
@@ -171,13 +175,15 @@
                     android:layout_height="125dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="40dp"
-                    android:background="@drawable/background_round_corners"
                     android:drawableTop="@drawable/ic_arrow_right_2"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:paddingTop="12sp"
                     android:text="Show all\nachievements"
                     android:textAllCaps="false"
-                    android:textColor="@color/zircon"
-                    app:backgroundTint="@null" />
+                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    app:backgroundTint="@color/black_russian"
+                    app:cornerRadius="16dp" />
 
             </LinearLayout>
 

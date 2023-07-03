@@ -1,9 +1,11 @@
 package com.qualle.shapeup.client;
 
-import com.qualle.shapeup.model.dto.Exercise;
-import com.qualle.shapeup.model.dto.Record;
-import com.qualle.shapeup.model.dto.RecordSummary;
-import com.qualle.shapeup.model.dto.Workout;
+import com.qualle.shapeup.client.api.Category;
+import com.qualle.shapeup.client.api.Exercise;
+import com.qualle.shapeup.client.api.Image;
+import com.qualle.shapeup.client.api.Record;
+import com.qualle.shapeup.client.api.RecordSummary;
+import com.qualle.shapeup.client.api.Workout;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,8 +17,9 @@ public class InMemoryBackendClient {
 
     private static List<Workout> workouts;
     private static List<Exercise> exercises;
+    private static List<Category> categories;
 
-    static  {
+    static {
         exercises = new ArrayList<>();
         exercises.add(new Exercise("Barbell bench press", ""));
         exercises.add(new Exercise("Dumbbell bench press", ""));
@@ -33,6 +36,20 @@ public class InMemoryBackendClient {
         exercises.add(new Exercise("Lying leg curls", ""));
         exercises.add(new Exercise("Calf Raises", ""));
         exercises.add(new Exercise("Crunches", ""));
+
+        categories = new ArrayList<>();
+        categories.add(new Category(1, "Chest", new Image(1, "", "ic_menu_chest")));
+        categories.add(new Category(2,"Back", new Image(2, "", "ic_menu_back")));
+        categories.add(new Category(3,"Biceps", new Image(3, "", "ic_menu_biceps")));
+        categories.add(new Category(4,"Triceps", new Image(4, "", "ic_menu_triceps")));
+        categories.add(new Category(5,"Shoulders", new Image(5, "", "ic_menu_shoulders")));
+        categories.add(new Category(6,"Trapezius", new Image(6, "", "ic_menu_trapeze")));
+        categories.add(new Category(7,"Forearms", new Image(7, "", "ic_menu_forearms")));
+        categories.add(new Category(8,"Abs", new Image(8, "", "ic_menu_abs")));
+        categories.add(new Category(9,"Quads", new Image(9, "", "ic_menu_quads")));
+        categories.add(new Category(10,"Hamstrings", new Image(10, "", "ic_menu_hamstrings")));
+        categories.add(new Category(11,"Glutes", new Image(11, "", "ic_menu_glutes")));
+        categories.add(new Category(12,"Caviar", new Image(12, "", "ic_menu_caviar")));
 
         workouts = new ArrayList<>();
 
@@ -87,6 +104,61 @@ public class InMemoryBackendClient {
 
     public static List<Workout> getWorkouts() {
         return workouts;
+    }
+
+    public static List<Category> getCategories() {
+        return categories;
+    }
+
+    public static List<Exercise> getExercisesByCategory(long category) {
+        int cat = (int) category;
+        List<Exercise> result = new ArrayList<>();
+        switch (cat) {
+            case 1:
+                result.add(new Exercise("Barbell bench press", ""));
+                result.add(new Exercise("Dumbbell bench press", ""));
+                break;
+            case 2:
+                result.add(new Exercise("Lat pulldown", ""));
+                result.add(new Exercise("Barbell deadlift", ""));
+                break;
+            case 3:
+                result.add(new Exercise("Barbell curls", ""));
+                result.add(new Exercise("Dumbbell curls", ""));
+                break;
+            case 4:
+                result.add(new Exercise("Barbell french press", ""));
+                result.add(new Exercise("Triceps pushdown", ""));
+                break;
+            case 5:
+                result.add(new Exercise("Dumbbell side lateral rise", ""));
+                break;
+            case 6:
+                result.add(new Exercise("Barbell shrugs", ""));
+                break;
+            case 7:
+                result.add(new Exercise("Barbell wrist curl", ""));
+                result.add(new Exercise("Reverse grip barbell curls", ""));
+                break;
+            case 8:
+                result.add(new Exercise("Crunches", ""));
+                break;
+            case 9:
+                result.add(new Exercise("Barbell squat", ""));
+                break;
+            case 10:
+                result.add(new Exercise("Lying leg curls", ""));
+                break;
+            case 11:
+                result.add(new Exercise("Romanian deadlift", ""));
+                break;
+            case 12:
+                result.add(new Exercise("Calf Raises", ""));
+                break;
+        }
+
+
+        return result;
     }
 
     public static List<RecordSummary> getRecordsGroupByExercise() {

@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qualle.shapeup.R;
-import com.qualle.shapeup.conig.ApplicationComponent;
+import com.qualle.shapeup.config.ApplicationComponent;
 import com.qualle.shapeup.client.BackendClient;
-import com.qualle.shapeup.client.api.UserDto;
-import com.qualle.shapeup.conig.DaggerApplicationComponent;
+import com.qualle.shapeup.client.api.User;
+import com.qualle.shapeup.config.DaggerApplicationComponent;
 import com.qualle.shapeup.databinding.FragmentProfileBinding;
 import com.qualle.shapeup.model.enums.ChartType;
 import com.qualle.shapeup.ui.chart.ChartLineFragment;
@@ -55,9 +55,9 @@ public class ProfileFragment extends Fragment {
         client.getUser().enqueue(new Callback<>() {
 
             @Override
-            public void onResponse(Call<UserDto> call, Response<UserDto> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
 
-                UserDto dto = response.body();
+                User dto = response.body();
 
                 binding.profileNameAge.setText(dto.getName() + ", " + dto.getAge());
                 binding.profileWorkoutCount.setText("Количество тренировок: " + dto.getWorkoutCount());
@@ -79,7 +79,7 @@ public class ProfileFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<UserDto> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
 
               t.printStackTrace();
             }

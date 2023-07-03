@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RegistrationFragment">
+    tools:context=".ui.auth.RegistrationFragment">
 
     <LinearLayout
         android:id="@+id/registration_linear_layout"

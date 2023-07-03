@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/category_button"
+    android:layout_width="145dp"
+    android:layout_height="145dp"
+    android:layout_margin="10dp"
+    android:drawableTop="@drawable/ic_menu_back"
+    android:insetTop="0dp"
+    android:insetBottom="0dp"
+    android:paddingTop="20dp"
+    android:text="Chest"
+    android:textAllCaps="false"
+    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+    app:backgroundTint="@color/black_russian"
+    app:cornerRadius="16dp" />

@@ -5,8 +5,11 @@
     <color name="pearl_bush">#e1d5c9</color>
     <color name="twine">#c09551</color>
     <color name="black_russian">#212224</color>
-    <color name="black_russian_highlight">#212224</color>
+
+    <color name="black_russian_highlight">#5A5A5E</color>
+    <color name="black_russian_highlight_circle">#7D7D80</color>
 
     <color name="gray">#B6B6B6</color>
+    <color name="red">#C84949</color>
 
 </resources>

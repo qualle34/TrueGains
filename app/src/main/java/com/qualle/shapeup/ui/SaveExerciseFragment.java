@@ -15,8 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.qualle.shapeup.databinding.FragmentSaveExerciseBinding;
 import com.qualle.shapeup.model.SaveWorkoutViewModel;
-import com.qualle.shapeup.model.dto.Record;
-import com.qualle.shapeup.model.dto.Workout;
+import com.qualle.shapeup.client.api.Record;
 
 import java.util.ArrayList;
 import java.util.List;

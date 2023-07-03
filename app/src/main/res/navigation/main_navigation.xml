@@ -58,7 +58,7 @@
 
     <fragment
         android:id="@+id/nav_greeting_fragment"
-        android:name="com.qualle.shapeup.ui.GreetingFragment"
+        android:name="com.qualle.shapeup.ui.auth.GreetingFragment"
         tools:layout="@layout/fragment_greeting">
         <action
             android:id="@+id/action_nav_greeting_fragment_to_nav_registration_fragment"
@@ -70,7 +70,7 @@
 
     <fragment
         android:id="@+id/nav_login_fragment"
-        android:name="com.qualle.shapeup.ui.login.LoginFragment"
+        android:name="com.qualle.shapeup.ui.auth.LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_nav_login_fragment_to_nav_greeting_fragment"
@@ -82,7 +82,7 @@
 
     <fragment
         android:id="@+id/nav_registration_fragment"
-        android:name="com.qualle.shapeup.ui.RegistrationFragment"
+        android:name="com.qualle.shapeup.ui.auth.RegistrationFragment"
         tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_nav_registration_fragment_to_nav_greeting_fragment"

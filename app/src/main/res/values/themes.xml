@@ -9,16 +9,13 @@
         <item name="android:navigationBarColor">@color/pearl_bush</item>
         <item name="android:statusBarColor">@color/pearl_bush</item>
 
-        <item name="android:buttonStyle">@style/Theme.ShapeUp.Button</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.ShapeUp.BottomSheetDialog</item>
     </style>
 
     <style name="Theme.ShapeUp" parent="Base.Theme.ShapeUp"/>
 
-
-    <style name="Theme.ShapeUp.Button" parent="Base.Widget.AppCompat.Button.Colored">
-        <item name="colorButtonNormal">@color/black_russian</item>
-        <item name="colorControlHighlight">@color/black_russian_highlight</item>
+    <style name="ThemeOverlay.ShapeUp.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
     </style>
-
 
 </resources>
