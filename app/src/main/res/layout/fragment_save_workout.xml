@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:itemCount="3"
-            tools:listitem="@layout/fragment_card_record" />
+            tools:listitem="@layout/item_save_workout_exercise" />
 
         <TextView
             android:id="@+id/save_workout_add_exercise"

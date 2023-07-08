@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.qualle.shapeup.client.api.Category;
 import com.qualle.shapeup.client.api.Image;
-import com.qualle.shapeup.databinding.FragmentBottomMenuCategoryItemBinding;
+import com.qualle.shapeup.databinding.ItemBottomMenuCategoryBinding;
 import com.qualle.shapeup.ui.listener.MenuClickListener;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(FragmentBottomMenuCategoryItemBinding
+        return new ViewHolder(ItemBottomMenuCategoryBinding
                 .inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
@@ -56,7 +56,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         public final Button button;
         public Category item;
 
-        public ViewHolder(FragmentBottomMenuCategoryItemBinding binding) {
+        public ViewHolder(ItemBottomMenuCategoryBinding binding) {
             super(binding.getRoot());
             button = binding.categoryButton;
         }

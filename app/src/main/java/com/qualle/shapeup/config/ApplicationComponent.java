@@ -1,5 +1,6 @@
 package com.qualle.shapeup.config;
 
+import com.qualle.shapeup.repository.LocalRepository;
 import com.qualle.shapeup.ui.profile.ProfileFragment;
 import com.qualle.shapeup.client.BackendClient;
 import com.qualle.shapeup.client.ClientModule;

@@ -6,18 +6,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.qualle.shapeup.client.InMemoryBackendClient;
+import com.qualle.shapeup.client.api.CurrentExercise;
+import com.qualle.shapeup.client.api.CurrentRecord;
+import com.qualle.shapeup.client.api.Exercise;
 import com.qualle.shapeup.databinding.FragmentBottomMenuBinding;
+import com.qualle.shapeup.model.BottomMenuViewModel;
+import com.qualle.shapeup.model.CurrentWorkoutViewModel;
 import com.qualle.shapeup.ui.adapter.CategoryRecyclerViewAdapter;
 import com.qualle.shapeup.ui.adapter.ExerciseRecyclerViewAdapter;
 import com.qualle.shapeup.ui.listener.MenuClickListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BottomMenuFragment extends BottomSheetDialogFragment implements MenuClickListener {
+
+    private CurrentWorkoutViewModel workoutViewModel;
 
     private FragmentBottomMenuBinding binding;
 
@@ -25,10 +36,9 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentBottomMenuBinding.inflate(inflater, container, false);
+        workoutViewModel = new ViewModelProvider(getParentFragment()).get(CurrentWorkoutViewModel.class);
 
         prepareCategoryMenu();
-
-        binding.bottomBack.setOnClickListener(v -> onBackClick());
 
         return binding.getRoot();
     }
@@ -38,6 +48,8 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
         binding.bottomBack.setVisibility(View.GONE);
         binding.bottomMenuExercise.setVisibility(View.GONE);
         binding.bottomMenuCategory.setVisibility(View.VISIBLE);
+
+        binding.bottomBack.setOnClickListener(v -> onBackClick());
 
         RecyclerView recyclerView = binding.bottomMenuCategory;
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -63,6 +75,8 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
 
     @Override
     public void onExerciseSelect(long exerciseId) {
+        workoutViewModel.createEmptyExercise(exerciseId);
+
         this.dismiss();
     }
 

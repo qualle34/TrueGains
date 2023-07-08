@@ -3,17 +3,17 @@ package com.qualle.shapeup.client.api;
 public class Record {
 
     private Exercise exercise;
-    private int value;
-    private String type;
+    private float value;
+    private int reps;
 
-    public Record(){
+    public Record() {
 
     }
 
-    public Record(Exercise exercise, int value, String type) {
+    public Record(Exercise exercise, float value, int reps) {
         this.exercise = exercise;
         this.value = value;
-        this.type = type;
+        this.reps = reps;
     }
 
     public Exercise getExercise() {
@@ -24,19 +24,19 @@ public class Record {
         this.exercise = exercise;
     }
 
-    public int getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         this.value = value;
     }
 
-    public String getType() {
-        return type;
+    public int getReps() {
+        return reps;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setReps(int reps) {
+        this.reps = reps;
     }
 }

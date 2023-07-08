@@ -38,8 +38,8 @@ public class MainFragment extends Fragment {
         binding.mainButtonProfile.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_main_fragment_to_nav_profile_fragment));
 
-        binding.mainButtonAllAchievements.setOnClickListener(v ->
-                navController.navigate(R.id.action_nav_main_fragment_to_nav_chart_menu_fragment));
+        binding.mainButtonAllWorkouts.setOnClickListener(v ->
+                navController.navigate(R.id.action_nav_main_fragment_to_workoutListFragment));
 
         binding.mainButtonStartWorkout.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_main_fragment_to_nav_save_workout_fragment));

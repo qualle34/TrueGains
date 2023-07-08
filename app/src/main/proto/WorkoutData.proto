@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "com.qualle.shapeup.model";
+option java_multiple_files = true;
+
+message WorkoutData {
+  string date = 1;
+  repeated ExerciseData exercises = 2;
+
+  message ExerciseData {
+    int64 id = 1;
+    string title = 2;
+    string image = 3;
+    repeated RecordData records = 4;
+
+    message RecordData {
+      int64 id = 1;
+      string previous = 2;
+      float value = 3;
+      int32 reps = 4;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id "com.google.protobuf" version "0.9.1"
 }
 
 android {
@@ -52,6 +53,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.6.1"
     implementation "androidx.lifecycle:lifecycle-livedata:2.6.1"
 
+    implementation "androidx.datastore:datastore:1.0.0"
+    implementation  "com.google.protobuf:protobuf-javalite:3.10.0"
+    implementation "androidx.datastore:datastore-rxjava3:1.0.0"
+
     implementation 'com.github.fornewid:neumorphism:0.3.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
@@ -61,6 +66,22 @@ dependencies {
         }
         module("org.jetbrains.kotlin:kotlin-stdlib-jdk8") {
             replacedBy("org.jetbrains.kotlin:kotlin-stdlib", "kotlin-stdlib-jdk8 is now part of kotlin-stdlib")
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.10.0"
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
         }
     }
 }

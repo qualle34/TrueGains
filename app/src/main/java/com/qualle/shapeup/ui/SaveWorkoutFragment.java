@@ -6,29 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.qualle.shapeup.ui.adapter.RecordRecyclerViewAdapter;
-import com.qualle.shapeup.client.InMemoryBackendClient;
+import com.qualle.shapeup.client.api.CurrentWorkout;
 import com.qualle.shapeup.databinding.FragmentSaveWorkoutBinding;
-import com.qualle.shapeup.model.SaveWorkoutViewModel;
-import com.qualle.shapeup.client.api.Record;
-import com.qualle.shapeup.ui.listener.BottomMenuDismissHandler;
+import com.qualle.shapeup.model.CurrentWorkoutViewModel;
+import com.qualle.shapeup.service.LocalService;
+import com.qualle.shapeup.ui.adapter.WorkoutExerciseRecyclerViewAdapter;
 import com.qualle.shapeup.ui.menu.BottomMenuFragment;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SaveWorkoutFragment extends Fragment {
 
-public class SaveWorkoutFragment extends Fragment implements BottomMenuDismissHandler {
-
-    private SaveWorkoutViewModel viewModel;
+    private CurrentWorkoutViewModel workoutViewModel;
+    private LocalService service;
 
     private FragmentSaveWorkoutBinding binding;
 
@@ -36,37 +29,37 @@ public class SaveWorkoutFragment extends Fragment implements BottomMenuDismissHa
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSaveWorkoutBinding.inflate(inflater, container, false);
+        service = LocalService.getInstance(getContext());
 
-        NavController navController = NavHostFragment.findNavController(this);
+        workoutViewModel = new ViewModelProvider(this).get(CurrentWorkoutViewModel.class);
+        CurrentWorkout workout = service.getWorkout();
 
-        Record record = new Record();
-        record.setType("asfd");
-        record.setValue(12);
-        record.setExercise(InMemoryBackendClient.getExercises().get(0));
+        if ("".equals(workout.getDate())) {
+            workoutViewModel.initialize();
+        } else {
+            workoutViewModel.setData(workout);
+        }
 
-        List<Record> records = new ArrayList<>();
-        records.add(record);
 
         RecyclerView recyclerView = binding.saveWorkoutRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        RecordRecyclerViewAdapter adapter = new RecordRecyclerViewAdapter(records);
+        WorkoutExerciseRecyclerViewAdapter adapter = new WorkoutExerciseRecyclerViewAdapter(workoutViewModel);
         recyclerView.setAdapter(adapter);
 
-        viewModel = new ViewModelProvider(this).get(SaveWorkoutViewModel.class);
+        workoutViewModel.getWorkout()
+                .observe(getViewLifecycleOwner(), newName -> adapter.notifyDataSetChanged());
 
         binding.saveWorkoutAddExercise.setOnClickListener(v -> {
-            new BottomMenuFragment().show(getChildFragmentManager(), "dialog");
+            new BottomMenuFragment().show(getChildFragmentManager(), null);
         });
 
         return binding.getRoot();
     }
 
     @Override
-    public void handle() {
-        Fragment bottomMenu = getChildFragmentManager().findFragmentByTag("dialog");
-
-        if (bottomMenu instanceof BottomSheetDialogFragment) {
-            ((BottomSheetDialogFragment) bottomMenu).dismiss();
-        }
+    public void onStop() {
+        super.onStop();
+        service.saveWorkout(workoutViewModel.getWorkout().getValue());
     }
+
 }

@@ -7,12 +7,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.qualle.shapeup.client.api.Exercise;
-import com.qualle.shapeup.databinding.FragmentBottomMenuExerciseItemBinding;
+import com.qualle.shapeup.databinding.ItemBottomMenuExerciseBinding;
+import com.qualle.shapeup.repository.LocalRepository;
 import com.qualle.shapeup.ui.listener.MenuClickListener;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(FragmentBottomMenuExerciseItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(ItemBottomMenuExerciseBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -39,8 +38,9 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         holder.item = exercise;
         holder.title.setText(exercise.getName());
 
-        holder.layout.setOnClickListener(v -> {
 
+
+        holder.layout.setOnClickListener(v -> {
             menuClickListener.onExerciseSelect(exercise.getId());
         });
     }
@@ -57,7 +57,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
 
         public Exercise item;
 
-        public ViewHolder(FragmentBottomMenuExerciseItemBinding binding) {
+        public ViewHolder(ItemBottomMenuExerciseBinding binding) {
             super(binding.getRoot());
             layout = binding.exerciseItem;
             title = binding.exerciseItemTitle;

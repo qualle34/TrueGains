@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="14dp"
-            android:text="Distribution"
+            android:text="Muscle distribution"
             android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
             android:textSize="24sp" />
 

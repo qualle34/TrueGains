@@ -7,9 +7,18 @@ import java.util.List;
 
 public class Workout {
 
+    private long id;
     private List<Record> records;
     private LocalDateTime date;
     private int achievementsCount;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public List<Record> getRecords() {
         return records;
