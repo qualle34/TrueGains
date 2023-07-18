@@ -54,8 +54,8 @@ public class WorkoutListRecyclerViewAdapter extends RecyclerView.Adapter<Workout
 
         public ViewHolder(ItemWorkoutListBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            mIdView = binding.date;
+            mContentView = binding.exerciseCount;
             workout = binding.workoutLayout;
         }
     }

@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.qualle.shapeup.ChartPieFragment;
 import com.qualle.shapeup.R;
 import com.qualle.shapeup.client.InMemoryBackendClient;
 import com.qualle.shapeup.databinding.FragmentMainBinding;
@@ -60,6 +61,11 @@ public class MainFragment extends Fragment {
             Workout workout = workouts.get(i);
             FrameLayout card = new FrameLayout(getContext());
             card.setId(i + 1);
+
+            Bundle bundle = new Bundle();
+            bundle.putLong("id", workout.getId());
+
+            card.setOnClickListener(v -> navController.navigate(R.id.action_nav_workout_list_fragment_to_nav_workout_details_fragment, bundle));
 
             ft.replace(card.getId(), CardWorkoutFragment.newInstance(workout.getFormattedDate(), workout.getRecords().size(), workout.getAchievementsCount()));
             linearLayout.addView(card);

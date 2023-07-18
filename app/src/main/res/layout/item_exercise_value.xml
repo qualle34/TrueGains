@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_round_corners"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/volume_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="2 349 Kg"
+        android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+        android:textSize="18sp" />
+
+</RelativeLayout>

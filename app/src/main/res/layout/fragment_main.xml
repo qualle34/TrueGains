@@ -37,7 +37,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_user_octagon" />
+                android:src="@drawable/ic_menu" />
 
         </LinearLayout>
 
@@ -74,7 +74,7 @@
                     android:id="@+id/main_button_start_workout"
                     android:layout_width="120dp"
                     android:layout_height="145dp"
-                    android:drawableTop="@drawable/add_circle"
+                    android:drawableTop="@drawable/ic_add_2"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:paddingTop="22sp"
@@ -104,7 +104,7 @@
                     android:layout_width="120dp"
                     android:layout_height="145dp"
                     android:layout_marginEnd="40dp"
-                    android:drawableTop="@drawable/ic_arrow_right_2"
+                    android:drawableTop="@drawable/ic_arrow_right_light"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:paddingTop="22sp"
@@ -175,7 +175,7 @@
                     android:layout_height="125dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="40dp"
-                    android:drawableTop="@drawable/ic_arrow_right_2"
+                    android:drawableTop="@drawable/ic_arrow_right_light"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:paddingTop="12sp"

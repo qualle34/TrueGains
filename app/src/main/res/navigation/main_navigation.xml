@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_nav_main_fragment_to_workoutListFragment"
             app:destination="@id/nav_workout_list_fragment" />
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_workout_details_fragment"
+            app:destination="@id/nav_workout_details_fragment" />
     </fragment>
 
     <fragment
@@ -117,6 +120,9 @@
         <action
             android:id="@+id/action_nav_workout_details_fragment_to_nav_workout_list_fragment"
             app:destination="@id/nav_workout_list_fragment" />
+        <action
+            android:id="@+id/action_nav_workout_details_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
     </fragment>
 
 </navigation>

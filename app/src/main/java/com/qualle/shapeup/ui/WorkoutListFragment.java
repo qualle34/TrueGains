@@ -28,7 +28,7 @@ public class WorkoutListFragment extends Fragment implements WorkoutListClickLis
         View view = binding.getRoot();
 
         Context context = view.getContext();
-        RecyclerView recyclerView = (RecyclerView) view;
+        RecyclerView recyclerView = binding.workoutListRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         recyclerView.setAdapter(new WorkoutListRecyclerViewAdapter(this, InMemoryBackendClient.getWorkouts()));
@@ -41,6 +41,10 @@ public class WorkoutListFragment extends Fragment implements WorkoutListClickLis
     @Override
     public void onWorkoutClick(long workoutId) {
         NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(R.id.action_nav_workout_list_fragment_to_nav_workout_details_fragment);
+
+        Bundle args = new Bundle();
+        args.putLong("id", workoutId);
+
+        navController.navigate(R.id.action_nav_workout_list_fragment_to_nav_workout_details_fragment, args);
     }
 }
