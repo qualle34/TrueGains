@@ -9,6 +9,16 @@ public class User {
     private int age;
     private int workoutCount;
     private String gender;
+    private String email;
+    private int height;
+
+    public User(String name, String birthday, int workoutCount, String gender, int height) {
+        this.name = name;
+        this.birthday = birthday;
+        this.workoutCount = workoutCount;
+        this.gender = gender;
+        this.height = height;
+    }
 
     public long getId() {
         return id;
@@ -62,7 +72,23 @@ public class User {
         return gender;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

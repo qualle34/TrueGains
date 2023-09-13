@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.qualle.shapeup.ChartPieFragment;
 import com.qualle.shapeup.R;
 import com.qualle.shapeup.client.InMemoryBackendClient;
 import com.qualle.shapeup.databinding.FragmentMainBinding;

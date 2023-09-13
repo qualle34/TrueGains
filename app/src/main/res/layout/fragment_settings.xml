@@ -1,77 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="none"
     tools:context=".ui.profile.SettingsFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="20dp">
 
         <LinearLayout
-            android:id="@+id/innerLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
-            <soup.neumorphism.NeumorphImageButton
-                android:id="@+id/settings_button"
-                style="@style/Widget.Neumorph.ImageButton"
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_arrow_left"
-                app:neumorph_shapeType="pressed" />
+            <ImageView
+                android:id="@+id/settings_button_back"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_ripple"
+                android:clickable="true"
+                android:src="@drawable/ic_arrow_left" />
 
-
-            <soup.neumorphism.NeumorphTextView
-                android:id="@+id/settings_text_title"
-                style="@style/Widget.Neumorph.TextView"
+            <TextView
+                android:id="@+id/workout_list_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
                 android:gravity="center"
                 android:text="Settings"
-                android:textSize="35sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="Main"
+                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryMedium"
+                android:textSize="20sp" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/pearl_bush"
+                android:hint="Language"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/settings_spinner_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/pearl_bush"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/pearl_bush"
+                android:hint="Weight units"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/settings_spinner_weight_units"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/pearl_bush"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/pearl_bush"
+                android:hint="Length units"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/settings_spinner_length_units"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/pearl_bush"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>
 
-<!--        <Switch-->
-<!--            android:id="@+id/switch1"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Единицы измерения" />-->
+        <Button
+            android:id="@+id/settings_save"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_round_corners"
+            android:text="Save "
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+            android:textColor="@color/zircon"
+            android:textSize="18dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginVertical="8dp"
+                android:gravity="center"
+                android:text="Help"
+                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryMedium"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/settings_support"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="Support"
+                    android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryLight"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="3dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_arrow_right" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/settings_delete_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="Delete account"
+                    android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryLight"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="3dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_arrow_right" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginVertical="8dp"
+                android:gravity="center"
+                android:text="Info"
+                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryMedium"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/settings_privacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="Privacy"
+                    android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryLight"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="3dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_arrow_right" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/settings_terms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="Terms of use"
+                    android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryLight"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="3dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_arrow_right" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="16dp"
+                android:text="Version 1.0"
+                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryLight"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/settings_button_logout"
-        style="@style/Widget.Neumorph.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:drawablePadding="8dp"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

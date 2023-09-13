@@ -1,4 +1,4 @@
-package com.qualle.shapeup;
+package com.qualle.shapeup.ui.chart;
 
 import android.graphics.Color;
 import android.os.Bundle;

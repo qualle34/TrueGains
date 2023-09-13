@@ -5,6 +5,7 @@ import com.qualle.shapeup.client.api.Exercise;
 import com.qualle.shapeup.client.api.Image;
 import com.qualle.shapeup.client.api.Record;
 import com.qualle.shapeup.client.api.RecordSummary;
+import com.qualle.shapeup.client.api.User;
 import com.qualle.shapeup.client.api.Workout;
 
 import java.time.LocalDateTime;
@@ -19,8 +20,12 @@ public class InMemoryBackendClient {
     private static List<Workout> workouts;
     private static List<Exercise> exercises;
     private static List<Category> categories;
+    private static User user;
 
     static {
+        user =  new User("Anton", "01.06.2001", 21, "Male", 174);
+        user.setEmail("antonsamoilo@gmail.com");
+
         exercises = new ArrayList<>();
         exercises.add(new Exercise("Barbell bench press", ""));
         exercises.add(new Exercise("Dumbbell bench press", ""));
@@ -197,5 +202,9 @@ public class InMemoryBackendClient {
         data.put(22f, 1f);
         data.put(23f, 3f);
         return data;
+    }
+
+    public static User getUser() {
+        return user;
     }
 }

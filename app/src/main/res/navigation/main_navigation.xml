@@ -93,13 +93,20 @@
 
     <fragment
         android:id="@+id/nav_profile_data_fragment"
-        android:name="com.qualle.shapeup.ui.profile.ProfileDataFragment"
-        tools:layout="@layout/fragment_profile_data" />
+        android:name="com.qualle.shapeup.ui.profile.ProfileEditFragment"
+        tools:layout="@layout/fragment_profile_edit" />
 
     <fragment
         android:id="@+id/nav_profile_security_fragment"
         android:name="com.qualle.shapeup.ui.profile.ProfileSecurityFragment"
-        tools:layout="@layout/fragment_profile_security" />
+        tools:layout="@layout/fragment_profile_security" >
+        <action
+            android:id="@+id/action_nav_profile_security_fragment_to_nav_profile_security_password_fragment"
+            app:destination="@id/nav_profile_security_password_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_security_fragment_to_nav_profile_security_email_fragment"
+            app:destination="@id/nav_profile_security_email_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_workout_list_fragment"
@@ -123,6 +130,22 @@
         <action
             android:id="@+id/action_nav_workout_details_fragment_to_nav_main_fragment"
             app:destination="@id/nav_main_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile_security_email_fragment"
+        android:name="com.qualle.shapeup.ui.profile.ProfileSecurityEmailFragment"
+        tools:layout="@layout/fragment_profile_security_email" >
+        <action
+            android:id="@+id/action_nav_profile_security_email_fragment_to_nav_profile_security_fragment"
+            app:destination="@id/nav_profile_security_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile_security_password_fragment"
+        android:name="com.qualle.shapeup.ui.profile.ProfileSecurityPasswordFragment"
+        tools:layout="@layout/fragment_profile_security_password" >
+        <action
+            android:id="@+id/action_nav_profile_security_password_fragment_to_nav_profile_security_fragment"
+            app:destination="@id/nav_profile_security_fragment" />
     </fragment>
 
 </navigation>

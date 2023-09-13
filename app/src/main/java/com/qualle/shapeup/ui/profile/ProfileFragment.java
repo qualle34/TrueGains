@@ -19,6 +19,7 @@ import com.qualle.shapeup.config.DaggerApplicationComponent;
 import com.qualle.shapeup.databinding.FragmentProfileBinding;
 import com.qualle.shapeup.model.enums.ChartType;
 import com.qualle.shapeup.ui.chart.ChartLineFragment;
+import com.qualle.shapeup.ui.menu.BottomMenuFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +44,7 @@ public class ProfileFragment extends Fragment {
         ApplicationComponent component = DaggerApplicationComponent.create();
         component.inject(this);
 
-        binding.profileCardUserData.setOnClickListener(v ->
+        binding.profileCardEditProfile.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_profile_fragment_to_nav_profile_data_fragment));
 
         binding.profileCardSettings.setOnClickListener(v ->
@@ -51,6 +52,28 @@ public class ProfileFragment extends Fragment {
 
         binding.profileCardSecurity.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_profile_fragment_to_nav_profile_security_fragment));
+
+        binding.profileCardMeasure.setOnClickListener(v -> {
+            new BottomMenuFragment().show(getChildFragmentManager(), null);
+        });
+
+        binding.profileButtonBack.setOnClickListener(v -> navController.popBackStack());
+
+        getChildFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance("Weight", ChartType.NUMBER, null), null)
+                .commit();
+
+        InputStream ims = null; // todo
+        try {
+            ims = getContext().getAssets().open("philipp.jpg");
+            Drawable d = Drawable.createFromStream(ims, null);
+            binding.profileImageView.setImageDrawable(d);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
 
         client.getUser().enqueue(new Callback<>() {
 
@@ -62,19 +85,6 @@ public class ProfileFragment extends Fragment {
                 binding.profileNameAge.setText(dto.getName() + ", " + dto.getAge());
                 binding.profileWorkoutCount.setText("Количество тренировок: " + dto.getWorkoutCount());
 
-                InputStream ims = null; // todo
-                try {
-                    ims = getContext().getAssets().open("philipp.jpg");
-                    Drawable d = Drawable.createFromStream(ims, null);
-                    binding.profileImageView.setImageDrawable(d);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-                getChildFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance("Weight", ChartType.NUMBER, null), null)
-                        .commit();
 
             }
 
