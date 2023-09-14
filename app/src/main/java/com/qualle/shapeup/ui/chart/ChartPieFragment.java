@@ -18,7 +18,9 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.qualle.shapeup.R;
 import com.qualle.shapeup.databinding.FragmentChartPieBinding;
+import com.qualle.shapeup.util.PieChartFormatter;
 
 import java.util.ArrayList;
 
@@ -28,10 +30,7 @@ public class ChartPieFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     protected final String[] parties = new String[] {
-            "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
-            "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
-            "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
-            "Party Y", "Party Z"
+            "Shoulders", "Back", "Chest", "Biceps", "Triceps"
     };
 
     private String mParam1;
@@ -67,50 +66,35 @@ public class ChartPieFragment extends Fragment {
         PieChart chart = binding.pieChart;
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
-        chart.setExtraOffsets(5, 10, 5, 5);
 
-        chart.setDragDecelerationFrictionCoef(0.95f);
-
+        chart.setDragDecelerationFrictionCoef(0.75f);
 
         chart.setDrawHoleEnabled(true);
-        chart.setHoleColor(Color.WHITE);
+        chart.setHoleColor(getResources().getColor(R.color.pearl_bush));
 
         chart.setTransparentCircleColor(Color.WHITE);
         chart.setTransparentCircleAlpha(110);
+        chart.setHoleRadius(35f);
+        chart.setTransparentCircleRadius(38f);
 
-        chart.setHoleRadius(58f);
-        chart.setTransparentCircleRadius(61f);
-
-        chart.setDrawCenterText(true);
+        chart.setDrawCenterText(false);
 
         chart.setRotationAngle(0);
-        // enable rotation of the chart by touch
         chart.setRotationEnabled(true);
         chart.setHighlightPerTapEnabled(true);
 
-        // chart.setUnit(" €");
-        // chart.setDrawUnitsInChart(true);
 
 
-
-
-        chart.animateY(1400, Easing.EaseInOutQuad);
-        // chart.spin(2000, 0, 360);
+        chart.animateY(1000, Easing.EaseInOutQuad);
 
         Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
+        l.setEnabled(false);
 
-        // entry label styling
-        chart.setEntryLabelColor(Color.WHITE);
+        chart.setEntryLabelColor(getResources().getColor(R.color.zircon));
         chart.setEntryLabelTextSize(12f);
 
-        setData(chart, 8, 30);
+
+        setData(chart, 5, 30);
 
         return binding.getRoot();
     }
@@ -118,14 +102,12 @@ public class ChartPieFragment extends Fragment {
     private void setData(PieChart chart, int count, float range) {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
-        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-        // the chart.
         for (int i = 0; i < count ; i++) {
             entries.add(new PieEntry((float) ((Math.random() * range) + range / 5),
                     parties[i % parties.length]));
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "Election Results");
+        PieDataSet dataSet = new PieDataSet(entries, "");
 
         dataSet.setDrawIcons(false);
 
@@ -133,34 +115,17 @@ public class ChartPieFragment extends Fragment {
         dataSet.setIconsOffset(new MPPointF(0, 40));
         dataSet.setSelectionShift(5f);
 
-        // add a lot of colors
-
         ArrayList<Integer> colors = new ArrayList<>();
 
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-
-        colors.add(ColorTemplate.getHoloBlue());
+        colors.add(getResources().getColor(R.color.black_russian));
+        colors.add(getResources().getColor(R.color.twine));
 
         dataSet.setColors(colors);
-        //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter());
+        data.setValueFormatter(new PieChartFormatter());
         data.setValueTextSize(11f);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(getResources().getColor(R.color.zircon));
         chart.setData(data);
 
         // undo all highlights

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -48,7 +49,7 @@ public class MainFragment extends Fragment {
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.main_chart_container, ChartBarFragment.newInstance(testChartData), null)
+                .replace(R.id.main_chart_container, ChartBarFragment.newInstance(testChartData), null)
                 .commit();
 
 
@@ -59,12 +60,8 @@ public class MainFragment extends Fragment {
         for (int i = 0; i < workouts.size(); i++) {
             Workout workout = workouts.get(i);
             FrameLayout card = new FrameLayout(getContext());
+            card.setClickable(true);
             card.setId(i + 1);
-
-            Bundle bundle = new Bundle();
-            bundle.putLong("id", workout.getId());
-
-            card.setOnClickListener(v -> navController.navigate(R.id.action_nav_workout_list_fragment_to_nav_workout_details_fragment, bundle));
 
             ft.replace(card.getId(), CardWorkoutFragment.newInstance(workout.getFormattedDate(), workout.getRecords().size(), workout.getAchievementsCount()));
             linearLayout.addView(card);
@@ -75,7 +72,7 @@ public class MainFragment extends Fragment {
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.main_radar_chart_container, new ChartRadarFragment(), null)
+                .replace(R.id.main_radar_chart_container, new ChartRadarFragment(), null)
                 .commit();
 
 

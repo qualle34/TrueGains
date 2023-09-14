@@ -1,17 +1,17 @@
 package com.qualle.shapeup.ui.card;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.qualle.shapeup.R;
 import com.qualle.shapeup.databinding.FragmentCardWorkoutBinding;
-import com.qualle.shapeup.ui.MainFragment;
 
 public class CardWorkoutFragment extends Fragment {
 
@@ -57,8 +57,15 @@ public class CardWorkoutFragment extends Fragment {
         binding.workoutCardMiddleText.setText(records + " Exercises");
         binding.workoutCardLowerText.setText(achievements + " new achievements");
 
-//        binding.getRoot().setOnClickListener(v -> navController.navigate());
+        Bundle bundle = new Bundle();
+//        bundle.putLong("id", workout.getId());
+
+
+        binding.mainWorkoutCard.setOnClickListener(v -> {
+            navController.navigate(R.id.action_nav_main_fragment_to_nav_workout_details_fragment, bundle);
+        });
 
         return binding.getRoot();
     }
+
 }

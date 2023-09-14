@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_wrap"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,7 +26,7 @@
                 android:layout_gravity="center"
                 android:text="Your training\nachievements"
                 android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
-                android:textSize="27sp" />
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="0dp"
@@ -56,7 +57,7 @@
             android:layout_marginVertical="14dp"
             android:text="Workouts"
             android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -125,7 +126,7 @@
             android:layout_marginVertical="14dp"
             android:text="Muscle distribution"
             android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_radar_chart_container"
@@ -140,7 +141,7 @@
             android:layout_marginBottom="14dp"
             android:text="Achievements"
             android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
 
         <HorizontalScrollView

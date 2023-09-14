@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background_round_corners"
     android:paddingHorizontal="16dp"
     android:paddingVertical="12dp"
-    android:layout_margin="8dp">
+    android:layout_marginVertical="8dp"
+    android:layout_marginEnd="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/exercise_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Shoulders"
+        android:layout_marginBottom="4dp"
+        android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/volume_title"
@@ -13,7 +25,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="2 349 Kg"
-        android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
-        android:textSize="18sp" />
+        android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
+        android:textSize="12sp" />
 
-</RelativeLayout>
+</LinearLayout>

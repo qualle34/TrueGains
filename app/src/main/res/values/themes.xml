@@ -12,8 +12,6 @@
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.ShapeUp.BottomSheetDialog</item>
 
         <item name="colorOnSurface">@color/black_russian</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
 
         <!--this is to change the shape of the MDC EditText-->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
@@ -26,25 +24,9 @@
         <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
     </style>
 
-
-    <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <!--this changes the font face of the hint text-->
-        <item name="fontFamily">sans-serif-condensed</item>
-        <item name="android:fontFamily">sans-serif-condensed</item>
-    </style>
-
-    <style name="TextAppearance.App.Caption" parent="TextAppearance.MaterialComponents.Caption">
-        <!--this changes the font face of the helper text-->
-        <item name="fontFamily">sans-serif-black</item>
-        <item name="android:fontFamily">sans-serif-black</item>
-    </style>
-
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
-
-
     </style>
 
 

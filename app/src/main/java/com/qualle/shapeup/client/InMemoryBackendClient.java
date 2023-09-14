@@ -6,6 +6,7 @@ import com.qualle.shapeup.client.api.Image;
 import com.qualle.shapeup.client.api.Record;
 import com.qualle.shapeup.client.api.RecordSummary;
 import com.qualle.shapeup.client.api.User;
+import com.qualle.shapeup.client.api.VolumeRecord;
 import com.qualle.shapeup.client.api.Workout;
 
 import java.time.LocalDateTime;
@@ -206,5 +207,15 @@ public class InMemoryBackendClient {
 
     public static User getUser() {
         return user;
+    }
+
+    public static List<VolumeRecord> getVolumeRecords(){
+        List<VolumeRecord> records = new ArrayList<>();
+
+       for (Record record : workouts.get(0).getRecords()) {
+           records.add(new VolumeRecord(record.getExercise().getName(), (int) (record.getValue() * record.getReps())));
+       }
+
+        return records;
     }
 }

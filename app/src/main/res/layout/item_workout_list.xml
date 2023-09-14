@@ -19,7 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:layout_marginBottom="4dp"
             android:text="8 June"/>
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="2 exercises"
             android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <Space
@@ -37,7 +38,7 @@
         android:layout_weight="1"/>
 
     <ImageView
-        android:layout_width="40dp"
+        android:layout_width="30dp"
         android:layout_height="match_parent"
         android:src="@drawable/ic_arrow_right_light"/>
 </LinearLayout>
