@@ -1,26 +1,24 @@
 package com.qualle.shapeup.ui.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qualle.shapeup.client.api.Workout;
 import com.qualle.shapeup.databinding.ItemWorkoutListBinding;
+import com.qualle.shapeup.model.local.SimpleWorkoutProto;
 import com.qualle.shapeup.ui.listener.WorkoutListClickListener;
 
-import java.time.format.TextStyle;
 import java.util.List;
-import java.util.Locale;
 
 public class WorkoutListRecyclerViewAdapter extends RecyclerView.Adapter<WorkoutListRecyclerViewAdapter.ViewHolder> {
-    private final  WorkoutListClickListener listener;
-    private final List<Workout> values;
 
-    public WorkoutListRecyclerViewAdapter(WorkoutListClickListener listener, List<Workout> values) {
+    private final WorkoutListClickListener listener;
+    private final List<SimpleWorkoutProto> values;
+
+    public WorkoutListRecyclerViewAdapter(WorkoutListClickListener listener, List<SimpleWorkoutProto> values) {
         this.listener = listener;
         this.values = values;
     }
@@ -33,13 +31,13 @@ public class WorkoutListRecyclerViewAdapter extends RecyclerView.Adapter<Workout
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Workout workout = values.get(position);
+        SimpleWorkoutProto workout = values.get(position);
 
-        holder.mIdView.setText(workout.getDate().getDayOfMonth() + " " + workout.getDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-        holder.mContentView.setText("Achievements Count: " + workout.getAchievementsCount());
+        holder.mIdView.setText(workout.getDate());
+        holder.mContentView.setText(workout.getExercisesCount() + " Exercises");
 
-        holder.workout.setOnClickListener(v -> listener.onWorkoutClick(workout.getId()));
-
+//        holder.workout.setOnClickListener(v -> listener.onWorkoutClick(workout.getId()));
+        holder.workout.setOnClickListener(v -> listener.onWorkoutClick(1));
     }
 
     @Override

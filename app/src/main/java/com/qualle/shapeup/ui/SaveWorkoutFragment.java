@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qualle.shapeup.client.api.CurrentWorkout;
+import com.qualle.shapeup.model.local.CurrentWorkoutProto;
 import com.qualle.shapeup.databinding.FragmentSaveWorkoutBinding;
 import com.qualle.shapeup.model.CurrentWorkoutViewModel;
 import com.qualle.shapeup.service.LocalService;
@@ -30,9 +32,12 @@ public class SaveWorkoutFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentSaveWorkoutBinding.inflate(inflater, container, false);
         service = LocalService.getInstance(getContext());
+        NavController navController = NavHostFragment.findNavController(this);
+
+        binding.saveWorkoutButtonBack.setOnClickListener(v -> navController.popBackStack());
 
         workoutViewModel = new ViewModelProvider(this).get(CurrentWorkoutViewModel.class);
-        CurrentWorkout workout = service.getWorkout();
+        CurrentWorkoutProto workout = service.getCurrentWorkout();
 
         if ("".equals(workout.getDate())) {
             workoutViewModel.initialize();

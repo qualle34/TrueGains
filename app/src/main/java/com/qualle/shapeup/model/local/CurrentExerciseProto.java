@@ -1,18 +1,18 @@
-package com.qualle.shapeup.client.api;
+package com.qualle.shapeup.model.local;
 
 import java.util.List;
 
-public class CurrentExercise {
+public class CurrentExerciseProto {
 
     private long id;
     private String title;
     private String imageLink;
-    private List<CurrentRecord> records;
+    private List<CurrentRecordProto> records;
 
-    public CurrentExercise() {
+    public CurrentExerciseProto() {
     }
 
-    public CurrentExercise(long id, String title, String imageLink, List<CurrentRecord> records) {
+    public CurrentExerciseProto(long id, String title, String imageLink, List<CurrentRecordProto> records) {
         this.id = id;
         this.title = title;
         this.imageLink = imageLink;
@@ -43,11 +43,11 @@ public class CurrentExercise {
         this.imageLink = imageLink;
     }
 
-    public List<CurrentRecord> getRecords() {
+    public List<CurrentRecordProto> getRecords() {
         return records;
     }
 
-    public void setRecords(List<CurrentRecord> records) {
+    public void setRecords(List<CurrentRecordProto> records) {
         this.records = records;
     }
 }

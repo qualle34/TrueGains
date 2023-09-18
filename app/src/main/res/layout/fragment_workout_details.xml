@@ -59,6 +59,7 @@
 
 
         <TextView
+            android:id="@+id/workout_details_exercise_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="14dp"

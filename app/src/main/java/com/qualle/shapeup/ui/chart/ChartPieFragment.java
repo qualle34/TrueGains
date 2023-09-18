@@ -2,12 +2,11 @@ package com.qualle.shapeup.ui.chart;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -15,37 +14,31 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.qualle.shapeup.R;
 import com.qualle.shapeup.databinding.FragmentChartPieBinding;
+import com.qualle.shapeup.model.local.VolumeProto;
 import com.qualle.shapeup.util.PieChartFormatter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChartPieFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_DATA = "data";
 
-    protected final String[] parties = new String[] {
-            "Shoulders", "Back", "Chest", "Biceps", "Triceps"
-    };
-
-    private String mParam1;
-    private String mParam2;
+    private List<VolumeProto> volume;
 
     private FragmentChartPieBinding binding;
 
     public ChartPieFragment() {
     }
 
-    public static ChartPieFragment newInstance(String param1, String param2) {
+    public static Fragment newInstance(List<VolumeProto> volumeForExercises) {
         ChartPieFragment fragment = new ChartPieFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_DATA, (Serializable) volumeForExercises);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,8 +47,7 @@ public class ChartPieFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            volume = (List<VolumeProto>) getArguments().getSerializable(ARG_DATA);
         }
     }
 
@@ -84,7 +76,6 @@ public class ChartPieFragment extends Fragment {
         chart.setHighlightPerTapEnabled(true);
 
 
-
         chart.animateY(1000, Easing.EaseInOutQuad);
 
         Legend l = chart.getLegend();
@@ -94,17 +85,16 @@ public class ChartPieFragment extends Fragment {
         chart.setEntryLabelTextSize(12f);
 
 
-        setData(chart, 5, 30);
+        setData(chart);
 
         return binding.getRoot();
     }
 
-    private void setData(PieChart chart, int count, float range) {
+    private void setData(PieChart chart) {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
-        for (int i = 0; i < count ; i++) {
-            entries.add(new PieEntry((float) ((Math.random() * range) + range / 5),
-                    parties[i % parties.length]));
+        for (int i = 0; i < volume.size(); i++) {
+            entries.add(new PieEntry(volume.get(i).getValue(), volume.get(i).getExercise()));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -112,7 +102,7 @@ public class ChartPieFragment extends Fragment {
         dataSet.setDrawIcons(false);
 
         dataSet.setSliceSpace(3f);
-        dataSet.setIconsOffset(new MPPointF(0, 40));
+        dataSet.setIconsOffset(new MPPointF(0, 60));
         dataSet.setSelectionShift(5f);
 
         ArrayList<Integer> colors = new ArrayList<>();

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qualle.shapeup.client.api.CurrentRecord;
+import com.qualle.shapeup.model.local.CurrentRecordProto;
 import com.qualle.shapeup.databinding.ItemSaveWorkoutRecordBinding;
 import com.qualle.shapeup.model.CurrentWorkoutViewModel;
 
@@ -22,7 +22,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
     private final int exercisePosition;
     private final CurrentWorkoutViewModel workoutViewModel;
     private RecyclerView recyclerView;
-    private final Map<Integer, CurrentRecord> records;
+    private final Map<Integer, CurrentRecordProto> records;
 
     public WorkoutRecordRecyclerViewAdapter(CurrentWorkoutViewModel workoutViewModel, int exercisePosition) {
         this.workoutViewModel = workoutViewModel;
@@ -30,7 +30,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
         records = new HashMap<>();
 
         int i = 0;
-        for (CurrentRecord record : workoutViewModel.getExercise(exercisePosition).getRecords()) {
+        for (CurrentRecordProto record : workoutViewModel.getExercise(exercisePosition).getRecords()) {
             records.put(i, record);
             i++;
         }
@@ -51,7 +51,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CurrentRecord record = workoutViewModel.getRecord(exercisePosition, position);
+        CurrentRecordProto record = workoutViewModel.getRecord(exercisePosition, position);
 
         holder.previous.setText(record.getPrevious() == null
                 ? " - " : record.getPrevious());
@@ -75,7 +75,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
         return workoutViewModel.getRecordsCount(exercisePosition);
     }
 
-    public Map<Integer, CurrentRecord> getRecords() {
+    public Map<Integer, CurrentRecordProto> getRecords() {
         return records;
     }
 
@@ -102,11 +102,11 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
 
     static class RecordWeightTextWatcher implements TextWatcher {
 
-        private Map<Integer, CurrentRecord> records;
+        private Map<Integer, CurrentRecordProto> records;
         private int position;
         private boolean onTextChanged = false;
 
-        public RecordWeightTextWatcher(Map<Integer, CurrentRecord> records, int position) {
+        public RecordWeightTextWatcher(Map<Integer, CurrentRecordProto> records, int position) {
             this.records = records;
             this.position = position;
         }
@@ -126,7 +126,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
             if (onTextChanged) {
                 onTextChanged = false;
 
-                CurrentRecord editedRecord = records.get(position);
+                CurrentRecordProto editedRecord = records.get(position);
                 if (editedRecord != null) {
                     editedRecord.setWeight(Float.parseFloat(s.toString()));
                 }
@@ -137,11 +137,11 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
 
     static class RecordRepsTextWatcher implements TextWatcher {
 
-        private Map<Integer, CurrentRecord> records;
+        private Map<Integer, CurrentRecordProto> records;
         private int position;
         private boolean onTextChanged = false;
 
-        public RecordRepsTextWatcher(Map<Integer, CurrentRecord> records, int position) {
+        public RecordRepsTextWatcher(Map<Integer, CurrentRecordProto> records, int position) {
             this.records = records;
             this.position = position;
         }
@@ -160,7 +160,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
         public void afterTextChanged(Editable s) {
             if (onTextChanged) {
                 onTextChanged = false;
-                CurrentRecord editedRecord = records.get(position);
+                CurrentRecordProto editedRecord = records.get(position);
                 if (editedRecord != null) {
                     editedRecord.setReps(Integer.parseInt(s.toString()));
                 }

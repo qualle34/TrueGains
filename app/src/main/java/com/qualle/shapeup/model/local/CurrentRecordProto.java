@@ -1,21 +1,21 @@
-package com.qualle.shapeup.client.api;
+package com.qualle.shapeup.model.local;
 
-public class CurrentRecord {
+public class CurrentRecordProto {
 
     private long id;
     private String previous;
     private float weight;
     private int reps;
 
-    public CurrentRecord() {
+    public CurrentRecordProto() {
     }
 
-    public CurrentRecord(long id, String previous) {
+    public CurrentRecordProto(long id, String previous) {
         this.id = id;
         this.previous = previous;
     }
 
-    public CurrentRecord(long id, String previous, float weight, int reps) {
+    public CurrentRecordProto(long id, String previous, float weight, int reps) {
         this.id = id;
         this.previous = previous;
         this.weight = weight;

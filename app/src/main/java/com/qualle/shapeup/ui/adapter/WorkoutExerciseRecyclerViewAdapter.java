@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qualle.shapeup.client.api.CurrentExercise;
+import com.qualle.shapeup.model.local.CurrentExerciseProto;
 import com.qualle.shapeup.databinding.ItemSaveWorkoutExerciseBinding;
 import com.qualle.shapeup.model.CurrentWorkoutViewModel;
 
@@ -32,7 +32,7 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CurrentExercise exercise = workoutViewModel.getExercise(position);
+        CurrentExerciseProto exercise = workoutViewModel.getExercise(position);
 
         holder.title.setText(exercise.getTitle());
 

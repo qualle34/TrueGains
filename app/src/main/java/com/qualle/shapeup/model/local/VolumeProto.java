@@ -1,15 +1,17 @@
-package com.qualle.shapeup.client.api;
+package com.qualle.shapeup.model.local;
 
-public class VolumeRecord {
+import java.io.Serializable;
+
+public class VolumeProto implements Serializable {
 
     private String exercise;
     private int value;
 
-    public VolumeRecord() {
+    public VolumeProto() {
 
     }
 
-    public VolumeRecord(String exercise, int value) {
+    public VolumeProto(String exercise, int value) {
         this.exercise = exercise;
         this.value = value;
     }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,9 +14,10 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.qualle.shapeup.R;
 import com.qualle.shapeup.client.InMemoryBackendClient;
-import com.qualle.shapeup.databinding.FragmentMainBinding;
 import com.qualle.shapeup.client.api.RecordSummary;
-import com.qualle.shapeup.client.api.Workout;
+import com.qualle.shapeup.databinding.FragmentMainBinding;
+import com.qualle.shapeup.model.local.SimpleWorkoutProto;
+import com.qualle.shapeup.service.LocalService;
 import com.qualle.shapeup.ui.card.CardAchievementFragment;
 import com.qualle.shapeup.ui.card.CardWorkoutFragment;
 import com.qualle.shapeup.ui.chart.ChartBarFragment;
@@ -29,11 +29,13 @@ import java.util.Map;
 public class MainFragment extends Fragment {
 
     private FragmentMainBinding binding;
+    private LocalService service;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMainBinding.inflate(inflater, container, false);
+        service = LocalService.getInstance(getContext());
         NavController navController = NavHostFragment.findNavController(this);
 
         binding.mainButtonProfile.setOnClickListener(v ->
@@ -52,18 +54,23 @@ public class MainFragment extends Fragment {
                 .replace(R.id.main_chart_container, ChartBarFragment.newInstance(testChartData), null)
                 .commit();
 
-
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         LinearLayout linearLayout = binding.mainLinearLayoutWorkout;
-        List<Workout> workouts = InMemoryBackendClient.getWorkouts();
+
+        if (service.isCurrentWorkoutStarted()) {
+            binding.mainButtonStartWorkout.setText("Continue\nworkout");
+        }
+
+
+        List<SimpleWorkoutProto> workouts = service.getWorkouts();
 
         for (int i = 0; i < workouts.size(); i++) {
-            Workout workout = workouts.get(i);
+            SimpleWorkoutProto workout = workouts.get(i);
             FrameLayout card = new FrameLayout(getContext());
             card.setClickable(true);
             card.setId(i + 1);
 
-            ft.replace(card.getId(), CardWorkoutFragment.newInstance(workout.getFormattedDate(), workout.getRecords().size(), workout.getAchievementsCount()));
+            ft.replace(card.getId(), CardWorkoutFragment.newInstance(workout.getId(), workout.getDate(), workout.getExercisesCount(), workout.getAchievementsCount()));
             linearLayout.addView(card);
         }
 

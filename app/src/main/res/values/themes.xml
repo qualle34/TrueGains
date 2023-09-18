@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.Theme.ShapeUp" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/black_russian</item>
-        <item name="colorPrimaryDark">@color/black_russian</item>
-        <item name="colorAccent">@color/black_russian</item>
+        <item name="colorPrimary">@color/twine</item>
+        <item name="colorPrimaryDark">@color/twine</item>
+        <item name="colorAccent">@color/twine</item>
 
         <item name="android:windowBackground">@color/pearl_bush</item>
         <item name="android:navigationBarColor">@color/pearl_bush</item>

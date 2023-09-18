@@ -65,48 +65,20 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/record_card_weights"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="20kg"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="40kg"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
-                    android:textSize="14sp" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/record_card_reps"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="x10"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="x8"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
-                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>

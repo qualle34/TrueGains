@@ -1,6 +1,11 @@
 package com.qualle.shapeup.ui;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,28 +15,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-
 import com.qualle.shapeup.R;
-import com.qualle.shapeup.client.InMemoryBackendClient;
-import com.qualle.shapeup.client.api.Exercise;
-import com.qualle.shapeup.client.api.RecordSummary;
-import com.qualle.shapeup.client.api.Workout;
 import com.qualle.shapeup.databinding.FragmentWorkoutDetailsBinding;
+import com.qualle.shapeup.model.local.ExerciseDetailsProto;
+import com.qualle.shapeup.model.local.VolumeProto;
+import com.qualle.shapeup.model.local.WorkoutDetailsProto;
+import com.qualle.shapeup.service.LocalService;
 import com.qualle.shapeup.ui.adapter.ExerciseVolumeRecyclerViewAdapter;
-import com.qualle.shapeup.ui.card.CardAchievementFragment;
 import com.qualle.shapeup.ui.card.CardExerciseFragment;
-import com.qualle.shapeup.ui.card.CardWorkoutFragment;
-import com.qualle.shapeup.ui.chart.ChartBarFragment;
 import com.qualle.shapeup.ui.chart.ChartPieFragment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WorkoutDetailsFragment extends Fragment {
@@ -41,6 +34,7 @@ public class WorkoutDetailsFragment extends Fragment {
     private long id;
 
     private FragmentWorkoutDetailsBinding binding;
+    private LocalService service;
 
     public WorkoutDetailsFragment() {
     }
@@ -64,50 +58,60 @@ public class WorkoutDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentWorkoutDetailsBinding.inflate(inflater, container, false);
+        service = LocalService.getInstance(getContext());
         NavController navController = NavHostFragment.findNavController(this);
 
         binding.workoutButtonBack.setOnClickListener(v -> navController.popBackStack());
 
-        RecyclerView recyclerView = binding.workoutVolumeRecyclerView;
+        WorkoutDetailsProto workoutDetails = service.getWorkoutById(id);
 
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.HORIZONTAL);
+        binding.workoutDetailsExerciseCount.setText(workoutDetails.getExercisesCount() + " Exercises");
+
+
+        List<VolumeProto> volumeForExercises = workoutDetails.getVolumeForExercises();
+        RecyclerView recyclerView = binding.workoutVolumeRecyclerView;
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(getSpanCount(volumeForExercises.size()), LinearLayoutManager.HORIZONTAL);
         staggeredGridLayoutManager.setAutoMeasureEnabled(true);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
-        ExerciseVolumeRecyclerViewAdapter adapter = new ExerciseVolumeRecyclerViewAdapter(InMemoryBackendClient.getVolumeRecords());
+        ExerciseVolumeRecyclerViewAdapter adapter = new ExerciseVolumeRecyclerViewAdapter(volumeForExercises);
         recyclerView.setAdapter(adapter);
-
 
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.workout_chart_container, ChartPieFragment.newInstance("testChartData", " s"), null)
+                .replace(R.id.workout_chart_container, ChartPieFragment.newInstance(workoutDetails.getVolumeForBodyParts()), null)
                 .commit();
 
 
-
+        List<ExerciseDetailsProto> exercises = workoutDetails.getExerciseDetailsList();
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         LinearLayout linearLayout = binding.workoutLinearLayoutExercises;
 
-        List<Exercise> exercises = InMemoryBackendClient.getExercises();
 
-        for (int i = 0; i < exercises.size() && i < 8; i++) {
-            Exercise exercise = exercises.get(i);
+        for (int i = 0; i < exercises.size(); i++) {
             FrameLayout card = new FrameLayout(getContext());
             card.setId(i + 20);
 
-            ft.replace(card.getId(), new CardExerciseFragment());
+            ft.replace(card.getId(), CardExerciseFragment.newInstance(exercises.get(i)));
             linearLayout.addView(card);
         }
 
         ft.commit();
 
 
-
-
-
-
         return binding.getRoot();
+    }
+
+    private int getSpanCount(int size) {
+
+        if (size < 3) {
+            return 1;
+        } else if (size < 6) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 }

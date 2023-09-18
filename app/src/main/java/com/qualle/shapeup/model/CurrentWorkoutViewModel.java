@@ -4,19 +4,19 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.qualle.shapeup.client.InMemoryBackendClient;
-import com.qualle.shapeup.client.api.CurrentExercise;
-import com.qualle.shapeup.client.api.CurrentRecord;
-import com.qualle.shapeup.client.api.CurrentWorkout;
+import com.qualle.shapeup.model.local.CurrentExerciseProto;
+import com.qualle.shapeup.model.local.CurrentRecordProto;
+import com.qualle.shapeup.model.local.CurrentWorkoutProto;
 import com.qualle.shapeup.client.api.Exercise;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class CurrentWorkoutViewModel extends ViewModel {
 
-    private MutableLiveData<CurrentWorkout> workoutData = new MutableLiveData<>();
+    private MutableLiveData<CurrentWorkoutProto> workoutData = new MutableLiveData<>();
 
     public void createEmptyExercise(long exerciseId) {
 
@@ -24,13 +24,13 @@ public class CurrentWorkoutViewModel extends ViewModel {
             throw new NullPointerException("Workout not initialized");
         }
 
-        CurrentWorkout workout = workoutData.getValue();
+        CurrentWorkoutProto workout = workoutData.getValue();
 
         Exercise exerciseData = InMemoryBackendClient.getExercise(exerciseId); // todo
 
-        CurrentExercise exercise = new CurrentExercise(exerciseId, exerciseData.getName(), exerciseData.getDescription(), List.of(new CurrentRecord(1, " - ")));
+        CurrentExerciseProto exercise = new CurrentExerciseProto(exerciseId, exerciseData.getName(), exerciseData.getDescription(), List.of(new CurrentRecordProto(1, " - ")));
 
-        List<CurrentExercise> exercises = new ArrayList<>(workout.getExercises());
+        List<CurrentExerciseProto> exercises = new ArrayList<>(workout.getExercises());
         exercises.add(exercise);
         workout.setExercises(exercises);
 
@@ -43,26 +43,26 @@ public class CurrentWorkoutViewModel extends ViewModel {
             throw new NullPointerException("Workout not initialized");
         }
 
-        CurrentWorkout workout = workoutData.getValue();
-        CurrentExercise exercise = workout.getExercises().get(exercisePosition);
+        CurrentWorkoutProto workout = workoutData.getValue();
+        CurrentExerciseProto exercise = workout.getExercises().get(exercisePosition);
 
-        List<CurrentRecord> records = new ArrayList<>(exercise.getRecords());
-        records.add(new CurrentRecord());
+        List<CurrentRecordProto> records = new ArrayList<>(exercise.getRecords());
+        records.add(new CurrentRecordProto());
         exercise.setRecords(records);
 
         workoutData.setValue(workout);
     }
 
-    public void updateRecords(int exercisePosition, Map<Integer, CurrentRecord> records) {
+    public void updateRecords(int exercisePosition, Map<Integer, CurrentRecordProto> records) {
 
         if (!workoutData.isInitialized()) {
             throw new NullPointerException("Workout not initialized");
         }
 
-        CurrentWorkout workout = workoutData.getValue();
-        CurrentExercise exercise = workout.getExercises().get(exercisePosition);
+        CurrentWorkoutProto workout = workoutData.getValue();
+        CurrentExerciseProto exercise = workout.getExercises().get(exercisePosition);
 
-        List<CurrentRecord> savedRecords = new ArrayList<>(exercise.getRecords());
+        List<CurrentRecordProto> savedRecords = new ArrayList<>(exercise.getRecords());
 
         records.forEach(savedRecords::set);
 
@@ -71,32 +71,32 @@ public class CurrentWorkoutViewModel extends ViewModel {
         workoutData.setValue(workout);
     }
 
-    public void updateRecord(int exercisePosition, CurrentRecord record) {
+    public void updateRecord(int exercisePosition, CurrentRecordProto record) {
 
         if (!workoutData.isInitialized()) {
             throw new NullPointerException("Workout not initialized");
         }
 
-        CurrentWorkout workout = workoutData.getValue();
-        CurrentExercise exercise = workout.getExercises().get(exercisePosition);
+        CurrentWorkoutProto workout = workoutData.getValue();
+        CurrentExerciseProto exercise = workout.getExercises().get(exercisePosition);
 // todo
-        List<CurrentRecord> records = new ArrayList<>(exercise.getRecords());
+        List<CurrentRecordProto> records = new ArrayList<>(exercise.getRecords());
 //        records.set(record.getPosition(), record);
         exercise.setRecords(records);
 
         workoutData.setValue(workout);
     }
 
-    public MutableLiveData<CurrentWorkout> getWorkout() {
+    public MutableLiveData<CurrentWorkoutProto> getWorkout() {
         return workoutData;
     }
 
-    public CurrentExercise getExercise(int position) {
+    public CurrentExerciseProto getExercise(int position) {
         return workoutData.getValue().getExercises().get(position);
     }
 
-    public CurrentRecord getRecord(int exercisePosition, int recordPosition) {
-        CurrentExercise exercise = getExercise(exercisePosition);
+    public CurrentRecordProto getRecord(int exercisePosition, int recordPosition) {
+        CurrentExerciseProto exercise = getExercise(exercisePosition);
 
         if (exercise != null) {
             return exercise.getRecords().get(recordPosition);
@@ -109,7 +109,7 @@ public class CurrentWorkoutViewModel extends ViewModel {
     }
 
     public int getRecordsCount(int exercisePosition) {
-        CurrentExercise currentExercise = workoutData.getValue().getExercises().get(exercisePosition);
+        CurrentExerciseProto currentExercise = workoutData.getValue().getExercises().get(exercisePosition);
         if (currentExercise != null) {
             return currentExercise.getRecords().size();
         }
@@ -118,13 +118,13 @@ public class CurrentWorkoutViewModel extends ViewModel {
 
 
     public void initialize() {
-        CurrentWorkout workout = new CurrentWorkout();
-        workout.setDate(LocalDateTime.now().toString());
+        CurrentWorkoutProto workout = new CurrentWorkoutProto();
+        workout.setDate(LocalDate.now());
         workout.setExercises(new ArrayList<>());
         workoutData.setValue(workout);
     }
 
-    public void setData(CurrentWorkout workout) {
+    public void setData(CurrentWorkoutProto workout) {
         workoutData.setValue(workout);
     }
 }

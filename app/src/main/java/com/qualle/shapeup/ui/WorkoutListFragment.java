@@ -15,26 +15,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.qualle.shapeup.R;
 import com.qualle.shapeup.client.InMemoryBackendClient;
 import com.qualle.shapeup.databinding.FragmentWorkoutListBinding;
+import com.qualle.shapeup.service.LocalService;
 import com.qualle.shapeup.ui.adapter.WorkoutListRecyclerViewAdapter;
 import com.qualle.shapeup.ui.listener.WorkoutListClickListener;
 
 public class WorkoutListFragment extends Fragment implements WorkoutListClickListener {
 
     private FragmentWorkoutListBinding binding;
+    private LocalService service;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentWorkoutListBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+        service = LocalService.getInstance(getContext());
+        NavController navController = NavHostFragment.findNavController(this);
 
-        Context context = view.getContext();
+        binding.workoutListButtonBack.setOnClickListener(v -> navController.popBackStack());
+
+        Context context = binding.getRoot().getContext();
         RecyclerView recyclerView = binding.workoutListRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        recyclerView.setAdapter(new WorkoutListRecyclerViewAdapter(this, InMemoryBackendClient.getWorkouts()));
+        recyclerView.setAdapter(new WorkoutListRecyclerViewAdapter(this, service.getWorkouts()));
 
 
-        return view;
+        return binding.getRoot();
     }
 
 

@@ -19,6 +19,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/workout_list_button_back"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_arrow_left"
@@ -55,6 +56,7 @@
             android:name="com.qualle.shapeup.WorkoutListFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:itemCount="3"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_workout_list" />
 

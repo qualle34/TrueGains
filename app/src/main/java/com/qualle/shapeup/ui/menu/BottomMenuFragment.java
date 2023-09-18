@@ -13,18 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.qualle.shapeup.client.InMemoryBackendClient;
-import com.qualle.shapeup.client.api.CurrentExercise;
-import com.qualle.shapeup.client.api.CurrentRecord;
-import com.qualle.shapeup.client.api.Exercise;
 import com.qualle.shapeup.databinding.FragmentBottomMenuBinding;
-import com.qualle.shapeup.model.BottomMenuViewModel;
 import com.qualle.shapeup.model.CurrentWorkoutViewModel;
 import com.qualle.shapeup.ui.adapter.CategoryRecyclerViewAdapter;
 import com.qualle.shapeup.ui.adapter.ExerciseRecyclerViewAdapter;
 import com.qualle.shapeup.ui.listener.MenuClickListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BottomMenuFragment extends BottomSheetDialogFragment implements MenuClickListener {
 
