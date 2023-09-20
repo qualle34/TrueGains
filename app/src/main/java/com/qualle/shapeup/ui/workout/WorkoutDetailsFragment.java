@@ -1,4 +1,4 @@
-package com.qualle.shapeup.ui;
+package com.qualle.shapeup.ui.workout;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

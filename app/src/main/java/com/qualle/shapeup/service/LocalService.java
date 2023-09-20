@@ -48,7 +48,7 @@ public class LocalService {
             exercise.getRecords().forEach(record -> {
                 LocalData.WorkoutData.ExerciseData.RecordData recordData = LocalData.WorkoutData.ExerciseData.RecordData.newBuilder()
                         .setId(record.getId())
-                        .setPrevious(record.getPrevious() == null ? "" : record.getPrevious())
+                        .setPrevious(record.getPrevious())
                         .setWeight(record.getWeight())
                         .setReps(record.getReps())
                         .build();
@@ -58,12 +58,12 @@ public class LocalService {
 
             exerciseDataList.add(LocalData.WorkoutData.ExerciseData.newBuilder()
                     .setId(exercise.getId())
-                    .setTitle(exercise.getTitle())
-                    .setImage(exercise.getImageLink() == null ? "" : exercise.getImageLink())
+                    .setName(exercise.getName())
+                    .setEquipment(exercise.getEquipment())
+                    .setImage(exercise.getImageLink())
                     .addAllRecords(recordDataList)
                     .build());
         });
-
 
         LocalData.WorkoutData workoutData = LocalData.WorkoutData.newBuilder()
                 .addAllExercises(exerciseDataList)
@@ -103,7 +103,7 @@ public class LocalService {
 
         workout.getExercisesList().forEach(exercise -> {
 
-            ExerciseDetailsProto exerciseDetails = new ExerciseDetailsProto(exercise.getId(), exercise.getTitle(), exercise.getImage());
+            ExerciseDetailsProto exerciseDetails = new ExerciseDetailsProto(exercise.getId(), exercise.getName(), exercise.getImage());
             List<ExerciseDetailsProto.RecordDetailsProto> recordDetailsList = new ArrayList<>();
 
             exercise.getRecordsList().forEach(record ->
@@ -112,7 +112,7 @@ public class LocalService {
             exerciseDetails.setRecords(recordDetailsList);
             exerciseDetailsList.add(exerciseDetails);
 
-            VolumeProto exerciseVolume = new VolumeProto(exercise.getTitle(),
+            VolumeProto exerciseVolume = new VolumeProto(exercise.getName(),
                     exercise.getRecordsList().stream()
                             .mapToInt(t -> (int) (t.getWeight() * t.getReps()))
                             .sum());
@@ -149,7 +149,7 @@ public class LocalService {
                     recordList.add(new CurrentRecordProto(record.getId(), record.getPrevious(), record.getWeight(), record.getReps()));
                 });
 
-                exerciseList.add(new CurrentExerciseProto(exercise.getId(), exercise.getTitle(), exercise.getImage(), recordList));
+                exerciseList.add(new CurrentExerciseProto(exercise.getId(), exercise.getName(), exercise.getEquipment(), exercise.getImage(), recordList));
             });
         }
 

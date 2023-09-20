@@ -5,16 +5,25 @@ import java.util.List;
 public class CurrentExerciseProto {
 
     private long id;
-    private String title;
+    private String name;
+    private String equipment;
     private String imageLink;
     private List<CurrentRecordProto> records;
 
     public CurrentExerciseProto() {
     }
 
-    public CurrentExerciseProto(long id, String title, String imageLink, List<CurrentRecordProto> records) {
+    public CurrentExerciseProto(long id, String name, String equipment, String imageLink) {
         this.id = id;
-        this.title = title;
+        this.name = name;
+        this.equipment = equipment;
+        this.imageLink = imageLink;
+    }
+
+    public CurrentExerciseProto(long id, String name, String equipment, String imageLink, List<CurrentRecordProto> records) {
+        this.id = id;
+        this.name = name;
+        this.equipment = equipment;
         this.imageLink = imageLink;
         this.records = records;
     }
@@ -27,12 +36,20 @@ public class CurrentExerciseProto {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(String equipment) {
+        this.equipment = equipment;
     }
 
     public String getImageLink() {

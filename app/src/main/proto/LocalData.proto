@@ -13,9 +13,10 @@ message LocalData {
 
     message ExerciseData {
       int64 id = 1;
-      string title = 2;
-      string image = 3;
-      repeated RecordData records = 4;
+      string name = 2;
+      string equipment = 3;
+      string image = 4;
+      repeated RecordData records = 5;
 
       message RecordData {
         int64 id = 1;

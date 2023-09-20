@@ -6,8 +6,8 @@ import com.qualle.shapeup.client.api.Image;
 import com.qualle.shapeup.client.api.Record;
 import com.qualle.shapeup.client.api.RecordSummary;
 import com.qualle.shapeup.client.api.User;
-import com.qualle.shapeup.model.local.VolumeProto;
 import com.qualle.shapeup.client.api.Workout;
+import com.qualle.shapeup.model.local.VolumeProto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,11 +24,11 @@ public class InMemoryBackendClient {
     private static User user;
 
     static {
-        user =  new User("Anton", "01.06.2001", 21, "Male", 174);
+        user = new User("Anton", "01.06.2001", 21, "Male", 174);
         user.setEmail("antonsamoilo@gmail.com");
 
         exercises = new ArrayList<>();
-        exercises.add(new Exercise("Barbell bench press", ""));
+        exercises.add(new Exercise(1, "Bench press", "Barbell", ""));
         exercises.add(new Exercise("Dumbbell bench press", ""));
         exercises.add(new Exercise("Lat pulldown", ""));
         exercises.add(new Exercise("Barbell deadlift", ""));
@@ -135,45 +135,45 @@ public class InMemoryBackendClient {
         List<Exercise> result = new ArrayList<>();
         switch (cat) {
             case 1:
-                result.add(new Exercise(1, "Barbell bench press", ""));
-                result.add(new Exercise(2, "Dumbbell bench press", ""));
+                result.add(new Exercise(1, "Bench press", "Barbell", ""));
+                result.add(new Exercise(2, "Bench press", "Dumbbell", ""));
                 break;
             case 2:
-                result.add(new Exercise(3, "Lat pulldown", ""));
-                result.add(new Exercise(4, "Barbell deadlift", ""));
+                result.add(new Exercise(3, "Lat pulldown", "Machine", ""));
+                result.add(new Exercise(4, "Deadlift", "Barbell", ""));
                 break;
             case 3:
-                result.add(new Exercise(5, "Barbell curls", ""));
-                result.add(new Exercise(6, "Dumbbell curls", ""));
+                result.add(new Exercise(5, "Curls", "Barbell", ""));
+                result.add(new Exercise(6, "Curls", "Dumbbell", ""));
                 break;
             case 4:
-                result.add(new Exercise(7, "Barbell french press", ""));
-                result.add(new Exercise(8, "Triceps pushdown", ""));
+                result.add(new Exercise(7, "French press", "Barbell", ""));
+                result.add(new Exercise(8, "Triceps pushdown", "Machine", ""));
                 break;
             case 5:
-                result.add(new Exercise(9, "Dumbbell side lateral rise", ""));
+                result.add(new Exercise(9, "Side lateral rise", "Dumbbell", ""));
                 break;
             case 6:
-                result.add(new Exercise(10, "Barbell shrugs", ""));
+                result.add(new Exercise(10, "Shrugs", "Barbell", ""));
                 break;
             case 7:
-                result.add(new Exercise(11, "Barbell wrist curl", ""));
-                result.add(new Exercise(12, "Reverse grip barbell curls", ""));
+                result.add(new Exercise(11, "Wrist curl", "Barbell", ""));
+                result.add(new Exercise(12, "Reverse grip curls", "Barbell", ""));
                 break;
             case 8:
-                result.add(new Exercise(13, "Crunches", ""));
+                result.add(new Exercise(13, "Crunches", "", ""));
                 break;
             case 9:
-                result.add(new Exercise(14, "Barbell squat", ""));
+                result.add(new Exercise(14, "Squat", "Barbell", ""));
                 break;
             case 10:
-                result.add(new Exercise(15, "Lying leg curls", ""));
+                result.add(new Exercise(15, "Lying leg curls", "Machine", ""));
                 break;
             case 11:
-                result.add(new Exercise(16, "Romanian deadlift", ""));
+                result.add(new Exercise(16, "Romanian deadlift", "Barbell", ""));
                 break;
             case 12:
-                result.add(new Exercise(17, "Calf Raises", ""));
+                result.add(new Exercise(17, "Calf Raises", "", ""));
                 break;
         }
 
@@ -209,12 +209,12 @@ public class InMemoryBackendClient {
         return user;
     }
 
-    public static List<VolumeProto> getVolumeRecords(){
+    public static List<VolumeProto> getVolumeRecords() {
         List<VolumeProto> records = new ArrayList<>();
 
-       for (Record record : workouts.get(0).getRecords()) {
-           records.add(new VolumeProto(record.getExercise().getName(), (int) (record.getValue() * record.getReps())));
-       }
+        for (Record record : workouts.get(0).getRecords()) {
+            records.add(new VolumeProto(record.getExercise().getName(), (int) (record.getValue() * record.getReps())));
+        }
 
         return records;
     }

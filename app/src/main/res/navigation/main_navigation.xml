@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/nav_save_workout_fragment"
-        android:name="com.qualle.shapeup.ui.SaveWorkoutFragment"
+        android:name="com.qualle.shapeup.ui.workout.SaveWorkoutFragment"
         tools:layout="@layout/fragment_save_workout" />
 
     <fragment
@@ -110,7 +110,7 @@
 
     <fragment
         android:id="@+id/nav_workout_list_fragment"
-        android:name="com.qualle.shapeup.ui.WorkoutListFragment"
+        android:name="com.qualle.shapeup.ui.workout.WorkoutListFragment"
         tools:layout="@layout/fragment_workout_list">
         <action
             android:id="@+id/action_nav_workout_list_fragment_to_nav_main_fragment"
@@ -122,7 +122,7 @@
 
     <fragment
         android:id="@+id/nav_workout_details_fragment"
-        android:name="com.qualle.shapeup.ui.WorkoutDetailsFragment"
+        android:name="com.qualle.shapeup.ui.workout.WorkoutDetailsFragment"
         tools:layout="@layout/fragment_workout_details">
         <action
             android:id="@+id/action_nav_workout_details_fragment_to_nav_workout_list_fragment"

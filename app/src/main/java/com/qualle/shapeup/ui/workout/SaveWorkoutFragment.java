@@ -1,9 +1,12 @@
-package com.qualle.shapeup.ui;
+package com.qualle.shapeup.ui.workout;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,19 +39,16 @@ public class SaveWorkoutFragment extends Fragment {
 
         binding.saveWorkoutButtonBack.setOnClickListener(v -> navController.popBackStack());
 
-        workoutViewModel = new ViewModelProvider(this).get(CurrentWorkoutViewModel.class);
         CurrentWorkoutProto workout = service.getCurrentWorkout();
 
-        if ("".equals(workout.getDate())) {
-            workoutViewModel.initialize();
-        } else {
-            workoutViewModel.setData(workout);
-        }
+        workoutViewModel = new ViewModelProvider(this).get(CurrentWorkoutViewModel.class);
+        workoutViewModel.setData(workout);
+
 
 
         RecyclerView recyclerView = binding.saveWorkoutRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        WorkoutExerciseRecyclerViewAdapter adapter = new WorkoutExerciseRecyclerViewAdapter(workoutViewModel);
+        WorkoutExerciseRecyclerViewAdapter adapter = new WorkoutExerciseRecyclerViewAdapter(getActivity(), workoutViewModel);
         recyclerView.setAdapter(adapter);
 
         workoutViewModel.getWorkout()

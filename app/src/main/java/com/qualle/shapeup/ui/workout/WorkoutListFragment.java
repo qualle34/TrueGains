@@ -1,4 +1,4 @@
-package com.qualle.shapeup.ui;
+package com.qualle.shapeup.ui.workout;
 
 import android.content.Context;
 import android.os.Bundle;

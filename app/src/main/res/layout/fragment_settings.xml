@@ -122,7 +122,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/background_round_corners"
-            android:text="Save "
+            android:text="Save"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
             android:textColor="@color/zircon"

@@ -10,6 +10,10 @@ public class CurrentRecordProto {
     public CurrentRecordProto() {
     }
 
+    public CurrentRecordProto(String previous) {
+        this.previous = previous;
+    }
+
     public CurrentRecordProto(long id, String previous) {
         this.id = id;
         this.previous = previous;
