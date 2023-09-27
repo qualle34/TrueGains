@@ -11,7 +11,13 @@ import com.qualle.shapeup.model.datastore.CategoryDataSerializer;
 import com.qualle.shapeup.model.datastore.LocalDataSerializer;
 
 import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;
 
@@ -52,6 +58,32 @@ public class LocalRepository {
         });
     }
 
+    public Map<Integer, Integer> getWorkoutsFromLastWeek(int weekCount) {
+       int currentWeek = LocalDate.now().get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
+
+        Map<Integer, Integer> workoutsPerWeek = new HashMap<>();
+
+        for (int i = 0; i < weekCount; i++) {
+            workoutsPerWeek.put(currentWeek - i, 0);
+        }
+
+        for (LocalData.WorkoutData workout : getWorkoutData().getWorkoutList()) {
+
+            int workoutWeek = LocalDate.ofEpochDay(workout.getDate()).get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
+
+            if (workoutWeek >= currentWeek - weekCount) {
+
+                if (workoutsPerWeek.containsKey(workoutWeek)) {
+                    workoutsPerWeek.put(workoutWeek, workoutsPerWeek.get(workoutWeek) + 1);
+                } else {
+                    workoutsPerWeek.put(workoutWeek, 1);
+                }
+            }
+        }
+
+        return workoutsPerWeek;
+    }
+
     public List<LocalData.WorkoutData> getWorkouts() {
         return getWorkoutData().getWorkoutList();
     }
@@ -80,7 +112,7 @@ public class LocalRepository {
     }
 
     public CategoryData getCategories() {
-       return categoryDataStore.data().blockingFirst();
+        return categoryDataStore.data().blockingFirst();
     }
 
 

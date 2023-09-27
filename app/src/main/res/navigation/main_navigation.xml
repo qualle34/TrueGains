@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_nav_main_fragment_to_nav_workout_details_fragment"
             app:destination="@id/nav_workout_details_fragment" />
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_chart_detailed_fragment"
+            app:destination="@id/nav_chart_detailed_fragment" />
     </fragment>
 
     <fragment
@@ -146,6 +149,14 @@
         <action
             android:id="@+id/action_nav_profile_security_password_fragment_to_nav_profile_security_fragment"
             app:destination="@id/nav_profile_security_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_chart_detailed_fragment"
+        android:name="com.qualle.shapeup.ui.chart.ChartDetailedFragment"
+        tools:layout="@layout/fragment_chart_detailed" >
+        <action
+            android:id="@+id/action_nav_chart_detailed_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
     </fragment>
 
 </navigation>

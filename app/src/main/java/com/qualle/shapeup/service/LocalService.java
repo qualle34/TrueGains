@@ -15,7 +15,10 @@ import com.qualle.shapeup.util.DateFormatterUtil;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LocalService {
 
@@ -72,6 +75,15 @@ public class LocalService {
                 .build();
 
         repository.saveWorkout(workoutData);
+    }
+
+    public Map<Float, Float> getBarChartData() {
+        Map<Integer, Integer> data =  repository.getWorkoutsFromLastWeek(4);
+        Map<Float, Float> result =  new HashMap<>();
+
+        data.forEach((k, v) -> result.put( (float) k, (float) v));
+
+        return result;
     }
 
     public List<SimpleWorkoutProto> getWorkouts() {

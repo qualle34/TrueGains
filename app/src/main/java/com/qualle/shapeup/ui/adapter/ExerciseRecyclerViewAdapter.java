@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.qualle.shapeup.client.api.Exercise;
 import com.qualle.shapeup.databinding.ItemBottomMenuExerciseBinding;
-import com.qualle.shapeup.repository.LocalRepository;
 import com.qualle.shapeup.ui.listener.MenuClickListener;
 
 import java.util.List;
@@ -37,7 +36,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         Exercise exercise = values.get(position);
         holder.item = exercise;
         holder.title.setText(exercise.getName());
-
+        holder.equipment.setText(exercise.getEquipment());
 
 
         holder.layout.setOnClickListener(v -> {
@@ -53,6 +52,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final LinearLayout layout;
         public final TextView title;
+        public final TextView equipment;
         public final ImageView image;
 
         public Exercise item;
@@ -61,6 +61,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             super(binding.getRoot());
             layout = binding.exerciseItem;
             title = binding.exerciseItemTitle;
+            equipment = binding.exerciseItemEquipment;
             image = binding.exerciseItemImage;
         }
 

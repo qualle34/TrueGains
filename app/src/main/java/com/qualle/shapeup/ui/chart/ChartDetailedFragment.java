@@ -1,31 +1,33 @@
 package com.qualle.shapeup.ui.chart;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qualle.shapeup.R;
+import androidx.fragment.app.Fragment;
+
+import com.qualle.shapeup.databinding.FragmentChartDetailedBinding;
+import com.qualle.shapeup.model.enums.ChartType;
+import com.qualle.shapeup.service.LocalService;
 
 public class ChartDetailedFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_ID = "id";
 
-    private String mParam1;
-    private String mParam2;
+    private FragmentChartDetailedBinding binding;
+    private LocalService service;
+
+
+    private long id;
 
     public ChartDetailedFragment() {
     }
 
-    public static ChartDetailedFragment newInstance(String param1, String param2) {
+    public static ChartDetailedFragment newInstance(long id) {
         ChartDetailedFragment fragment = new ChartDetailedFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putLong(ARG_ID, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,13 +36,23 @@ public class ChartDetailedFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            id = getArguments().getLong(ARG_ID);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chart_detailed, container, false);
+        binding = FragmentChartDetailedBinding.inflate(inflater, container, false);
+        service = LocalService.getInstance(getContext());
+
+
+
+        getChildFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .add(binding.mainChartContainer.getId(), ChartLineFragment.newInstance("Bench Press", ChartType.NUMBER, null), null)
+                .commit();
+
+
+        return binding.getRoot();
     }
 }

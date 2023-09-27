@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="14dp"
             android:layout_weight="1">
@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:text="Your training\nachievements"
+                android:text="Your training \ncompanion"
                 android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
                 android:textSize="24sp" />
 
@@ -35,8 +35,8 @@
 
             <ImageView
                 android:id="@+id/main_button_profile"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_menu" />
 
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="14dp"
-            android:text="Achievements"
+            android:text="Charts"
             android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
             android:textSize="20sp" />
 

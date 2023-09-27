@@ -100,8 +100,10 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
             needToChange = false;
             holder.exercise.clearFocus();
 
+
+
             ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE))
-                    .toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                    .toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_NOT_ALWAYS);
 
 
             workoutViewModel.createEmptyRecord(position);

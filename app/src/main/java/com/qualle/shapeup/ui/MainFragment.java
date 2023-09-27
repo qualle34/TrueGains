@@ -47,7 +47,7 @@ public class MainFragment extends Fragment {
         binding.mainButtonStartWorkout.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_main_fragment_to_nav_save_workout_fragment));
 
-        Map<Float, Float> testChartData = InMemoryBackendClient.getChart();
+        Map<Float, Float> testChartData = service.getBarChartData();
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
@@ -92,27 +92,11 @@ public class MainFragment extends Fragment {
             FrameLayout card = new FrameLayout(getContext());
             card.setId(i + 10);
 
-            ft1.replace(card.getId(), CardAchievementFragment.newInstance(recordSummary.getExercise().getName(), recordSummary.getCount()));
+            ft1.replace(card.getId(), CardAchievementFragment.newInstance(1, recordSummary.getExercise().getName(), recordSummary.getCount()));
             linearLayout1.addView(card);
         }
 
         ft1.commit();
-
-
-//        getChildFragmentManager().beginTransaction()
-//                .setReorderingAllowed(true)
-//                .add(binding.mainButtonWorkoutTest1.getId(), new WorkoutCardFragment(), null)
-//                .commit();
-//
-//        getChildFragmentManager().beginTransaction()
-//                .setReorderingAllowed(true)
-//                .add(binding.mainButtonSaveWorkout.getId(), new WorkoutCardFragment(), null)
-//                .commit();
-//
-//        getChildFragmentManager().beginTransaction()
-//                .setReorderingAllowed(true)
-//                .add(binding.mainButtonAllWorkouts.getId(), new WorkoutCardFragment(), null)
-//                .commit();
 
         return binding.getRoot();
     }

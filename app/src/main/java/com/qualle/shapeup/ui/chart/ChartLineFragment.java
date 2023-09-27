@@ -26,6 +26,7 @@ import java.util.Map;
 
 
 public class ChartLineFragment extends Fragment {
+
     private static final String ARG_TITLE = "title";
     private static final String ARG_DATA = "data";
     private static final String ARG_TYPE = "type";
@@ -78,7 +79,6 @@ public class ChartLineFragment extends Fragment {
 
         XAxis x = chart.getXAxis();
         x.setEnabled(true);
-        x.setLabelCount(4, true);
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setDrawGridLines(true);
 
@@ -88,14 +88,12 @@ public class ChartLineFragment extends Fragment {
 
         YAxis y = chart.getAxisLeft();
         y.setDrawGridLines(false);
-        y.setGranularity(1f);
         y.setAxisMinimum(0f);
-        y.setAxisMaximum(7f);
 
         chart.getAxisRight().setEnabled(false);
         chart.getLegend().setEnabled(false);
 
-        chart.animateX(3000);
+        chart.animateX(1000);
 
         chart.invalidate();
 
