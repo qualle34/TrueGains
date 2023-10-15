@@ -18,7 +18,7 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
+            android:textAppearance="@style/TextAppearance.TrueGain.SecondaryMedium"
             android:textSize="18sp"
             android:layout_marginBottom="4dp"
             android:text="8 June"/>
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2 exercises"
-            android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
+            android:textAppearance="@style/TextAppearance.TrueGain.GrayLight"
             android:textSize="12sp" />
     </LinearLayout>
 

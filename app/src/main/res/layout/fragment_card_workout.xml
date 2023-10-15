@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="6 June"
-        android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight" />
+        android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight" />
 
     <Space
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="10 Exercises"
-        android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
+        android:textAppearance="@style/TextAppearance.TrueGain.SecondaryMedium"
         android:textSize="20sp" />
 
     <Space
@@ -42,6 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="2 new achievements"
-        android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
+        android:textAppearance="@style/TextAppearance.TrueGain.GrayLight"
         android:textSize="10sp" />
 </LinearLayout>

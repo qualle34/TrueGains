@@ -32,7 +32,7 @@
                 android:layout_marginStart="16dp"
                 android:gravity="center"
                 android:text="Bench Press"
-                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+                android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
                 android:textSize="22sp" />
 
             <Space

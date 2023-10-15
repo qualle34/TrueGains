@@ -17,7 +17,7 @@
         android:gravity="center"
         android:text="Shoulders"
         android:layout_marginBottom="4dp"
-        android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
+        android:textAppearance="@style/TextAppearance.TrueGain.SecondaryMedium"
         android:textSize="14sp" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="2 349 Kg"
-        android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
+        android:textAppearance="@style/TextAppearance.TrueGain.GrayLight"
         android:textSize="12sp" />
 
 </LinearLayout>

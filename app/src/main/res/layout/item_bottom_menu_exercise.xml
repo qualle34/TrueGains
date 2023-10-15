@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Barbell"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryLight"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryLight"
             android:textSize="12sp" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Bench Press"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryMedium"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryMedium"
             android:textSize="14sp" />
 
     </LinearLayout>

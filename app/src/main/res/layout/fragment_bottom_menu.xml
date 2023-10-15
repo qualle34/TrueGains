@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:text="Categories"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryMedium"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryMedium"
             android:textSize="20sp" />
 
     </LinearLayout>

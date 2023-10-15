@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
-rootProject.name = "ShapeUpNowAndroid"
+rootProject.name = "TrueGain"
 include ':app'

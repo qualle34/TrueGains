@@ -12,6 +12,6 @@
     android:text="Chest"
     android:textAllCaps="false"
     android:textColor="@color/zircon"
-    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
     app:backgroundTint="@color/black_russian"
     app:cornerRadius="16dp" />

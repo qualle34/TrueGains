@@ -53,7 +53,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:text="User, 0"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryMedium"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryMedium"
             android:textSize="22sp" />
 
         <LinearLayout
@@ -75,7 +75,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
                     android:text="Workout count"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     android:textSize="16sp" />
 
                 <TextView
@@ -102,7 +102,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
                     android:text="Volume"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     android:textSize="16sp" />
 
                 <TextView
@@ -148,7 +148,7 @@
                     android:layout_height="30dp"
                     android:gravity="center"
                     android:text="Measure"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     android:textSize="16sp" />
 
                 <Space
@@ -184,7 +184,7 @@
                     android:layout_height="30dp"
                     android:gravity="center"
                     android:text="Edit Profile"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     android:textSize="16sp" />
 
                 <Space
@@ -220,7 +220,7 @@
                     android:layout_height="30dp"
                     android:gravity="center"
                     android:text="Security"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     android:textSize="16sp" />
 
                 <Space
@@ -256,7 +256,7 @@
                     android:layout_height="30dp"
                     android:gravity="center"
                     android:text="Settings"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     android:textSize="16sp" />
 
                 <Space

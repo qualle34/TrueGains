@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Barbell"
-                android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
+                android:textAppearance="@style/TextAppearance.TrueGain.GrayLight"
                 android:textSize="12sp" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Bench Press"
-                android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
+                android:textAppearance="@style/TextAppearance.TrueGain.SecondaryMedium"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -89,7 +89,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Previous"
-                android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
+                android:textAppearance="@style/TextAppearance.TrueGain.GrayLight"
                 android:textSize="12sp" />
 
             <Space
@@ -102,7 +102,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Current"
-                android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight"
+                android:textAppearance="@style/TextAppearance.TrueGain.GrayLight"
                 android:textSize="12sp" />
 
         </LinearLayout>

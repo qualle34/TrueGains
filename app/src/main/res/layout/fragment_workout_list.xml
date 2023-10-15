@@ -33,7 +33,7 @@
                 android:layout_marginStart="16dp"
                 android:gravity="center"
                 android:text="All Workouts"
-                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+                android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
                 android:textSize="22sp" />
 
             <Space
@@ -53,7 +53,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workout_list_recycler_view"
-            android:name="com.qualle.shapeup.WorkoutListFragment"
+            android:name="com.qualle.truegain.WorkoutListFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:itemCount="3"

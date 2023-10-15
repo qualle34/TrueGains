@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="8 June"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+                    android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
                     android:textSize="22sp" />
 
             </LinearLayout>
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="14dp"
             android:text="7 Exercises"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
             android:textSize="20sp" />
 
         <androidx.fragment.app.FragmentContainerView
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="14dp"
             android:text="Volume"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
             android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="14dp"
             android:text="Exercises"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
             android:textSize="20sp" />
 
         <RelativeLayout

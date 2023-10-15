@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Base.Theme.ShapeUp" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Base.Theme.TrueGain" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/twine</item>
         <item name="colorPrimaryDark">@color/twine</item>
         <item name="colorAccent">@color/twine</item>
@@ -9,7 +9,7 @@
         <item name="android:navigationBarColor">@color/pearl_bush</item>
         <item name="android:statusBarColor">@color/pearl_bush</item>
 
-        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.ShapeUp.BottomSheetDialog</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.TrueGain.BottomSheetDialog</item>
 
         <item name="colorOnSurface">@color/black_russian</item>
 
@@ -18,9 +18,9 @@
 
     </style>
 
-    <style name="Theme.ShapeUp" parent="Base.Theme.ShapeUp"/>
+    <style name="Theme.TrueGain" parent="Base.Theme.TrueGain"/>
 
-    <style name="ThemeOverlay.ShapeUp.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+    <style name="ThemeOverlay.TrueGain.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
     </style>
 

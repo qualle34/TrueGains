@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Barbell Bench Press"
-            android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+            android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
             android:textSize="15sp" />
 
         <Space

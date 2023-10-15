@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:text="Your training \ncompanion"
-                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+                android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
                 android:textSize="24sp" />
 
             <Space
@@ -56,7 +56,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="14dp"
             android:text="Workouts"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
             android:textSize="20sp" />
 
         <HorizontalScrollView
@@ -81,7 +81,7 @@
                     android:paddingTop="22sp"
                     android:text="Start new\nworkout"
                     android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     app:backgroundTint="@color/black_russian"
                     app:cornerRadius="16dp" />
 
@@ -111,7 +111,7 @@
                     android:paddingTop="22sp"
                     android:text="Show all\nworkouts"
                     android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     app:backgroundTint="@color/black_russian"
                     app:cornerRadius="16dp" />
 
@@ -125,7 +125,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="14dp"
             android:text="Muscle distribution"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
             android:textSize="20sp" />
 
         <androidx.fragment.app.FragmentContainerView
@@ -140,7 +140,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="14dp"
             android:text="Charts"
-            android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+            android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
             android:textSize="20sp" />
 
 
@@ -182,7 +182,7 @@
                     android:paddingTop="12sp"
                     android:text="Show all\nachievements"
                     android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+                    android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     app:backgroundTint="@color/black_russian"
                     app:cornerRadius="16dp" />
 

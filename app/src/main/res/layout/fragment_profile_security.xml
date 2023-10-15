@@ -33,7 +33,7 @@
                 android:layout_marginStart="16dp"
                 android:gravity="center"
                 android:text="Security details"
-                android:textAppearance="@style/TextAppearance.ShapeUp.PrimaryBold"
+                android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
                 android:textSize="22sp" />
 
         </LinearLayout>
@@ -85,7 +85,7 @@
             android:background="@drawable/background_round_corners"
             android:text="Logout"
             android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryLight"
+            android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
             android:textColor="@color/zircon"
             android:textSize="18dp" />
 

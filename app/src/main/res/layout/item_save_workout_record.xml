@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text=" - "
-        android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight" />
+        android:textAppearance="@style/TextAppearance.TrueGain.GrayLight" />
 
     <Space
         android:layout_width="0dp"

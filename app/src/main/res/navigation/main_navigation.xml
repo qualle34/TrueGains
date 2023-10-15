@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_main_fragment"
-        android:name="com.qualle.shapeup.ui.MainFragment"
+        android:name="com.qualle.truegain.ui.MainFragment"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_nav_main_fragment_to_nav_profile_fragment"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/nav_settings_fragment"
-        android:name="com.qualle.shapeup.ui.profile.SettingsFragment"
+        android:name="com.qualle.truegain.ui.profile.SettingsFragment"
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_nav_settings_fragment_to_nav_greeting_fragment"
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/nav_profile_fragment"
-        android:name="com.qualle.shapeup.ui.profile.ProfileFragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_nav_profile_fragment_to_nav_main_fragment"
@@ -55,12 +55,12 @@
 
     <fragment
         android:id="@+id/nav_save_workout_fragment"
-        android:name="com.qualle.shapeup.ui.workout.SaveWorkoutFragment"
+        android:name="com.qualle.truegain.ui.workout.SaveWorkoutFragment"
         tools:layout="@layout/fragment_save_workout" />
 
     <fragment
         android:id="@+id/nav_greeting_fragment"
-        android:name="com.qualle.shapeup.ui.auth.GreetingFragment"
+        android:name="com.qualle.truegain.ui.auth.GreetingFragment"
         tools:layout="@layout/fragment_greeting">
         <action
             android:id="@+id/action_nav_greeting_fragment_to_nav_registration_fragment"
@@ -72,7 +72,7 @@
 
     <fragment
         android:id="@+id/nav_login_fragment"
-        android:name="com.qualle.shapeup.ui.auth.LoginFragment"
+        android:name="com.qualle.truegain.ui.auth.LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_nav_login_fragment_to_nav_greeting_fragment"
@@ -84,7 +84,7 @@
 
     <fragment
         android:id="@+id/nav_registration_fragment"
-        android:name="com.qualle.shapeup.ui.auth.RegistrationFragment"
+        android:name="com.qualle.truegain.ui.auth.RegistrationFragment"
         tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_nav_registration_fragment_to_nav_greeting_fragment"
@@ -96,12 +96,12 @@
 
     <fragment
         android:id="@+id/nav_profile_data_fragment"
-        android:name="com.qualle.shapeup.ui.profile.ProfileEditFragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileEditFragment"
         tools:layout="@layout/fragment_profile_edit" />
 
     <fragment
         android:id="@+id/nav_profile_security_fragment"
-        android:name="com.qualle.shapeup.ui.profile.ProfileSecurityFragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileSecurityFragment"
         tools:layout="@layout/fragment_profile_security" >
         <action
             android:id="@+id/action_nav_profile_security_fragment_to_nav_profile_security_password_fragment"
@@ -113,7 +113,7 @@
 
     <fragment
         android:id="@+id/nav_workout_list_fragment"
-        android:name="com.qualle.shapeup.ui.workout.WorkoutListFragment"
+        android:name="com.qualle.truegain.ui.workout.WorkoutListFragment"
         tools:layout="@layout/fragment_workout_list">
         <action
             android:id="@+id/action_nav_workout_list_fragment_to_nav_main_fragment"
@@ -125,7 +125,7 @@
 
     <fragment
         android:id="@+id/nav_workout_details_fragment"
-        android:name="com.qualle.shapeup.ui.workout.WorkoutDetailsFragment"
+        android:name="com.qualle.truegain.ui.workout.WorkoutDetailsFragment"
         tools:layout="@layout/fragment_workout_details">
         <action
             android:id="@+id/action_nav_workout_details_fragment_to_nav_workout_list_fragment"
@@ -136,7 +136,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_profile_security_email_fragment"
-        android:name="com.qualle.shapeup.ui.profile.ProfileSecurityEmailFragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileSecurityEmailFragment"
         tools:layout="@layout/fragment_profile_security_email" >
         <action
             android:id="@+id/action_nav_profile_security_email_fragment_to_nav_profile_security_fragment"
@@ -144,7 +144,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_profile_security_password_fragment"
-        android:name="com.qualle.shapeup.ui.profile.ProfileSecurityPasswordFragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileSecurityPasswordFragment"
         tools:layout="@layout/fragment_profile_security_password" >
         <action
             android:id="@+id/action_nav_profile_security_password_fragment_to_nav_profile_security_fragment"
@@ -152,7 +152,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_chart_detailed_fragment"
-        android:name="com.qualle.shapeup.ui.chart.ChartDetailedFragment"
+        android:name="com.qualle.truegain.ui.chart.ChartDetailedFragment"
         tools:layout="@layout/fragment_chart_detailed" >
         <action
             android:id="@+id/action_nav_chart_detailed_fragment_to_nav_main_fragment"

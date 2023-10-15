@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bench press"
-        android:textAppearance="@style/TextAppearance.ShapeUp.GrayLight" />
+        android:textAppearance="@style/TextAppearance.TrueGain.GrayLight" />
 
     <Space
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="10 Records"
-        android:textAppearance="@style/TextAppearance.ShapeUp.SecondaryMedium"
+        android:textAppearance="@style/TextAppearance.TrueGain.SecondaryMedium"
         android:textSize="20sp" />
 
 </LinearLayout>

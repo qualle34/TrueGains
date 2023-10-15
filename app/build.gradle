@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.qualle.shapeup'
+    namespace 'com.qualle.truegain'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.qualle.shapeup"
+        applicationId "com.qualle.truegain"
         minSdk 30
         targetSdk 33
         versionCode 1
