@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_package = "com.qualle.truegain.model";
+option java_multiple_files = true;
+
+message LocalData {
+  repeated WorkoutData workout = 1;
+
+  message WorkoutData {
+    int64 id = 1;
+    int64 date = 2;
+    repeated ExerciseData exercises = 3;
+
+    message ExerciseData {
+      int64 id = 1;
+      string name = 2;
+      string equipment = 3;
+      string image = 4;
+      repeated RecordData records = 5;
+
+      message RecordData {
+        int64 id = 1;
+        string previous = 2;
+        float weight = 3;
+        int32 reps = 4;
+      }
+    }
+  }
+}
+
+message CategoryData {
+  int64 id = 1;
+  string name = 2;
+  ImageData image = 3;
+}
+
+message ImageData {
+  int64 id = 1;
+  string name = 2;
+  string link = 3;
+}

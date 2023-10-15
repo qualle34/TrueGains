@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black_russian"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingVertical="8dp"
+    tools:context=".ui.card.CardExerciseFragment">
+
+    <LinearLayout
+        android:id="@+id/exercise_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_ripple"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/record_card_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/test_barbell_bench_press_light" />
+
+        <TextView
+            android:id="@+id/record_card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Barbell Bench Press"
+            android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
+            android:textSize="15sp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/record_card_menu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_ripple"
+            android:clickable="true"
+            android:padding="4dp"
+            android:src="@drawable/ic_more"
+            app:tint="@color/zircon" />
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/record_card_records"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/record_card_weights"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/record_card_reps"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_dark" />
+
+</LinearLayout>

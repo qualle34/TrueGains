@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".ui.profile.ProfileSecurityEmailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/security_email_button_back"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_ripple"
+                android:clickable="true"
+                android:src="@drawable/ic_arrow_left" />
+
+            <TextView
+                android:id="@+id/workout_list_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="Change email"
+                android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Current email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/security_current_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="New email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/security_new_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Repeat new email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/security_repeat_new_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/security_button_code"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_round_corners"
+            android:text="Send code"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
+            android:textColor="@color/zircon"
+            android:textSize="18dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Code">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/security_email_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/security_button_confirm"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_round_corners_red"
+            android:text="Confirm"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
+            android:textColor="@color/zircon"
+            android:textSize="18dp" />
+
+
+    </LinearLayout>
+
+</ScrollView>

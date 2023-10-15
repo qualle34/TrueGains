@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/nav_main_fragment">
+
+    <fragment
+        android:id="@+id/nav_main_fragment"
+        android:name="com.qualle.truegain.ui.MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_profile_fragment"
+            app:destination="@id/nav_profile_fragment" />
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_save_workout_fragment"
+            app:destination="@id/nav_save_workout_fragment" />
+        <action
+            android:id="@+id/action_nav_main_fragment_to_workoutListFragment"
+            app:destination="@id/nav_workout_list_fragment" />
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_workout_details_fragment"
+            app:destination="@id/nav_workout_details_fragment" />
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_chart_detailed_fragment"
+            app:destination="@id/nav_chart_detailed_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_settings_fragment"
+        android:name="com.qualle.truegain.ui.profile.SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_nav_settings_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_profile_fragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_settings_fragment"
+            app:destination="@id/nav_settings_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_profile_security_fragment"
+            app:destination="@id/nav_profile_security_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_profile_data_fragment"
+            app:destination="@id/nav_profile_data_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_save_workout_fragment"
+        android:name="com.qualle.truegain.ui.workout.SaveWorkoutFragment"
+        tools:layout="@layout/fragment_save_workout" />
+
+    <fragment
+        android:id="@+id/nav_greeting_fragment"
+        android:name="com.qualle.truegain.ui.auth.GreetingFragment"
+        tools:layout="@layout/fragment_greeting">
+        <action
+            android:id="@+id/action_nav_greeting_fragment_to_nav_registration_fragment"
+            app:destination="@id/nav_registration_fragment" />
+        <action
+            android:id="@+id/action_nav_greeting_fragment_to_nav_login_fragment"
+            app:destination="@id/nav_login_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login_fragment"
+        android:name="com.qualle.truegain.ui.auth.LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_nav_login_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment" />
+        <action
+            android:id="@+id/action_nav_login_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_registration_fragment"
+        android:name="com.qualle.truegain.ui.auth.RegistrationFragment"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_nav_registration_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment" />
+        <action
+            android:id="@+id/action_nav_registration_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_profile_data_fragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileEditFragment"
+        tools:layout="@layout/fragment_profile_edit" />
+
+    <fragment
+        android:id="@+id/nav_profile_security_fragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileSecurityFragment"
+        tools:layout="@layout/fragment_profile_security" >
+        <action
+            android:id="@+id/action_nav_profile_security_fragment_to_nav_profile_security_password_fragment"
+            app:destination="@id/nav_profile_security_password_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_security_fragment_to_nav_profile_security_email_fragment"
+            app:destination="@id/nav_profile_security_email_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_workout_list_fragment"
+        android:name="com.qualle.truegain.ui.workout.WorkoutListFragment"
+        tools:layout="@layout/fragment_workout_list">
+        <action
+            android:id="@+id/action_nav_workout_list_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+        <action
+            android:id="@+id/action_nav_workout_list_fragment_to_nav_workout_details_fragment"
+            app:destination="@id/nav_workout_details_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_workout_details_fragment"
+        android:name="com.qualle.truegain.ui.workout.WorkoutDetailsFragment"
+        tools:layout="@layout/fragment_workout_details">
+        <action
+            android:id="@+id/action_nav_workout_details_fragment_to_nav_workout_list_fragment"
+            app:destination="@id/nav_workout_list_fragment" />
+        <action
+            android:id="@+id/action_nav_workout_details_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile_security_email_fragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileSecurityEmailFragment"
+        tools:layout="@layout/fragment_profile_security_email" >
+        <action
+            android:id="@+id/action_nav_profile_security_email_fragment_to_nav_profile_security_fragment"
+            app:destination="@id/nav_profile_security_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile_security_password_fragment"
+        android:name="com.qualle.truegain.ui.profile.ProfileSecurityPasswordFragment"
+        tools:layout="@layout/fragment_profile_security_password" >
+        <action
+            android:id="@+id/action_nav_profile_security_password_fragment_to_nav_profile_security_fragment"
+            app:destination="@id/nav_profile_security_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_chart_detailed_fragment"
+        android:name="com.qualle.truegain.ui.chart.ChartDetailedFragment"
+        tools:layout="@layout/fragment_chart_detailed" >
+        <action
+            android:id="@+id/action_nav_chart_detailed_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+    </fragment>
+
+</navigation>

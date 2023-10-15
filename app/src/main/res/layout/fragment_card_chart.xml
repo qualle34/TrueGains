@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_chart_card"
+    android:layout_width="180dp"
+    android:layout_height="125dp"
+    android:layout_marginHorizontal="8dp"
+    android:background="@drawable/background_round_corners"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="20dp"
+    tools:context=".ui.card.CardAchievementFragment">
+
+    <TextView
+        android:id="@+id/chart_card_upper_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bench press"
+        android:textAppearance="@style/TextAppearance.TrueGain.GrayLight" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/chart_card_lower_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="10 Records"
+        android:textAppearance="@style/TextAppearance.TrueGain.SecondaryMedium"
+        android:textSize="20sp" />
+
+</LinearLayout>

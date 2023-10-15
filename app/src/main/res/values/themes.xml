@@ -1,0 +1,33 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.TrueGain" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/twine</item>
+        <item name="colorPrimaryDark">@color/twine</item>
+        <item name="colorAccent">@color/twine</item>
+
+        <item name="android:windowBackground">@color/pearl_bush</item>
+        <item name="android:navigationBarColor">@color/pearl_bush</item>
+        <item name="android:statusBarColor">@color/pearl_bush</item>
+
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.TrueGain.BottomSheetDialog</item>
+
+        <item name="colorOnSurface">@color/black_russian</item>
+
+        <!--this is to change the shape of the MDC EditText-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+
+    </style>
+
+    <style name="Theme.TrueGain" parent="Base.Theme.TrueGain"/>
+
+    <style name="ThemeOverlay.TrueGain.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
+    </style>
+
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+
+</resources>

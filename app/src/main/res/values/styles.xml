@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.TrueGain.Text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.SecondaryBold" parent="Theme.TrueGain.Text">
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/zircon</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.PrimaryBold" parent="Theme.TrueGain.Text">
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/black_russian</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.TwineBold" parent="Theme.TrueGain.Text">
+        <item name="android:textSize">25sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/twine</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.SecondaryMedium" parent="Theme.TrueGain.Text">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/zircon</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.PrimaryMedium" parent="Theme.TrueGain.Text">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/black_russian</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.SecondaryLight" parent="Theme.TrueGain.Text">
+        <item name="android:textColor">@color/zircon</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.GrayLight" parent="Theme.TrueGain.Text">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.RedLight" parent="Theme.TrueGain.Text">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="TextAppearance.TrueGain.PrimaryLight" parent="Theme.TrueGain.Text">
+        <item name="android:textColor">@color/black_russian</item>
+    </style>
+
+    <style name="ModalBottomSheetDialog" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@color/pearl_bush</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.LargeComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+
+</resources>

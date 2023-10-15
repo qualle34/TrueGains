@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="zircon">#f2f0f3</color>
+    <color name="pearl_bush">#e1d5c9</color>
+
+    <color name="twine">#c09551</color>
+    <color name="twine_highlight">#D8AB63</color>
+
+
+    <color name="black_russian">#212224</color>
+    <color name="black_russian_highlight_dark">#323335</color>
+    <color name="black_russian_highlight">#5A5A5E</color>
+    <color name="black_russian_highlight_circle">#7D7D80</color>
+
+    <color name="gray_dark">#393A3C</color>
+    <color name="gray">#B6B6B6</color>
+    <color name="red">#C84949</color>
+    <color name="green">#7AC849</color>
+
+</resources>
