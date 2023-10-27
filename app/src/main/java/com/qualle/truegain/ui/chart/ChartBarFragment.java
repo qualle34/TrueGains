@@ -21,7 +21,10 @@ import com.qualle.truegain.databinding.FragmentChartBarBinding;
 import com.qualle.truegain.util.ChartValueFormatter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 
 public class ChartBarFragment extends Fragment {
@@ -35,7 +38,7 @@ public class ChartBarFragment extends Fragment {
     public ChartBarFragment() {
     }
 
-    public static ChartBarFragment newInstance(Map<Float, Float> data) {
+    public static ChartBarFragment newInstance(Map<Integer, Integer> data) {
         ChartBarFragment fragment = new ChartBarFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATA, (Serializable) data);
@@ -47,7 +50,7 @@ public class ChartBarFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            data = convertData((Map<Float, Float>) getArguments().getSerializable(ARG_DATA));
+            data = convertData((Map<Integer, Integer>) getArguments().getSerializable(ARG_DATA));
         }
     }
 
@@ -60,14 +63,14 @@ public class ChartBarFragment extends Fragment {
         chart.getDescription().setEnabled(false);
         chart.getLegend().setEnabled(false);
 
-        chart.setDragEnabled(false);
+        chart.setDragEnabled(true);
         chart.setScaleEnabled(false);
         chart.setPinchZoom(false);
         chart.setDrawBarShadow(false);
         chart.setDrawGridBackground(false);
         chart.setDrawValueAboveBar(true);
 
-        chart.setMaxVisibleValueCount(60);
+        chart.setMaxVisibleValueCount(5);
 
         XAxis x = chart.getXAxis();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -95,8 +98,6 @@ public class ChartBarFragment extends Fragment {
             set = (BarDataSet) chart.getData().getDataSetByIndex(0);
             set.setValues(data);
 
-
-
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
 
@@ -121,16 +122,23 @@ public class ChartBarFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private ArrayList<BarEntry> convertData(Map<Float, Float> data) {
+    private ArrayList<BarEntry> convertData(Map<Integer, Integer> data) {
         ArrayList<BarEntry> values = new ArrayList<>();
 
         if (data == null || data.isEmpty()) {
             return values;
         }
 
-        data.forEach((k, v) -> {
-            values.add(new BarEntry(k, v));
-        });
+        int weekOfYear = LocalDate.now().get(WeekFields.of(Locale.getDefault()).weekOfYear());
+
+        values.add(new BarEntry(weekOfYear, data.get(weekOfYear)));
+        values.add(new BarEntry(weekOfYear - 1, data.get(weekOfYear - 1)));
+        values.add(new BarEntry(weekOfYear - 2, data.get(weekOfYear - 2)));
+        values.add(new BarEntry(weekOfYear - 3, data.get(weekOfYear - 3)));
+
+//        data.forEach((k, v) -> {
+//            values.add(new BarEntry(k, v));
+//        });
         return values;
     }
 

@@ -1,11 +1,16 @@
 package com.qualle.truegain.client.api;
 
-public class Exercise {
+import java.io.Serializable;
+import java.util.List;
+
+public class Exercise implements Serializable {
 
     private long id;
     private String name;
     private String equipment;
     private String description;
+    private String imageLink;
+    private List<Record> records;
 
     public Exercise() {
     }
@@ -58,5 +63,21 @@ public class Exercise {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public List<Record> getRecords() {
+        return records;
+    }
+
+    public void setRecords(List<Record> records) {
+        this.records = records;
     }
 }

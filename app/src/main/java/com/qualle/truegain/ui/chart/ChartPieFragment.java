@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.qualle.truegain.R;
+import com.qualle.truegain.client.api.WorkoutVolume;
 import com.qualle.truegain.databinding.FragmentChartPieBinding;
 import com.qualle.truegain.model.local.VolumeProto;
 import com.qualle.truegain.util.PieChartFormatter;
@@ -28,14 +29,14 @@ public class ChartPieFragment extends Fragment {
 
     private static final String ARG_DATA = "data";
 
-    private List<VolumeProto> volume;
+    private List<WorkoutVolume> volume;
 
     private FragmentChartPieBinding binding;
 
     public ChartPieFragment() {
     }
 
-    public static Fragment newInstance(List<VolumeProto> volumeForExercises) {
+    public static Fragment newInstance(List<WorkoutVolume> volumeForExercises) {
         ChartPieFragment fragment = new ChartPieFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATA, (Serializable) volumeForExercises);
@@ -47,7 +48,7 @@ public class ChartPieFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            volume = (List<VolumeProto>) getArguments().getSerializable(ARG_DATA);
+            volume = (List<WorkoutVolume>) getArguments().getSerializable(ARG_DATA);
         }
     }
 
@@ -94,7 +95,7 @@ public class ChartPieFragment extends Fragment {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         for (int i = 0; i < volume.size(); i++) {
-            entries.add(new PieEntry(volume.get(i).getValue(), volume.get(i).getExercise()));
+            entries.add(new PieEntry((float) volume.get(i).getValue(), volume.get(i).getName()));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "");

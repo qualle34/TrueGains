@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_wrap"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_wrap"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
@@ -85,20 +85,16 @@
                     app:backgroundTint="@color/black_russian"
                     app:cornerRadius="16dp" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:id="@+id/main_linear_layout_workout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="8dp">
-                        <!-- Generated workouts -->
-                    </LinearLayout>
-
-                </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/main_workout_list_recycler_view"
+                    android:name="com.qualle.truegain.MainFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/fragment_card_workout" />
 
                 <Button
                     android:id="@+id/main_button_all_workouts"

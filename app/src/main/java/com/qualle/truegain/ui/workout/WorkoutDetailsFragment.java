@@ -16,6 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.qualle.truegain.R;
+import com.qualle.truegain.client.BackendClient;
+import com.qualle.truegain.client.api.Exercise;
+import com.qualle.truegain.client.api.Record;
+import com.qualle.truegain.client.api.User;
+import com.qualle.truegain.client.api.Workout;
+import com.qualle.truegain.client.api.WorkoutVolume;
+import com.qualle.truegain.config.ApplicationComponent;
+import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentWorkoutDetailsBinding;
 import com.qualle.truegain.model.local.ExerciseDetailsProto;
 import com.qualle.truegain.model.local.VolumeProto;
@@ -24,8 +32,17 @@ import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.adapter.ExerciseVolumeRecyclerViewAdapter;
 import com.qualle.truegain.ui.card.CardExerciseFragment;
 import com.qualle.truegain.ui.chart.ChartPieFragment;
+import com.qualle.truegain.util.DateFormatterUtil;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WorkoutDetailsFragment extends Fragment {
 
@@ -35,6 +52,9 @@ public class WorkoutDetailsFragment extends Fragment {
 
     private FragmentWorkoutDetailsBinding binding;
     private LocalService service;
+
+    @Inject
+    public BackendClient client;
 
     public WorkoutDetailsFragment() {
     }
@@ -60,46 +80,56 @@ public class WorkoutDetailsFragment extends Fragment {
         binding = FragmentWorkoutDetailsBinding.inflate(inflater, container, false);
         service = LocalService.getInstance(getContext());
         NavController navController = NavHostFragment.findNavController(this);
+        DaggerApplicationComponent.create().inject(this);
 
         binding.workoutButtonBack.setOnClickListener(v -> navController.popBackStack());
 
-        WorkoutDetailsProto workoutDetails = service.getWorkoutById(id);
+        client.getWorkoutById(id).enqueue(new Callback<>() {
 
-        binding.workoutDetailsExerciseCount.setText(workoutDetails.getExercisesCount() + " Exercises");
+            @Override
+            public void onResponse(Call<Workout> call, Response<Workout> response) {
 
+                Workout dto = response.body();
 
-        List<VolumeProto> volumeForExercises = workoutDetails.getVolumeForExercises();
-        RecyclerView recyclerView = binding.workoutVolumeRecyclerView;
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(getSpanCount(volumeForExercises.size()), LinearLayoutManager.HORIZONTAL);
-        staggeredGridLayoutManager.setAutoMeasureEnabled(true);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+                binding.workoutDate.setText(DateFormatterUtil.formatToSimpleDate(DateFormatterUtil.fromApiDate(dto.getDate())));
+                binding.workoutDetailsExerciseCount.setText((dto.getExercises() != null ? dto.getExercises().size() : 0) + " Exercises");
 
-        ExerciseVolumeRecyclerViewAdapter adapter = new ExerciseVolumeRecyclerViewAdapter(volumeForExercises);
-        recyclerView.setAdapter(adapter);
+                List<WorkoutVolume> volumeForExercises = dto.getVolumeForExercises();
+                RecyclerView recyclerView = binding.workoutVolumeRecyclerView;
+                StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(getSpanCount(volumeForExercises.size()), LinearLayoutManager.HORIZONTAL);
+                staggeredGridLayoutManager.setAutoMeasureEnabled(true);
+                recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
-
-        getChildFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.workout_chart_container, ChartPieFragment.newInstance(workoutDetails.getVolumeForBodyParts()), null)
-                .commit();
-
-
-        List<ExerciseDetailsProto> exercises = workoutDetails.getExerciseDetailsList();
-
-        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        LinearLayout linearLayout = binding.workoutLinearLayoutExercises;
+                ExerciseVolumeRecyclerViewAdapter adapter = new ExerciseVolumeRecyclerViewAdapter(volumeForExercises);
+                recyclerView.setAdapter(adapter);
 
 
-        for (int i = 0; i < exercises.size(); i++) {
-            FrameLayout card = new FrameLayout(getContext());
-            card.setId(i + 20);
+                getChildFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.workout_chart_container, ChartPieFragment.newInstance(dto.getVolumeForBodyParts()), null)
+                        .commit();
 
-            ft.replace(card.getId(), CardExerciseFragment.newInstance(exercises.get(i)));
-            linearLayout.addView(card);
-        }
+                List<Exercise> exercises = dto.getExercises();
 
-        ft.commit();
+                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                LinearLayout linearLayout = binding.workoutLinearLayoutExercises;
 
+                for (int i = 0; i < exercises.size(); i++) {
+                    FrameLayout card = new FrameLayout(getContext());
+                    card.setId(i + 20);
+
+                    ft.add(card.getId(), CardExerciseFragment.newInstance(exercises.get(i)));
+                    linearLayout.addView(card);
+                }
+
+                ft.commit();
+            }
+
+            @Override
+            public void onFailure(Call<Workout> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
         return binding.getRoot();
     }

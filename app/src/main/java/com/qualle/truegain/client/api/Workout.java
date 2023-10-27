@@ -1,16 +1,16 @@
 package com.qualle.truegain.client.api;
 
-import com.qualle.truegain.util.DateFormatterUtil;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Workout {
 
     private long id;
-    private List<Record> records;
-    private LocalDateTime date;
-    private int achievementsCount;
+    private long userId;
+    private String date;
+    private List<Exercise> exercises;
+    private List<WorkoutVolume> volumeForExercises;
+    private List<WorkoutVolume> volumeForBodyParts;
 
     public long getId() {
         return id;
@@ -20,31 +20,43 @@ public class Workout {
         this.id = id;
     }
 
-    public List<Record> getRecords() {
-        return records;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setRecords(List<Record> records) {
-        this.records = records;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public LocalDateTime getDate() {
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
+    public String getDate() {
         return date;
     }
 
-    public String getFormattedDate(){
-        return DateFormatterUtil.formatToSimpleDate(date);
-    }
-
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public int getAchievementsCount() {
-        return achievementsCount;
+    public List<WorkoutVolume> getVolumeForExercises() {
+        return volumeForExercises;
     }
 
-    public void setAchievementsCount(int achievementsCount) {
-        this.achievementsCount = achievementsCount;
+    public void setVolumeForExercises(List<WorkoutVolume> volumeForExercises) {
+        this.volumeForExercises = volumeForExercises;
+    }
+
+    public List<WorkoutVolume> getVolumeForBodyParts() {
+        return volumeForBodyParts;
+    }
+
+    public void setVolumeForBodyParts(List<WorkoutVolume> volumeForBodyParts) {
+        this.volumeForBodyParts = volumeForBodyParts;
     }
 }

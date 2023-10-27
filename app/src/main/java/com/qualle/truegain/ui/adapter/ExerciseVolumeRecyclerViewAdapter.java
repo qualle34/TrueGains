@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qualle.truegain.R;
+import com.qualle.truegain.client.api.WorkoutVolume;
 import com.qualle.truegain.databinding.ItemExerciseValueBinding;
 import com.qualle.truegain.model.local.VolumeProto;
 
@@ -16,9 +17,9 @@ import java.util.List;
 
 public class ExerciseVolumeRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseVolumeRecyclerViewAdapter.ViewHolder> {
 
-    private final List<VolumeProto> data;
+    private final List<WorkoutVolume> data;
 
-    public ExerciseVolumeRecyclerViewAdapter(List<VolumeProto> data) {
+    public ExerciseVolumeRecyclerViewAdapter(List<WorkoutVolume> data) {
         this.data = data;
     }
 
@@ -32,7 +33,7 @@ public class ExerciseVolumeRecyclerViewAdapter extends RecyclerView.Adapter<Exer
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.exercise.setText(data.get(position).getExercise());
+        holder.exercise.setText(data.get(position).getName());
         holder.volume.setText(data.get(position).getValue() + " kg");
     }
 

@@ -13,6 +13,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.qualle.truegain.R;
+import com.qualle.truegain.client.api.Exercise;
+import com.qualle.truegain.client.api.Record;
 import com.qualle.truegain.databinding.FragmentCardExerciseBinding;
 import com.qualle.truegain.model.local.ExerciseDetailsProto;
 import com.qualle.truegain.util.SizeConverter;
@@ -25,15 +27,15 @@ public class CardExerciseFragment extends Fragment {
 
     private FragmentCardExerciseBinding binding;
 
-    private ExerciseDetailsProto exercise;
+    private Exercise exercise;
 
     private CardExerciseFragment() {
     }
 
-    public static CardExerciseFragment newInstance(ExerciseDetailsProto exercise) {
+    public static CardExerciseFragment newInstance(Exercise ex) {
         CardExerciseFragment fragment = new CardExerciseFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_EXERCISE, exercise);
+        args.putSerializable(ARG_EXERCISE, ex);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,7 +45,7 @@ public class CardExerciseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            exercise = getArguments().getSerializable(ARG_EXERCISE, ExerciseDetailsProto.class);
+            exercise = getArguments().getSerializable(ARG_EXERCISE, Exercise.class);
         }
     }
 
@@ -51,16 +53,16 @@ public class CardExerciseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCardExerciseBinding.inflate(inflater, container, false);
 
-        binding.recordCardTitle.setText(exercise.getTitle());
+        binding.recordCardEquipmentTitle.setText(exercise.getEquipment());
+        binding.recordCardExerciseTitle.setText(exercise.getName());
 
-
-        List<ExerciseDetailsProto.RecordDetailsProto> records = exercise.getRecords();
+        List<Record> records = exercise.getRecords();
 
         LinearLayout weights = binding.recordCardWeights;
         LinearLayout reps = binding.recordCardReps;
 
         for (int i = 0; i < records.size(); i++) {
-            ExerciseDetailsProto.RecordDetailsProto record = records.get(i);
+            Record record = records.get(i);
 
             TextView weight = new TextView(getContext());
             weight.setWidth(SizeConverter.pxToDp(getContext(), 65));

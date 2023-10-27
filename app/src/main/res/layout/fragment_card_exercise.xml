@@ -23,16 +23,35 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="16dp"
+            android:layout_gravity="center"
             android:src="@drawable/test_barbell_bench_press_light" />
 
-        <TextView
-            android:id="@+id/record_card_title"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Barbell Bench Press"
-            android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
-            android:textSize="15sp" />
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/record_card_equipment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Barbell"
+                android:textAppearance="@style/TextAppearance.TrueGain.GrayLight"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/record_card_exercise_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Bench Press"
+                android:textAppearance="@style/TextAppearance.TrueGain.SecondaryMedium"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
 
         <Space
             android:layout_width="0dp"

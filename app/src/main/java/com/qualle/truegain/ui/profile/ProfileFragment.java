@@ -41,8 +41,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         NavController navController = NavHostFragment.findNavController(this);
-        ApplicationComponent component = DaggerApplicationComponent.create();
-        component.inject(this);
+        DaggerApplicationComponent.create().inject(this);
 
         binding.profileCardEditProfile.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_profile_fragment_to_nav_profile_data_fragment));
@@ -75,7 +74,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-        client.getUser().enqueue(new Callback<>() {
+        client.getUser(1).enqueue(new Callback<>() {
 
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

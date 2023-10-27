@@ -16,7 +16,7 @@ public class ChartValueFormatter {
 
             @Override
             public String getFormattedValue(float value) {
-                int week = (int) value -1; // todo HOW TO GET CORRECT WEEK
+                int week = (int) value; // todo HOW TO GET CORRECT WEEK
 
                 LocalDate monday = LocalDate.now()
                         .with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, week)

@@ -1,8 +1,11 @@
 package com.qualle.truegain.config;
 
-import com.qualle.truegain.ui.profile.ProfileFragment;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.ClientModule;
+import com.qualle.truegain.ui.MainFragment;
+import com.qualle.truegain.ui.profile.ProfileFragment;
+import com.qualle.truegain.ui.workout.WorkoutDetailsFragment;
+import com.qualle.truegain.ui.workout.WorkoutListFragment;
 
 import javax.inject.Singleton;
 
@@ -11,6 +14,12 @@ import dagger.Component;
 @Singleton
 @Component(modules = ClientModule.class)
 public interface ApplicationComponent {
+
+    void inject(MainFragment fragment);
+
+    void inject(WorkoutListFragment fragment);
+
+    void inject(WorkoutDetailsFragment fragment);
 
     void inject(ProfileFragment fragment);
 

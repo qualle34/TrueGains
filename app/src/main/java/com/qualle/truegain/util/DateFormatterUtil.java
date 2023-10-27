@@ -10,12 +10,33 @@ public class DateFormatterUtil {
 
     private static final DateTimeFormatter simpleDateFormatter = DateTimeFormatter.ofPattern("d MMMM");
 
+    public static String formatApiDate(String date) {
+        return DateFormatterUtil.formatToSimpleDate(DateFormatterUtil.fromApiDate(date));
+    }
+
     public static String formatToSimpleDate(LocalDateTime dateTime) {
-        return dateTime.format(simpleDateFormatter);
+        try {
+            return dateTime.format(simpleDateFormatter);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+        }
     }
 
     public static String formatToSimpleDate(long epochDay) {
-        LocalDate date = LocalDate.ofEpochDay(epochDay);
-        return date.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()) + " " + date.getDayOfMonth();
+        try {
+            LocalDate date = LocalDate.ofEpochDay(epochDay);
+            return date.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()) + " " + date.getDayOfMonth();
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+        }
+    }
+
+    public static LocalDateTime fromApiDate(String date) {
+
+        try {
+            return LocalDateTime.parse(date, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+        }
     }
 }

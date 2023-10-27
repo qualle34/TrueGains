@@ -2,34 +2,36 @@ package com.qualle.truegain.client.api;
 
 public class Record {
 
-    private Exercise exercise;
-    private float value;
+    private long id;
+    private long exerciseId;
+    private float weight;
     private int reps;
 
     public Record() {
-
     }
 
-    public Record(Exercise exercise, float value, int reps) {
-        this.exercise = exercise;
-        this.value = value;
-        this.reps = reps;
+    public long getId() {
+        return id;
     }
 
-    public Exercise getExercise() {
-        return exercise;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setExercise(Exercise exercise) {
-        this.exercise = exercise;
+    public long getExerciseId() {
+        return exerciseId;
     }
 
-    public float getValue() {
-        return value;
+    public void setExerciseId(long exerciseId) {
+        this.exerciseId = exerciseId;
     }
 
-    public void setValue(float value) {
-        this.value = value;
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
 
     public int getReps() {

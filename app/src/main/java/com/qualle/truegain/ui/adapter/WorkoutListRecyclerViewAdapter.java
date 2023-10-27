@@ -7,18 +7,20 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qualle.truegain.client.api.SimpleWorkout;
 import com.qualle.truegain.databinding.ItemWorkoutListBinding;
 import com.qualle.truegain.model.local.SimpleWorkoutProto;
 import com.qualle.truegain.ui.listener.WorkoutListClickListener;
+import com.qualle.truegain.util.DateFormatterUtil;
 
 import java.util.List;
 
 public class WorkoutListRecyclerViewAdapter extends RecyclerView.Adapter<WorkoutListRecyclerViewAdapter.ViewHolder> {
 
     private final WorkoutListClickListener listener;
-    private final List<SimpleWorkoutProto> values;
+    private final List<SimpleWorkout> values;
 
-    public WorkoutListRecyclerViewAdapter(WorkoutListClickListener listener, List<SimpleWorkoutProto> values) {
+    public WorkoutListRecyclerViewAdapter(WorkoutListClickListener listener, List<SimpleWorkout> values) {
         this.listener = listener;
         this.values = values;
     }
@@ -31,13 +33,12 @@ public class WorkoutListRecyclerViewAdapter extends RecyclerView.Adapter<Workout
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        SimpleWorkoutProto workout = values.get(position);
+        SimpleWorkout workout = values.get(position);
 
-        holder.mIdView.setText(workout.getDate());
-        holder.mContentView.setText(workout.getExercisesCount() + " Exercises");
+        holder.mIdView.setText(DateFormatterUtil.formatApiDate(workout.getDate()));
+        holder.mContentView.setText(workout.getExerciseCount() + " Exercises");
 
-//        holder.workout.setOnClickListener(v -> listener.onWorkoutClick(workout.getId()));
-        holder.workout.setOnClickListener(v -> listener.onWorkoutClick(1));
+        holder.workout.setOnClickListener(v -> listener.onWorkoutClick(workout.getId()));
     }
 
     @Override
@@ -56,5 +57,9 @@ public class WorkoutListRecyclerViewAdapter extends RecyclerView.Adapter<Workout
             mContentView = binding.exerciseCount;
             workout = binding.workoutLayout;
         }
+    }
+
+    private String formatDate(SimpleWorkout workout){
+        return DateFormatterUtil.formatToSimpleDate(DateFormatterUtil.fromApiDate(workout.getDate()));
     }
 }
