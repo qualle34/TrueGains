@@ -2,22 +2,16 @@ package com.qualle.truegain.service;
 
 import android.content.Context;
 
-import com.qualle.truegain.model.LocalData;
+import com.qualle.truegain.model.WorkoutData;
 import com.qualle.truegain.model.local.CurrentExerciseProto;
 import com.qualle.truegain.model.local.CurrentRecordProto;
 import com.qualle.truegain.model.local.CurrentWorkoutProto;
-import com.qualle.truegain.model.local.ExerciseDetailsProto;
-import com.qualle.truegain.model.local.SimpleWorkoutProto;
-import com.qualle.truegain.model.local.VolumeProto;
-import com.qualle.truegain.model.local.WorkoutDetailsProto;
 import com.qualle.truegain.repository.LocalRepository;
-import com.qualle.truegain.util.DateFormatterUtil;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LocalService {
 
@@ -42,13 +36,13 @@ public class LocalService {
     }
 
     public void saveWorkout(CurrentWorkoutProto currentWorkout) {
-        List<LocalData.WorkoutData.ExerciseData> exerciseDataList = new ArrayList<>();
+        List<WorkoutData.ExerciseData> exerciseDataList = new ArrayList<>();
 
         currentWorkout.getExercises().forEach(exercise -> {
-            List<LocalData.WorkoutData.ExerciseData.RecordData> recordDataList = new ArrayList<>();
+            List<WorkoutData.ExerciseData.RecordData> recordDataList = new ArrayList<>();
 
             exercise.getRecords().forEach(record -> {
-                LocalData.WorkoutData.ExerciseData.RecordData recordData = LocalData.WorkoutData.ExerciseData.RecordData.newBuilder()
+                WorkoutData.ExerciseData.RecordData recordData = WorkoutData.ExerciseData.RecordData.newBuilder()
                         .setId(record.getId())
                         .setPrevious(record.getPrevious())
                         .setWeight(record.getWeight())
@@ -58,7 +52,7 @@ public class LocalService {
                 recordDataList.add(recordData);
             });
 
-            exerciseDataList.add(LocalData.WorkoutData.ExerciseData.newBuilder()
+            exerciseDataList.add(WorkoutData.ExerciseData.newBuilder()
                     .setId(exercise.getId())
                     .setName(exercise.getName())
                     .setEquipment(exercise.getEquipment())
@@ -67,87 +61,21 @@ public class LocalService {
                     .build());
         });
 
-        LocalData.WorkoutData workoutData = LocalData.WorkoutData.newBuilder()
+        WorkoutData workoutData = WorkoutData.newBuilder()
                 .addAllExercises(exerciseDataList)
-                .setDate(currentWorkout.getDate().toEpochDay())
-                .setId(currentWorkout.getDate().toEpochDay()) // todo
+                .setDate(currentWorkout.getDate().toEpochSecond(ZoneOffset.UTC)) // todo
+                .setId(currentWorkout.getId())
                 .build();
 
         repository.saveWorkout(workoutData);
     }
 
-    public Map<Float, Float> getBarChartData() {
-        Map<Integer, Integer> data =  repository.getWorkoutsFromLastWeek(4);
-        Map<Float, Float> result =  new HashMap<>();
-
-        data.forEach((k, v) -> result.put( (float) k, (float) v));
-
-        return result;
-    }
-
-    public List<SimpleWorkoutProto> getWorkouts() {
-        List<LocalData.WorkoutData> workoutData = repository.getWorkouts();
-
-        List<SimpleWorkoutProto> simpleWorkouts = new ArrayList<>();
-
-        for (LocalData.WorkoutData workout : workoutData) {
-
-            simpleWorkouts.add(new SimpleWorkoutProto(
-                    workout.getId(),
-                    DateFormatterUtil.formatToSimpleDate(workout.getDate()),
-                    workout.getExercisesCount(),
-                    1));
-        }
-
-        return simpleWorkouts;
-    }
-
-    public WorkoutDetailsProto getWorkoutById(long id) {
-        LocalData.WorkoutData workout = repository.getWorkoutById(id);
-
-        WorkoutDetailsProto workoutDetails = new WorkoutDetailsProto(workout.getId(), LocalDate.ofEpochDay(workout.getDate()), workout.getExercisesCount());
-
-        List<ExerciseDetailsProto> exerciseDetailsList = new ArrayList<>();
-        List<VolumeProto> volumeForExercises = new ArrayList<>();
-        List<VolumeProto> volumeForBodyParts = new ArrayList<>();
-        volumeForExercises.add(new VolumeProto("Overall", 0));
-
-        workout.getExercisesList().forEach(exercise -> {
-
-            ExerciseDetailsProto exerciseDetails = new ExerciseDetailsProto(exercise.getId(), exercise.getName(), exercise.getImage());
-            List<ExerciseDetailsProto.RecordDetailsProto> recordDetailsList = new ArrayList<>();
-
-            exercise.getRecordsList().forEach(record ->
-                    recordDetailsList.add(new ExerciseDetailsProto.RecordDetailsProto(record.getId(), record.getWeight(), record.getReps())));
-
-            exerciseDetails.setRecords(recordDetailsList);
-            exerciseDetailsList.add(exerciseDetails);
-
-            VolumeProto exerciseVolume = new VolumeProto(exercise.getName(),
-                    exercise.getRecordsList().stream()
-                            .mapToInt(t -> (int) (t.getWeight() * t.getReps()))
-                            .sum());
-
-            volumeForExercises.add(exerciseVolume);
-            volumeForBodyParts.add(exerciseVolume);
-
-            volumeForExercises.get(0).setValue(volumeForExercises.get(0).getValue() + exerciseVolume.getValue());
-        });
-
-        workoutDetails.setExerciseDetailsList(exerciseDetailsList);
-        workoutDetails.setVolumeForBodyParts(volumeForBodyParts);
-        workoutDetails.setVolumeForExercises(volumeForExercises);
-
-        return workoutDetails;
-    }
-
     public CurrentWorkoutProto getCurrentWorkout() {
-        LocalData.WorkoutData workout = repository.getCurrentWorkout();
+        WorkoutData workout = repository.getCurrentWorkout();
 
         if (workout == null) {
-            return new CurrentWorkoutProto(LocalDate.now(), new ArrayList<>());
+            return new CurrentWorkoutProto(LocalDateTime.now(), new ArrayList<>());
         }
-
 
         List<CurrentExerciseProto> exerciseList = new ArrayList<>();
 
@@ -164,7 +92,7 @@ public class LocalService {
             });
         }
 
-        return new CurrentWorkoutProto(LocalDate.ofEpochDay(workout.getDate()), exerciseList);
+        return new CurrentWorkoutProto(LocalDateTime.ofEpochSecond(workout.getDate(), 0, ZoneOffset.UTC), exerciseList);
     }
 
     public boolean isCurrentWorkoutStarted() {

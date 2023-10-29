@@ -1,5 +1,9 @@
 package com.qualle.truegain.client;
 
+import com.qualle.truegain.repository.LocalRepository;
+import com.qualle.truegain.service.ApiService;
+import com.qualle.truegain.service.LocalService;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -9,6 +13,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class ClientModule {
+
+//    @Provides
+//    @Singleton
+//    public LocalService provideLocalService() {
+//        return new LocalService();
+//    }
+//
+//    @Provides
+//    @Singleton
+//    public LocalRepository provideLocalRepository() {
+//        return new LocalRepository();
+//    }
+
+    @Provides
+    @Singleton
+    public ApiService provideApiService() {
+        return new ApiService();
+    }
 
     @Provides
     @Singleton

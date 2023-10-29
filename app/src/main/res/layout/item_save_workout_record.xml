@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text=" - "
+        android:textSize="12sp"
         android:textAppearance="@style/TextAppearance.TrueGain.GrayLight" />
 
     <Space

@@ -1,5 +1,8 @@
 package com.qualle.truegain.ui.adapter;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,7 +40,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         holder.item = exercise;
         holder.title.setText(exercise.getName());
         holder.equipment.setText(exercise.getEquipment());
-
+        holder.image.setImageDrawable(getImage(holder.image.getContext(), exercise.getImageLink()));
 
         holder.layout.setOnClickListener(v -> {
             menuClickListener.onExerciseSelect(exercise.getId());
@@ -65,5 +68,18 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             image = binding.exerciseItemImage;
         }
 
+    }
+
+    private Drawable getImage(Context context, String link) {
+        Resources resources = context.getResources();
+
+        int imageId = resources.getIdentifier(link, "drawable", context.getPackageName());
+        Drawable drawable = resources.getDrawable(imageId);
+
+        if (drawable == null) {
+            throw new NullPointerException("Image not found");
+        }
+
+        return drawable;
     }
 }

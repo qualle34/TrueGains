@@ -1,15 +1,18 @@
 package com.qualle.truegain.client.api;
 
+import java.util.List;
+
 public class Category {
 
     private long id;
     private String name;
-    private Image image;
+    private String imageLink;
+    private List<Exercise> exercises;
 
-    public Category(long id, String name, Image image) {
+    public Category(long id, String name, String imageLink) {
         this.id = id;
         this.name = name;
-        this.image = image;
+        this.imageLink = imageLink;
     }
 
     public long getId() {
@@ -28,11 +31,19 @@ public class Category {
         this.name = name;
     }
 
-    public Image getImage() {
-        return image;
+    public String getImageLink() {
+        return imageLink;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qualle.truegain.client.api.Record;
 import com.qualle.truegain.databinding.ItemSaveWorkoutRecordBinding;
 import com.qualle.truegain.model.CurrentWorkoutViewModel;
 import com.qualle.truegain.model.local.CurrentRecordProto;
@@ -22,7 +23,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
     private final int exercisePosition;
     private final boolean needFocus;
     private final CurrentWorkoutViewModel workoutViewModel;
-    private final Map<Integer, CurrentRecordProto> records;
+    private final Map<Integer, Record> records;
 
     public WorkoutRecordRecyclerViewAdapter(CurrentWorkoutViewModel workoutViewModel, int exercisePosition, boolean needFocus) {
         this.workoutViewModel = workoutViewModel;
@@ -31,7 +32,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
         this.records = new HashMap<>();
 
         int i = 0;
-        for (CurrentRecordProto record : workoutViewModel.getExercise(exercisePosition).getRecords()) {
+        for (Record record : workoutViewModel.getExercise(exercisePosition).getRecords()) {
             records.put(i, record);
             i++;
         }
@@ -46,7 +47,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CurrentRecordProto record = records.get(position);
+        Record record = records.get(position);
 
         holder.previous.setText(record.getPrevious() != null && !record.getPrevious().equals("")
                 ? record.getPrevious() : " - ");
@@ -65,7 +66,7 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
         holder.reps.addTextChangedListener(new RecordTextWatcher(records, position, RecordEditTextType.REPS));
     }
 
-    public Map<Integer, CurrentRecordProto> getRecords() {
+    public Map<Integer, Record> getRecords() {
         return records;
     }
 
@@ -90,12 +91,12 @@ public class WorkoutRecordRecyclerViewAdapter extends RecyclerView.Adapter<Worko
 
     static class RecordTextWatcher implements TextWatcher {
 
-        private Map<Integer, CurrentRecordProto> records;
+        private Map<Integer, Record> records;
         private int position;
         private RecordEditTextType type;
         private boolean onTextChanged = false;
 
-        public RecordTextWatcher(Map<Integer, CurrentRecordProto> records, int position, RecordEditTextType type) {
+        public RecordTextWatcher(Map<Integer, Record> records, int position, RecordEditTextType type) {
             this.records = records;
             this.position = position;
             this.type = type;

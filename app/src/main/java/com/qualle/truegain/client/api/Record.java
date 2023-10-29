@@ -6,8 +6,19 @@ public class Record {
     private long exerciseId;
     private float weight;
     private int reps;
+    private String previous;
 
     public Record() {
+    }
+
+    public Record(String previous) {
+        this.previous = previous;
+    }
+
+    public Record(long id, float weight, int reps) {
+        this.id = id;
+        this.weight = weight;
+        this.reps = reps;
     }
 
     public long getId() {
@@ -40,5 +51,13 @@ public class Record {
 
     public void setReps(int reps) {
         this.reps = reps;
+    }
+
+    public String getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(String previous) {
+        this.previous = previous;
     }
 }

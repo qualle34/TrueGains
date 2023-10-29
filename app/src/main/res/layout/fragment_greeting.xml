@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.GreetingFragment">
 
-    <soup.neumorphism.NeumorphTextView
+    <TextView
         android:id="@+id/textview"
-        style="@style/Widget.Neumorph.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
@@ -19,9 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <soup.neumorphism.NeumorphButton
+    <Button
         android:id="@+id/greeting_button_login"
-        style="@style/Widget.Neumorph.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -33,9 +31,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <soup.neumorphism.NeumorphButton
+    <Button
         android:id="@+id/greeting_button_registration"
-        style="@style/Widget.Neumorph.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

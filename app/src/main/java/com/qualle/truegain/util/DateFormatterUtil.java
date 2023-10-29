@@ -39,4 +39,13 @@ public class DateFormatterUtil {
             throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
         }
     }
+
+    public static String toApiDate(LocalDateTime date) {
+
+        try {
+            return date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Unable to format date: " + e.getMessage(), e);
+        }
+    }
 }

@@ -13,13 +13,6 @@ public class CurrentExerciseProto {
     public CurrentExerciseProto() {
     }
 
-    public CurrentExerciseProto(long id, String name, String equipment, String imageLink) {
-        this.id = id;
-        this.name = name;
-        this.equipment = equipment;
-        this.imageLink = imageLink;
-    }
-
     public CurrentExerciseProto(long id, String name, String equipment, String imageLink, List<CurrentRecordProto> records) {
         this.id = id;
         this.name = name;

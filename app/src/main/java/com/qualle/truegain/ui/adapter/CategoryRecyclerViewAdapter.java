@@ -40,7 +40,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
 
         holder.item = category;
         holder.button.setText(category.getName());
-        holder.button.setCompoundDrawablesWithIntrinsicBounds(null, getImage(holder.button.getContext(), category.getImage()), null, null);
+        holder.button.setCompoundDrawablesWithIntrinsicBounds(null, getImage(holder.button.getContext(), category.getImageLink()), null, null);
 
         holder.button.setOnClickListener(v -> {
             menuClickListener.onCategorySelect(category.getId());
@@ -62,10 +62,10 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         }
     }
 
-    private Drawable getImage(Context context, Image image) {
+    private Drawable getImage(Context context, String link) {
         Resources resources = context.getResources();
 
-        int imageId = resources.getIdentifier(image.getLink(), "drawable", context.getPackageName());
+        int imageId = resources.getIdentifier(link, "drawable", context.getPackageName());
         Drawable drawable = resources.getDrawable(imageId);
 
         if (drawable == null) {

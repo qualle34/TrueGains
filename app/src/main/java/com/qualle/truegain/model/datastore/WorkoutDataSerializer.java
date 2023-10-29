@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.datastore.core.Serializer;
 
-import com.qualle.truegain.model.LocalData.WorkoutData;
+import com.qualle.truegain.model.WorkoutData;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 import java.io.IOException;
@@ -35,10 +35,10 @@ public class WorkoutDataSerializer implements Serializer<WorkoutData> {
 
     @Nullable
     @Override
-    public Object writeTo(WorkoutData recordData, @NonNull OutputStream outputStream, @NonNull Continuation<? super Unit> continuation) {
+    public Object writeTo(WorkoutData data, @NonNull OutputStream outputStream, @NonNull Continuation<? super Unit> continuation) {
         try {
-            recordData.writeTo(outputStream);
-            return recordData;
+            data.writeTo(outputStream);
+            return data;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

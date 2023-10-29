@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qualle.truegain.R;
+import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.databinding.ItemSaveWorkoutExerciseBinding;
 import com.qualle.truegain.model.CurrentWorkoutViewModel;
 import com.qualle.truegain.model.local.CurrentExerciseProto;
@@ -46,12 +47,12 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        CurrentExerciseProto exercise = workoutViewModel.getExercise(position);
+        Exercise exercise = workoutViewModel.getExercise(position);
 
         holder.exerciseTitle.setText(exercise.getName());
         holder.equipmentTitle.setText(exercise.getEquipment());
 
-        if (workoutViewModel.isExerciseAdded()){
+        if (workoutViewModel.isAvailable()){
             selectedItemPosition = getItemCount() - 1;
             needToChange = true;
             workoutViewModel.resetExerciseAdded();
@@ -98,11 +99,8 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
             needToChange = false;
             holder.exercise.clearFocus();
 
-
-
             ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE))
                     .toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_NOT_ALWAYS);
-
 
             workoutViewModel.createEmptyRecord(position);
             workoutViewModel.updateRecords(position, adapter.getRecords());

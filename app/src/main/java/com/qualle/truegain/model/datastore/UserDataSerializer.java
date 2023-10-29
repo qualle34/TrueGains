@@ -5,7 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.datastore.core.Serializer;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.qualle.truegain.model.CategoryData;
+import com.qualle.truegain.model.UserData;
+import com.qualle.truegain.model.WorkoutData;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,18 +15,18 @@ import java.io.OutputStream;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 
-public class CategoryDataSerializer implements Serializer<CategoryData> {
+public class UserDataSerializer implements Serializer<UserData> {
 
     @Override
-    public CategoryData getDefaultValue() {
-        return CategoryData.getDefaultInstance();
+    public UserData getDefaultValue() {
+        return UserData.getDefaultInstance();
     }
 
     @Nullable
     @Override
-    public Object readFrom(@NonNull InputStream inputStream, @NonNull Continuation<? super CategoryData> continuation) {
+    public Object readFrom(@NonNull InputStream inputStream, @NonNull Continuation<? super UserData> continuation) {
         try {
-            return CategoryData.parseFrom(inputStream);
+            return UserData.parseFrom(inputStream);
         } catch (InvalidProtocolBufferException e) {
             throw new IllegalArgumentException("Can not read proto", e);
         } catch (IOException e) {
@@ -35,7 +36,7 @@ public class CategoryDataSerializer implements Serializer<CategoryData> {
 
     @Nullable
     @Override
-    public Object writeTo(CategoryData data, @NonNull OutputStream outputStream, @NonNull Continuation<? super Unit> continuation) {
+    public Object writeTo(UserData data, @NonNull OutputStream outputStream, @NonNull Continuation<? super Unit> continuation) {
         try {
             data.writeTo(outputStream);
             return data;

@@ -45,18 +45,18 @@ public class InMemoryBackendClient {
         exercises.add(new Exercise("Crunches", ""));
 
         categories = new ArrayList<>();
-        categories.add(new Category(1, "Chest", new Image(1, "", "ic_menu_chest")));
-        categories.add(new Category(2, "Back", new Image(2, "", "ic_menu_back")));
-        categories.add(new Category(3, "Biceps", new Image(3, "", "ic_menu_biceps")));
-        categories.add(new Category(4, "Triceps", new Image(4, "", "ic_menu_triceps")));
-        categories.add(new Category(5, "Shoulders", new Image(5, "", "ic_menu_shoulders")));
-        categories.add(new Category(6, "Trapezius", new Image(6, "", "ic_menu_trapeze")));
-        categories.add(new Category(7, "Forearms", new Image(7, "", "ic_menu_forearms")));
-        categories.add(new Category(8, "Abs", new Image(8, "", "ic_menu_abs")));
-        categories.add(new Category(9, "Quads", new Image(9, "", "ic_menu_quads")));
-        categories.add(new Category(10, "Hamstrings", new Image(10, "", "ic_menu_hamstrings")));
-        categories.add(new Category(11, "Glutes", new Image(11, "", "ic_menu_glutes")));
-        categories.add(new Category(12, "Caviar", new Image(12, "", "ic_menu_caviar")));
+//        categories.add(new Category(1, "Chest", new Image(1, "", "ic_menu_chest")));
+//        categories.add(new Category(2, "Back", new Image(2, "", "ic_menu_back")));
+//        categories.add(new Category(3, "Biceps", new Image(3, "", "ic_menu_biceps")));
+//        categories.add(new Category(4, "Triceps", new Image(4, "", "ic_menu_triceps")));
+//        categories.add(new Category(5, "Shoulders", new Image(5, "", "ic_menu_shoulders")));
+//        categories.add(new Category(6, "Trapezius", new Image(6, "", "ic_menu_trapeze")));
+//        categories.add(new Category(7, "Forearms", new Image(7, "", "ic_menu_forearms")));
+//        categories.add(new Category(8, "Abs", new Image(8, "", "ic_menu_abs")));
+//        categories.add(new Category(9, "Quads", new Image(9, "", "ic_menu_quads")));
+//        categories.add(new Category(10, "Hamstrings", new Image(10, "", "ic_menu_hamstrings")));
+//        categories.add(new Category(11, "Glutes", new Image(11, "", "ic_menu_glutes")));
+//        categories.add(new Category(12, "Caviar", new Image(12, "", "ic_menu_caviar")));
 
         workouts = new ArrayList<>();
 
