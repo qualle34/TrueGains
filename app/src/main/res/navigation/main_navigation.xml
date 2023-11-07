@@ -24,6 +24,11 @@
         <action
             android:id="@+id/action_nav_main_fragment_to_nav_chart_detailed_fragment"
             app:destination="@id/nav_chart_detailed_fragment" />
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment"
+            app:popUpTo="@id/nav_greeting_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -51,12 +56,23 @@
         <action
             android:id="@+id/action_nav_profile_fragment_to_nav_profile_data_fragment"
             app:destination="@id/nav_profile_data_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment"
+            app:popUpTo="@id/nav_greeting_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_save_workout_fragment"
         android:name="com.qualle.truegain.ui.workout.SaveWorkoutFragment"
-        tools:layout="@layout/fragment_save_workout" />
+        tools:layout="@layout/fragment_save_workout" >
+        <action
+            android:id="@+id/action_nav_save_workout_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment"
+            app:popUpTo="@id/nav_greeting_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_greeting_fragment"
@@ -109,6 +125,9 @@
         <action
             android:id="@+id/action_nav_profile_security_fragment_to_nav_profile_security_email_fragment"
             app:destination="@id/nav_profile_security_email_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_security_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment" />
     </fragment>
 
     <fragment
@@ -121,6 +140,11 @@
         <action
             android:id="@+id/action_nav_workout_list_fragment_to_nav_workout_details_fragment"
             app:destination="@id/nav_workout_details_fragment" />
+        <action
+            android:id="@+id/action_nav_workout_list_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment"
+            app:popUpTo="@id/nav_greeting_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -133,6 +157,11 @@
         <action
             android:id="@+id/action_nav_workout_details_fragment_to_nav_main_fragment"
             app:destination="@id/nav_main_fragment" />
+        <action
+            android:id="@+id/action_nav_workout_details_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment"
+            app:popUpTo="@id/nav_greeting_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/nav_profile_security_email_fragment"

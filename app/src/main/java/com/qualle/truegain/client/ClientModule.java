@@ -1,7 +1,12 @@
 package com.qualle.truegain.client;
 
+import android.content.Context;
+
 import com.qualle.truegain.repository.LocalRepository;
-import com.qualle.truegain.service.ApiService;
+import com.qualle.truegain.service.ApiAuthenticationHandler;
+import com.qualle.truegain.service.ApiErrorHandler;
+import com.qualle.truegain.service.AuthenticationHandler;
+import com.qualle.truegain.service.ErrorHandler;
 import com.qualle.truegain.service.LocalService;
 
 import javax.inject.Singleton;
@@ -14,22 +19,43 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ClientModule {
 
-//    @Provides
-//    @Singleton
-//    public LocalService provideLocalService() {
-//        return new LocalService();
-//    }
-//
-//    @Provides
-//    @Singleton
-//    public LocalRepository provideLocalRepository() {
-//        return new LocalRepository();
-//    }
+    private static volatile ClientModule instance;
+
+    private Context context;
+
+    private ClientModule (Context context) {
+        this.context = context;
+    }
+
+    public static ClientModule getInstance(Context context) {
+        ClientModule localInstance = instance;
+        if (localInstance == null) {
+            synchronized (ClientModule.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new ClientModule(context);
+                }
+            }
+        }
+        return localInstance;
+    }
 
     @Provides
     @Singleton
-    public ApiService provideApiService() {
-        return new ApiService();
+    public LocalService provideLocalService() {
+        return LocalService.getInstance(context);
+    }
+
+    @Provides
+    @Singleton
+    public ErrorHandler provideErrorHandler(BackendClient client) {
+        return new ApiErrorHandler(client);
+    }
+
+    @Provides
+    @Singleton
+    public AuthenticationHandler provideAuthenticationHandler(BackendClient client, LocalService service) {
+        return new ApiAuthenticationHandler(client, service);
     }
 
     @Provides

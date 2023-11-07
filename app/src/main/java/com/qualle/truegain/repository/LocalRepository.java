@@ -16,15 +16,13 @@ import io.reactivex.rxjava3.core.Single;
 
 public class LocalRepository {
 
-    private static volatile LocalRepository instance;
-
     private final RxDataStore<LocalData> workoutDataStore;
 
-    private LocalRepository(Context context) {
-        workoutDataStore = new RxDataStoreBuilder<>(context, "workoutdata.pb", new LocalDataSerializer()).build();
+    public LocalRepository(Context context) {
+        workoutDataStore = new RxDataStoreBuilder<>(context, "localdata.pb", new LocalDataSerializer()).build();
     }
 
-    public void saveWorkout(WorkoutData currentWorkout) {
+    public synchronized void saveWorkout(WorkoutData currentWorkout) {
 
         workoutDataStore.updateDataAsync(data -> {
 
@@ -33,7 +31,7 @@ public class LocalRepository {
         });
     }
 
-    public void saveUser(UserData user) {
+    public synchronized void saveUser(UserData user) {
 
         workoutDataStore.updateDataAsync(data -> {
 
@@ -42,24 +40,11 @@ public class LocalRepository {
         });
     }
 
-    public WorkoutData getCurrentWorkout() {
+    public synchronized WorkoutData getCurrentWorkout() {
         return workoutDataStore.data().blockingFirst().getWorkout();
     }
 
-    public UserData getUser() {
+    public synchronized UserData getUser() {
         return workoutDataStore.data().blockingFirst().getUser();
-    }
-
-    public static LocalRepository getInstance(Context context) {
-        LocalRepository localInstance = instance;
-        if (localInstance == null) {
-            synchronized (LocalRepository.class) {
-                localInstance = instance;
-                if (localInstance == null) {
-                    instance = localInstance = new LocalRepository(context);
-                }
-            }
-        }
-        return localInstance;
     }
 }

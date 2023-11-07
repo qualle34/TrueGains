@@ -1,11 +1,15 @@
 package com.qualle.truegain.config;
 
+import com.qualle.truegain.MainActivity;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.ClientModule;
 import com.qualle.truegain.model.BottomMenuViewModel;
 import com.qualle.truegain.model.CurrentWorkoutViewModel;
-import com.qualle.truegain.service.ApiService;
+import com.qualle.truegain.service.AuthenticationHandler;
+import com.qualle.truegain.service.ErrorHandler;
+import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.MainFragment;
+import com.qualle.truegain.ui.auth.LoginFragment;
 import com.qualle.truegain.ui.menu.BottomMenuFragment;
 import com.qualle.truegain.ui.profile.ProfileFragment;
 import com.qualle.truegain.ui.workout.SaveWorkoutFragment;
@@ -20,9 +24,15 @@ import dagger.Component;
 @Component(modules = ClientModule.class)
 public interface ApplicationComponent {
 
+    void inject(MainActivity activity);
+
     void inject(MainFragment fragment);
 
-    void inject(ApiService service);
+    void inject(LoginFragment fragment);
+
+    void inject(ErrorHandler handler);
+
+    void inject(AuthenticationHandler service);
 
     void inject(WorkoutListFragment fragment);
 
@@ -40,4 +50,9 @@ public interface ApplicationComponent {
 
     BackendClient backendClient();
 
+    LocalService localService();
+
+    ErrorHandler errorHandler();
+
+    AuthenticationHandler authenticationHandler();
 }

@@ -37,7 +37,7 @@ public class ProfileSecurityFragment extends Fragment {
                 navController.navigate(R.id.action_nav_profile_security_fragment_to_nav_profile_security_password_fragment));
 
         binding.profileSecurityLogout.setOnClickListener(v ->
-                navController.navigate(R.id.action_nav_settings_fragment_to_nav_greeting_fragment));
+                navController.navigate(R.id.action_nav_profile_security_fragment_to_nav_greeting_fragment));
 
 
         return binding.getRoot();

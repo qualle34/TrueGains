@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.qualle.truegain.client.BackendClient;
+import com.qualle.truegain.client.ClientModule;
 import com.qualle.truegain.client.api.Category;
 import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentBottomMenuBinding;
 import com.qualle.truegain.model.BottomMenuViewModel;
 import com.qualle.truegain.model.CurrentWorkoutViewModel;
+import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.adapter.CategoryRecyclerViewAdapter;
 import com.qualle.truegain.ui.adapter.ExerciseRecyclerViewAdapter;
 import com.qualle.truegain.ui.listener.MenuClickListener;
@@ -41,6 +43,9 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
     @Inject
     public BackendClient client;
 
+    @Inject
+    public LocalService service;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,7 +53,9 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
         workoutViewModel = new ViewModelProvider(getParentFragment()).get(CurrentWorkoutViewModel.class);
         menuViewModel = new ViewModelProvider(getParentFragment()).get(BottomMenuViewModel.class);
 
-        DaggerApplicationComponent.create().inject(this);
+        DaggerApplicationComponent.builder()
+                .clientModule(ClientModule.getInstance(getContext())).build()
+                .inject(this);
 
         prepareCategoryMenu();
 
@@ -76,10 +83,11 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
             client.getCategories("exercise").enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-
-                    List<Category> categories = response.body();
-                    menuViewModel.setCategories(categories);
-                    recyclerView.setAdapter(new CategoryRecyclerViewAdapter(categories, fragment));
+                    if (response.isSuccessful()) {
+                        List<Category> categories = response.body();
+                        menuViewModel.setCategories(categories);
+                        recyclerView.setAdapter(new CategoryRecyclerViewAdapter(categories, fragment));
+                    }
                 }
 
                 @Override
@@ -132,18 +140,18 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
     @Override
     public void onExerciseSelect(long exerciseId) {
 
-            client.getExerciseByIdForUserId(exerciseId, 1).enqueue(new Callback<>() {
-                @Override
-                public void onResponse(Call<Exercise> call, Response<Exercise> response) {
+        client.getExerciseByIdForUser(service.getAuthorizationHeader(), 1).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<Exercise> call, Response<Exercise> response) {
 
-                    workoutViewModel.createEmptyExercise(response.body());
-                }
+                workoutViewModel.createEmptyExercise(response.body());
+            }
 
-                @Override
-                public void onFailure(Call<Exercise> call, Throwable t) {
-                    t.printStackTrace();
-                }
-            });
+            @Override
+            public void onFailure(Call<Exercise> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
         this.dismiss();
     }

@@ -2,12 +2,15 @@ package com.qualle.truegain.service;
 
 import android.content.Context;
 
+import com.qualle.truegain.model.UserData;
 import com.qualle.truegain.model.WorkoutData;
 import com.qualle.truegain.model.local.CurrentExerciseProto;
 import com.qualle.truegain.model.local.CurrentRecordProto;
 import com.qualle.truegain.model.local.CurrentWorkoutProto;
+import com.qualle.truegain.model.local.LocalUser;
 import com.qualle.truegain.repository.LocalRepository;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
@@ -15,10 +18,11 @@ import java.util.List;
 
 public class LocalService {
 
-    private final LocalRepository repository;
-    private static LocalService instance;
+    private static volatile LocalService instance;
 
-    public LocalService(LocalRepository repository) {
+    private final LocalRepository repository;
+
+    private LocalService(LocalRepository repository) {
         this.repository = repository;
     }
 
@@ -28,7 +32,7 @@ public class LocalService {
             synchronized (LocalService.class) {
                 localInstance = instance;
                 if (localInstance == null) {
-                    instance = localInstance = new LocalService(LocalRepository.getInstance(context));
+                    instance = localInstance = new LocalService(new LocalRepository(context));
                 }
             }
         }
@@ -95,7 +99,46 @@ public class LocalService {
         return new CurrentWorkoutProto(LocalDateTime.ofEpochSecond(workout.getDate(), 0, ZoneOffset.UTC), exerciseList);
     }
 
+    public String getAuthorizationHeader() {
+        UserData data = repository.getUser();
+        return "Bearer " + data.getAccessToken();
+    }
+
+    public LocalUser getUser() {
+        UserData data = repository.getUser();
+
+        return new LocalUser(
+                data.getId(),
+                data.getAccessToken(),
+                LocalDateTime.ofInstant(Instant.ofEpochMilli(data.getAccessTokenExpiredAt()), ZoneOffset.UTC),
+                data.getRefreshToken(),
+                LocalDateTime.ofInstant(Instant.ofEpochMilli(data.getRefreshTokenExpiredAt()), ZoneOffset.UTC)
+        );
+    }
+
+    public void saveUser(LocalUser user) {
+        UserData data = UserData.newBuilder()
+                .setId(user.getId())
+                .setAccessToken(user.getAccessToken())
+                .setAccessTokenExpiredAt(user.getAccessTokenExpiredAt().toInstant(ZoneOffset.UTC).toEpochMilli())
+                .setRefreshToken(user.getRefreshToken())
+                .setRefreshTokenExpiredAt(user.getRefreshTokenExpiredAt().toInstant(ZoneOffset.UTC).toEpochMilli())
+                .build();
+
+        repository.saveUser(data);
+    }
+
     public boolean isCurrentWorkoutStarted() {
         return repository.getCurrentWorkout() != null;
+    }
+
+    public void clearAuthentication() {
+        UserData data = repository.getUser();
+
+        UserData newData = UserData.newBuilder()
+                .setId(data.getId())
+                .build();
+
+        repository.saveUser(newData);
     }
 }

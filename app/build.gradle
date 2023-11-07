@@ -54,7 +54,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:2.6.1"
 
     implementation "androidx.datastore:datastore:1.0.0"
-    implementation  "com.google.protobuf:protobuf-javalite:3.10.0"
+    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
     implementation "androidx.datastore:datastore-rxjava3:1.0.0"
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

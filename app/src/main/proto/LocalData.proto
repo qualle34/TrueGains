@@ -31,6 +31,8 @@ message WorkoutData {
 
 message UserData {
   int64 id = 1;
-  string token = 2;
-  string logged_at = 3;
+  string accessToken = 2;
+  int64 accessTokenExpiredAt = 3;
+  string refreshToken = 4;
+  int64 refreshTokenExpiredAt = 5;
 }

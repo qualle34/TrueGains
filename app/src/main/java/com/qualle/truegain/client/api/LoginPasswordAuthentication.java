@@ -1,6 +1,6 @@
 package com.qualle.truegain.client.api;
 
-public class Authentication {
+public class LoginPasswordAuthentication {
 
     private String login;
     private String password;

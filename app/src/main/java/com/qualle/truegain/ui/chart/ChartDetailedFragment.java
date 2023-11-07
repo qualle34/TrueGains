@@ -11,12 +11,16 @@ import com.qualle.truegain.databinding.FragmentChartDetailedBinding;
 import com.qualle.truegain.model.enums.ChartType;
 import com.qualle.truegain.service.LocalService;
 
+import javax.inject.Inject;
+
 public class ChartDetailedFragment extends Fragment {
 
     private static final String ARG_ID = "id";
 
     private FragmentChartDetailedBinding binding;
-    private LocalService service;
+
+    @Inject
+    public LocalService service;
 
 
     private long id;
@@ -43,9 +47,6 @@ public class ChartDetailedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentChartDetailedBinding.inflate(inflater, container, false);
-        service = LocalService.getInstance(getContext());
-
-
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
