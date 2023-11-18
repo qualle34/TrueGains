@@ -48,8 +48,8 @@ public class ClientModule {
 
     @Provides
     @Singleton
-    public ErrorHandler provideErrorHandler(BackendClient client) {
-        return new ApiErrorHandler(client);
+    public ErrorHandler provideErrorHandler() {
+        return new ApiErrorHandler();
     }
 
     @Provides

@@ -5,32 +5,47 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.qualle.truegain.client.BackendClient;
-import com.qualle.truegain.client.ClientModule;
 import com.qualle.truegain.client.api.ErrorResponse;
-import com.qualle.truegain.config.DaggerApplicationComponent;
 
 import java.lang.reflect.Type;
-
-import javax.inject.Inject;
 
 import okhttp3.ResponseBody;
 
 public class ApiErrorHandler implements ErrorHandler {
 
-    private final BackendClient client;
+    private final Gson gson;
 
-    public ApiErrorHandler(BackendClient client) {
-        this.client = client;
+    public ApiErrorHandler() {
+        this.gson = new Gson();
     }
 
     @Override
     public void handle(Context context, ResponseBody body) {
-        Gson gson = new Gson();
-        Type type = new TypeToken<ErrorResponse>() {}.getType();
-        ErrorResponse errorResponse = gson.fromJson(body.charStream(), type);
+        ErrorResponse errorResponse = gson.fromJson(body.charStream(), ErrorResponse.class);
 
-        // todo
-        Toast.makeText(context, errorResponse.getType() + ": " + errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+        switch (errorResponse.getType()) {
+
+            case VALIDATION_FAIL:
+
+                String reason = errorResponse.getAdditional().get("reason");
+                String message = "Check your data, something is wrong";
+
+                if ("login_found".equals(reason)) {
+                    message = "A user with this login already exists";
+                } else if ("email_found".equals(reason)) {
+                    message = "A user with this email already exists";
+                } else if ("week_password".equals(reason)) {
+                    message = "Your password is weak";
+                }
+
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                Toast.makeText(context, "Server error: " + errorResponse.getType(), Toast.LENGTH_SHORT).show();
+
+        }
+
+
     }
 }

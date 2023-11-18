@@ -106,8 +106,8 @@
             android:id="@+id/action_nav_registration_fragment_to_nav_greeting_fragment"
             app:destination="@id/nav_greeting_fragment" />
         <action
-            android:id="@+id/action_nav_registration_fragment_to_nav_main_fragment"
-            app:destination="@id/nav_main_fragment" />
+            android:id="@+id/action_nav_registration_fragment_to_nav_verify_registration_fragment"
+            app:destination="@id/nav_verify_registration_fragment" />
     </fragment>
 
     <fragment
@@ -185,6 +185,14 @@
         tools:layout="@layout/fragment_chart_detailed" >
         <action
             android:id="@+id/action_nav_chart_detailed_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_verify_registration_fragment"
+        android:name="com.qualle.truegain.ui.auth.VerifyRegistrationFragment"
+        tools:layout="@layout/fragment_verify_registration" >
+        <action
+            android:id="@+id/action_nav_verify_registration_fragment_to_nav_main_fragment"
             app:destination="@id/nav_main_fragment" />
     </fragment>
 

@@ -116,6 +116,22 @@ public class LocalService {
         );
     }
 
+    public String getTemporaryToken() {
+        UserData data = repository.getUser();
+
+        return data.getTemporaryToken();
+    }
+
+
+    public void saveTemporaryToken(String token) {
+        UserData data = UserData.newBuilder()
+                .setTemporaryToken(token)
+                .build();
+
+        repository.saveUser(data);
+    }
+
+
     public void saveUser(LocalUser user) {
         UserData data = UserData.newBuilder()
                 .setId(user.getId())

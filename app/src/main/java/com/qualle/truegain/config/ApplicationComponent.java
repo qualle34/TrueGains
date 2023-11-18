@@ -10,6 +10,8 @@ import com.qualle.truegain.service.ErrorHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.MainFragment;
 import com.qualle.truegain.ui.auth.LoginFragment;
+import com.qualle.truegain.ui.auth.RegistrationFragment;
+import com.qualle.truegain.ui.auth.VerifyRegistrationFragment;
 import com.qualle.truegain.ui.menu.BottomMenuFragment;
 import com.qualle.truegain.ui.profile.ProfileFragment;
 import com.qualle.truegain.ui.workout.SaveWorkoutFragment;
@@ -29,6 +31,10 @@ public interface ApplicationComponent {
     void inject(MainFragment fragment);
 
     void inject(LoginFragment fragment);
+
+    void inject(RegistrationFragment fragment);
+
+    void inject(VerifyRegistrationFragment fragment);
 
     void inject(ErrorHandler handler);
 

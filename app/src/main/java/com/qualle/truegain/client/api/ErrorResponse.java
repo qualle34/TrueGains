@@ -1,30 +1,27 @@
 package com.qualle.truegain.client.api;
 
-import java.util.Collection;
 import java.util.Map;
 
 public class ErrorResponse {
 
-    private String type;
+    private ErrorType type;
     private String message;
     private Map<String, String> additional;
-    private Collection<String> stack;
 
     public ErrorResponse() {
     }
 
-    public ErrorResponse(String type, String message, Map<String, String> additional, Collection<String> stack) {
+    public ErrorResponse(ErrorType type, String message, Map<String, String> additional) {
         this.type = type;
         this.message = message;
         this.additional = additional;
-        this.stack = stack;
     }
 
-    public String getType() {
+    public ErrorType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ErrorType type) {
         this.type = type;
     }
 
@@ -42,13 +39,5 @@ public class ErrorResponse {
 
     public void setAdditional(Map<String, String> additional) {
         this.additional = additional;
-    }
-
-    public Collection<String> getStack() {
-        return stack;
-    }
-
-    public void setStack(Collection<String> stack) {
-        this.stack = stack;
     }
 }

@@ -1,10 +1,13 @@
 package com.qualle.truegain.client;
 
 import com.qualle.truegain.client.api.Category;
+import com.qualle.truegain.client.api.ConfirmRegistration;
 import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.client.api.LoginPasswordAuthentication;
 import com.qualle.truegain.client.api.MainPageData;
+import com.qualle.truegain.client.api.NewRegistration;
 import com.qualle.truegain.client.api.SimpleWorkout;
+import com.qualle.truegain.client.api.TemporaryToken;
 import com.qualle.truegain.client.api.Token;
 import com.qualle.truegain.client.api.TokenAuthentication;
 import com.qualle.truegain.client.api.User;
@@ -30,6 +33,12 @@ public interface BackendClient {
 
     @POST("/logout")
     Call<Void> logout(@Body TokenAuthentication authentication);
+
+    @POST("/registration/new")
+    Call<TemporaryToken> registerNewUser(@Body NewRegistration registration);
+
+    @POST("/registration/confirm")
+    Call<Token> confirmRegistration(@Body ConfirmRegistration registration);
 
     @GET("/private/user")
     Call<User> getUser(@Header("Authorization") String auth);

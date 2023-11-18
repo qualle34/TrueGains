@@ -19,6 +19,8 @@ public class GreetingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_greeting, container, false);
         NavController navController = NavHostFragment.findNavController(this);
 
+        // todo check temp token
+
         view.findViewById(R.id.greeting_button_login).setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_greeting_fragment_to_nav_login_fragment));
         view.findViewById(R.id.greeting_button_registration).setOnClickListener(v ->

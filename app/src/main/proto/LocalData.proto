@@ -35,4 +35,5 @@ message UserData {
   int64 accessTokenExpiredAt = 3;
   string refreshToken = 4;
   int64 refreshTokenExpiredAt = 5;
+  string temporaryToken = 6;
 }
