@@ -67,7 +67,7 @@ public class ChartListFragment extends Fragment {
             FrameLayout chart = new FrameLayout(view.getContext());
             chart.setId(i + 1);
 
-            ft.replace(chart.getId(), ChartLineFragment.newInstance("Bench press", ChartType.NUMBER, null));
+            ft.replace(chart.getId(), ChartLineFragment.newInstance(null, null));
 
             linearLayout.addView(chart);
         }

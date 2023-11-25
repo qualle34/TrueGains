@@ -13,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.qualle.truegain.client.api.Category;
 import com.qualle.truegain.client.api.Image;
 import com.qualle.truegain.databinding.ItemBottomMenuCategoryBinding;
-import com.qualle.truegain.ui.listener.MenuClickListener;
+import com.qualle.truegain.ui.listener.MenuCategoryClickListener;
 
 import java.util.List;
 
 public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
 
     private final List<Category> values;
-    private final MenuClickListener menuClickListener;
+    private final MenuCategoryClickListener menuClickListener;
 
-    public CategoryRecyclerViewAdapter(List<Category> values, MenuClickListener menuClickListener) {
+    public CategoryRecyclerViewAdapter(List<Category> values, MenuCategoryClickListener menuClickListener) {
         this.values = values;
         this.menuClickListener = menuClickListener;
     }

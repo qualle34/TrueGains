@@ -72,14 +72,14 @@ public class ProfileFragment extends Fragment {
                 navController.navigate(R.id.action_nav_profile_fragment_to_nav_profile_security_fragment));
 
         binding.profileCardMeasure.setOnClickListener(v -> {
-            new BottomMenuFragment().show(getChildFragmentManager(), null);
+            BottomMenuFragment.newInstance().show(getChildFragmentManager(), null); // todo add click logic
         });
 
         binding.profileButtonBack.setOnClickListener(v -> navController.popBackStack());
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance("Weight", ChartType.NUMBER, null), null)
+                .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance( null, null), null)
                 .commit();
 
         InputStream ims = null; // todo
@@ -101,8 +101,8 @@ public class ProfileFragment extends Fragment {
 
                     User dto = response.body();
 
-                    binding.profileNameAge.setText(dto.getName() + ", " + dto.getAge());
-                    binding.profileWorkoutCount.setText("Workout count: " + dto.getWorkoutCount());
+                    binding.profileNameAge.setText(dto.getName() + ", " + 22);
+                    binding.profileWorkoutCount.setText("Workout count: " + 4);
                 }
 
             }

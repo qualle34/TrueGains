@@ -1,11 +1,13 @@
 package com.qualle.truegain.ui.menu;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +25,8 @@ import com.qualle.truegain.model.CurrentWorkoutViewModel;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.adapter.CategoryRecyclerViewAdapter;
 import com.qualle.truegain.ui.adapter.ExerciseRecyclerViewAdapter;
-import com.qualle.truegain.ui.listener.MenuClickListener;
+import com.qualle.truegain.ui.listener.MenuCategoryClickListener;
+import com.qualle.truegain.ui.listener.MenuExerciseClickListener;
 
 import java.util.List;
 
@@ -33,7 +36,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BottomMenuFragment extends BottomSheetDialogFragment implements MenuClickListener {
+public class BottomMenuFragment extends BottomSheetDialogFragment implements MenuCategoryClickListener, MenuExerciseClickListener {
+
+    private static final String EXERCISE_CLICK_LISTENER = "exercise-click-listener";
+
+    private MenuExerciseClickListener exerciseClickListener;
 
     private CurrentWorkoutViewModel workoutViewModel;
     private BottomMenuViewModel menuViewModel;
@@ -45,6 +52,32 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
 
     @Inject
     public LocalService service;
+
+    private BottomMenuFragment() {
+    }
+
+    public static BottomMenuFragment newInstance() {
+        return new BottomMenuFragment();
+    }
+
+    public static BottomMenuFragment newInstance(MenuExerciseClickListener exerciseClickListener) {
+        BottomMenuFragment fragment = new BottomMenuFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(EXERCISE_CLICK_LISTENER, exerciseClickListener);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
+    @Override
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            exerciseClickListener = getArguments()
+                    .getSerializable(EXERCISE_CLICK_LISTENER, MenuExerciseClickListener.class);
+        }
+    }
 
     @Nullable
     @Override
@@ -140,20 +173,24 @@ public class BottomMenuFragment extends BottomSheetDialogFragment implements Men
     @Override
     public void onExerciseSelect(long exerciseId) {
 
-        client.getExerciseByIdForUser(service.getAuthorizationHeader(), 1).enqueue(new Callback<>() {
-            @Override
-            public void onResponse(Call<Exercise> call, Response<Exercise> response) {
-
-                workoutViewModel.createEmptyExercise(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<Exercise> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+        exerciseClickListener.onExerciseSelect(exerciseId);
 
         this.dismiss();
+
+
+//        client.getExerciseByIdForUser(service.getAuthorizationHeader(), 1).enqueue(new Callback<>() {
+//            @Override
+//            public void onResponse(Call<Exercise> call, Response<Exercise> response) {
+//
+//                workoutViewModel.createEmptyExercise(response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Exercise> call, Throwable t) {
+//                t.printStackTrace();
+//            }
+//        });
+
     }
 
     private void onBackClick() {

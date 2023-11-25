@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.qualle.truegain.R;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.ClientModule;
+import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.client.api.Workout;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentSaveWorkoutBinding;
@@ -24,6 +25,7 @@ import com.qualle.truegain.model.CurrentWorkoutViewModel;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.adapter.WorkoutExerciseRecyclerViewAdapter;
+import com.qualle.truegain.ui.listener.MenuExerciseClickListener;
 import com.qualle.truegain.ui.menu.BottomMenuFragment;
 import com.qualle.truegain.util.DateFormatterUtil;
 
@@ -35,12 +37,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SaveWorkoutFragment extends Fragment {
+public class SaveWorkoutFragment extends Fragment implements MenuExerciseClickListener {
 
     private CurrentWorkoutViewModel workoutViewModel;
 
     @Inject
-    public LocalService localService;
+    public LocalService service;
 
     @Inject
     public BackendClient client;
@@ -73,7 +75,7 @@ public class SaveWorkoutFragment extends Fragment {
 
         binding.saveWorkoutButtonBack.setOnClickListener(v -> navController.popBackStack());
 
-        client.getWorkoutByUserAndDate(localService.getAuthorizationHeader(), DateFormatterUtil.toApiDate(LocalDateTime.now())).enqueue(new Callback<>() {
+        client.getWorkoutByUserAndDate(service.getAuthorizationHeader(), DateFormatterUtil.toApiDate(LocalDateTime.now())).enqueue(new Callback<>() {
 
             @Override
             public void onResponse(Call<Workout> call, Response<Workout> response) {
@@ -99,17 +101,35 @@ public class SaveWorkoutFragment extends Fragment {
         });
 
         binding.saveWorkoutAddExercise.setOnClickListener(v -> {
-            new BottomMenuFragment().show(getChildFragmentManager(), null);
+            BottomMenuFragment.newInstance(this)
+                    .show(getChildFragmentManager(), null);
         });
 
         return binding.getRoot();
     }
 
     @Override
+    public void onExerciseSelect(long exerciseId) {
+
+        client.getExerciseByIdForUser(service.getAuthorizationHeader(), exerciseId).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<Exercise> call, Response<Exercise> response) {
+                workoutViewModel.createEmptyExercise(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Exercise> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+
+    @Override
     public void onStop() {
         super.onStop();
 
-        client.saveWorkout(localService.getAuthorizationHeader(), workoutViewModel.getApiWorkout()).enqueue(new Callback<Workout>() {
+        client.saveWorkout(service.getAuthorizationHeader(), workoutViewModel.getApiWorkout()).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Workout> call, Response<Workout> response) {
                 // todo print something

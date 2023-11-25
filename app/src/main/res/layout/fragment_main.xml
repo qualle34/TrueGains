@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="14dp"
-            android:text="Charts"
+            android:text="Exercises"
             android:textAppearance="@style/TextAppearance.TrueGain.PrimaryBold"
             android:textSize="20sp" />
 
@@ -152,22 +152,19 @@
                 android:layout_marginBottom="14dp"
                 android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:id="@+id/main_linear_layout_achievements"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <!-- Generated achievements -->
-                    </LinearLayout>
-
-                </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/main_exercises_list_recycler_view"
+                    android:name="com.qualle.truegain.MainFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/fragment_card_main_exercise" />
 
                 <Button
-                    android:id="@+id/main_button_all_achievements"
+                    android:id="@+id/main_button_all_exercises"
                     android:layout_width="140dp"
                     android:layout_height="125dp"
                     android:layout_marginStart="8dp"
@@ -176,7 +173,7 @@
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:paddingTop="12sp"
-                    android:text="Show all\nachievements"
+                    android:text="Show all\nexercises"
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.TrueGain.SecondaryLight"
                     app:backgroundTint="@color/black_russian"

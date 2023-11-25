@@ -59,6 +59,9 @@ public class LoginFragment extends Fragment {
                 .clientModule(ClientModule.getInstance(getContext())).build()
                 .inject(this);
 
+        binding.loginButtonBack.setOnClickListener(v -> navController.popBackStack());
+
+
         binding.buttonLogin.setOnClickListener(v -> {
 
                     String password = binding.editPassword.getText().toString();

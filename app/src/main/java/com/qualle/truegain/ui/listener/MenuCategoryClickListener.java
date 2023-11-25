@@ -1,8 +1,6 @@
 package com.qualle.truegain.ui.listener;
 
-public interface MenuClickListener {
+public interface MenuCategoryClickListener {
 
     void onCategorySelect(long categoryId);
-
-    void onExerciseSelect(long exerciseId);
 }

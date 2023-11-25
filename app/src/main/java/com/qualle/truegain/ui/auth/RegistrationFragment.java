@@ -48,6 +48,8 @@ public class RegistrationFragment extends Fragment {
                 .clientModule(ClientModule.getInstance(getContext())).build()
                 .inject(this);
 
+        binding.registrationButtonBack.setOnClickListener(v -> navController.popBackStack());
+
 
         binding.registrationButtonNext.setOnClickListener(v -> {
 

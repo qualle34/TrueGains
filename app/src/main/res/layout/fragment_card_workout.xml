@@ -9,8 +9,7 @@
     android:clickable="true"
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
-    android:paddingVertical="16dp"
-    tools:context=".ui.card.CardWorkoutFragment">
+    android:paddingVertical="16dp">
 
     <TextView
         android:id="@+id/workout_card_upper_text"

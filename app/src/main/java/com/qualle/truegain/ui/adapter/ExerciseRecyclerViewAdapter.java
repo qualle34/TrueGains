@@ -14,16 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.databinding.ItemBottomMenuExerciseBinding;
-import com.qualle.truegain.ui.listener.MenuClickListener;
+import com.qualle.truegain.ui.listener.MenuExerciseClickListener;
 
 import java.util.List;
 
 public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder> {
 
     private final List<Exercise> values;
-    private final MenuClickListener menuClickListener;
+    private final MenuExerciseClickListener menuClickListener;
 
-    public ExerciseRecyclerViewAdapter(List<Exercise> items, MenuClickListener menuClickListener) {
+    public ExerciseRecyclerViewAdapter(List<Exercise> items, MenuExerciseClickListener menuClickListener) {
         this.values = items;
         this.menuClickListener = menuClickListener;
     }
@@ -40,7 +40,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         holder.item = exercise;
         holder.title.setText(exercise.getName());
         holder.equipment.setText(exercise.getEquipment());
-        holder.image.setImageDrawable(getImage(holder.image.getContext(), exercise.getImageLink()));
+        holder.image.setImageDrawable(getImage(holder.image.getContext(), exercise.getIconLink()));
 
         holder.layout.setOnClickListener(v -> {
             menuClickListener.onExerciseSelect(exercise.getId());

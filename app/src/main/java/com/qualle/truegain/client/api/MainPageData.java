@@ -5,19 +5,19 @@ import java.util.Map;
 
 public class MainPageData {
 
-    Map<Integer, Integer> workoutPerWeekChartData;
-    List<SimpleWorkout> recentWorkouts;
-    Map<Float, Float> muscleDistributionChartData;
-    List<Chart> recentCharts;
+    private Map<Integer, Integer> workoutPerWeekChartData;
+    private List<SimpleWorkout> recentWorkouts;
+    private Map<Float, Float> muscleDistributionChartData;
+    private List<SimpleExercise> frequentExercises;
 
     public MainPageData() {
     }
 
-    public MainPageData(Map<Integer, Integer> workoutPerWeekChartData, List<SimpleWorkout> recentWorkouts, Map<Float, Float> muscleDistributionChartData, List<Chart> recentCharts) {
+    public MainPageData(Map<Integer, Integer> workoutPerWeekChartData, List<SimpleWorkout> recentWorkouts, Map<Float, Float> muscleDistributionChartData, List<SimpleExercise> frequentExercises) {
         this.workoutPerWeekChartData = workoutPerWeekChartData;
         this.recentWorkouts = recentWorkouts;
         this.muscleDistributionChartData = muscleDistributionChartData;
-        this.recentCharts = recentCharts;
+        this.frequentExercises = frequentExercises;
     }
 
     public Map<Integer, Integer> getWorkoutPerWeekChartData() {
@@ -44,11 +44,11 @@ public class MainPageData {
         this.muscleDistributionChartData = muscleDistributionChartData;
     }
 
-    public List<Chart> getRecentCharts() {
-        return recentCharts;
+    public List<SimpleExercise> getFrequentExercises() {
+        return frequentExercises;
     }
 
-    public void setRecentCharts(List<Chart> recentCharts) {
-        this.recentCharts = recentCharts;
+    public void setFrequentExercises(List<SimpleExercise> frequentExercises) {
+        this.frequentExercises = frequentExercises;
     }
 }

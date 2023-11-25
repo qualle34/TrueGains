@@ -1,6 +1,5 @@
 package com.qualle.truegain.ui.chart;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,42 +9,46 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.qualle.truegain.R;
-import com.qualle.truegain.databinding.FragmentChartBinding;
+import com.qualle.truegain.databinding.FragmentChartLineBinding;
 import com.qualle.truegain.model.enums.ChartType;
 import com.qualle.truegain.util.ChartValueFormatter;
 
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 
 public class ChartLineFragment extends Fragment {
 
-    private static final String ARG_TITLE = "title";
     private static final String ARG_DATA = "data";
     private static final String ARG_TYPE = "type";
 
-    private FragmentChartBinding binding;
+    private FragmentChartLineBinding binding;
 
-    private String title;
     private ChartType type;
     private ArrayList<Entry> data;
 
     public ChartLineFragment() {
     }
 
-    public static ChartLineFragment newInstance(String title, ChartType type, Map<Float, Float> data) {
+    public static ChartLineFragment newInstance(Map<Float, Float> data, ChartType type) {
         ChartLineFragment fragment = new ChartLineFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_TITLE, title);
-        args.putSerializable(ARG_TYPE, type);
         args.putSerializable(ARG_DATA, (Serializable) data);
+        args.putSerializable(ARG_TYPE, (Serializable) type != null ? type : ChartType.SECONDARY);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,7 +57,6 @@ public class ChartLineFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            title = getArguments().getString(ARG_TITLE);
             type = (ChartType) getArguments().getSerializable(ARG_TYPE);
             data = convertData((Map<Float, Float>) getArguments().getSerializable(ARG_DATA));
         }
@@ -62,16 +64,16 @@ public class ChartLineFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentChartBinding.inflate(inflater, container, false);
+        binding = FragmentChartLineBinding.inflate(inflater, container, false);
 
-        binding.chartTextTitle.setText(title);
-        LineChart chart = binding.chart;
+        LineChart chart = binding.lineChart;
 
         chart.getDescription().setEnabled(false);
 
-        chart.setTouchEnabled(false);
-        chart.setDragEnabled(false);
-        chart.setScaleEnabled(false);
+        chart.setTouchEnabled(true);
+
+        chart.setDragEnabled(true);
+        chart.setScaleXEnabled(true);
         chart.setPinchZoom(false);
 
         chart.setDrawGridBackground(false);
@@ -79,16 +81,19 @@ public class ChartLineFragment extends Fragment {
 
         XAxis x = chart.getXAxis();
         x.setEnabled(true);
+        x.setDrawGridLines(false);
+        x.setAxisLineColor(getResources().getColor(R.color.black_russian));
+        x.setTextColor(getResources().getColor(R.color.black_russian));
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x.setDrawGridLines(true);
-
-        if (ChartType.DATE.equals(type)) {
-            x.setValueFormatter(ChartValueFormatter.getDateValueFormatter());
-        }
+        x.setValueFormatter(ChartValueFormatter.getDateDayValueFormatter());
+        x.setLabelCount(4);
 
         YAxis y = chart.getAxisLeft();
         y.setDrawGridLines(false);
+        y.setAxisLineColor(getResources().getColor(R.color.black_russian));
+        y.setTextColor(getResources().getColor(R.color.black_russian));
         y.setAxisMinimum(0f);
+        y.setLabelCount(4);
 
         chart.getAxisRight().setEnabled(false);
         chart.getLegend().setEnabled(false);
@@ -115,7 +120,7 @@ public class ChartLineFragment extends Fragment {
 
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(values, "DataSet");
+            set1 = new LineDataSet(values, "Data");
 
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             set1.setCubicIntensity(0.2f);
@@ -123,34 +128,56 @@ public class ChartLineFragment extends Fragment {
             set1.setDrawCircles(true);
             set1.setLineWidth(1.8f);
             set1.setCircleRadius(2.3f);
-            set1.setCircleColor(R.color.zircon);
-            set1.setColor(R.color.zircon);
-            set1.setFillColor(Color.WHITE);
             set1.setFillAlpha(100);
             set1.setDrawHorizontalHighlightIndicator(false);
 
             set1.setFillFormatter((dataSet, dataProvider) -> chart.getAxisLeft().getAxisMinimum());
 
-            // create a data object with the data sets
+            if (ChartType.PRIMARY.equals(type)) {
+                set1.setCircleColor(getResources().getColor(R.color.black_russian));
+                set1.setColor(getResources().getColor(R.color.black_russian));
+                set1.setFillColor(getResources().getColor(R.color.black_russian));
+            } else {
+                set1.setCircleColor(getResources().getColor(R.color.twine));
+                set1.setColor(getResources().getColor(R.color.twine));
+                set1.setFillColor(getResources().getColor(R.color.twine));
+            }
+
+
+
             LineData data = new LineData(set1);
             data.setValueTextSize(9f);
             data.setDrawValues(false);
 
-            // set data
             chart.setData(data);
         }
     }
 
-    private ArrayList<Entry> getData() {
+    private List<Entry> getData() {
 
         int count = 10;
         float range = 100;
 
-        ArrayList<Entry> values = new ArrayList<>();
+        List<Float> dates = new ArrayList<>();
+
+        Instant hundredYearsAgo = Instant.now().minus(Duration.ofDays(65));
+        Instant tenDaysAgo = Instant.now().minus(Duration.ofDays(10));
+
+        for (int i = 0; i < count; i++) {
+
+            long daySinceStart = between(hundredYearsAgo, tenDaysAgo).getEpochSecond() / 86400;
+
+            dates.add((float) daySinceStart);
+        }
+
+        dates = dates.stream().sorted(Float::compare).collect(Collectors.toList());
+
+
+        List<Entry> values = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
             float val = (float) (Math.random() * (range + 1)) + 20;
-            values.add(new Entry(i, val));
+            values.add(new Entry(dates.get(i), val));
         }
 
         return values;
@@ -160,13 +187,23 @@ public class ChartLineFragment extends Fragment {
         ArrayList<Entry> values = new ArrayList<>();
 
         if (data == null) { // todo throw exception
-            return getData();
+            return null;
         }
 
         data.forEach((k, v) -> {
             values.add(new Entry(k, v));
         });
         return values;
+    }
+
+    public static Instant between(Instant startInclusive, Instant endExclusive) {
+        long startSeconds = startInclusive.getEpochSecond();
+        long endSeconds = endExclusive.getEpochSecond();
+        long random = ThreadLocalRandom
+                .current()
+                .nextLong(startSeconds, endSeconds);
+
+        return Instant.ofEpochSecond(random);
     }
 
 }

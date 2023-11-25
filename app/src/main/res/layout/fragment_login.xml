@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/profile_edit_button_back"
+            android:id="@+id/login_button_back"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="@drawable/background_ripple"

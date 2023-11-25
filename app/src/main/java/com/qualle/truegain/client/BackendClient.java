@@ -68,6 +68,9 @@ public interface BackendClient {
     @GET("/exercise")
     Call<List<Exercise>> getExercises(@Query("category-id") long categoryId);
 
+    @GET("/private/chart/{id}")
+    Call<Exercise> getExerciseWithChartData(@Header("Authorization") String auth, @Path("id") long id);
+
     @GET("/private/exercise/{id}")
     Call<Exercise> getExerciseByIdForUser(@Header("Authorization") String auth, @Path("id") long id);
 }

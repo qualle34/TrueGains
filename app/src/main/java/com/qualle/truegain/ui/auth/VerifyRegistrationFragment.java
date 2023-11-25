@@ -53,6 +53,7 @@ public class VerifyRegistrationFragment extends Fragment {
         DaggerApplicationComponent.builder()
                 .clientModule(ClientModule.getInstance(getContext())).build()
                 .inject(this);
+        binding.verifyButtonBack.setOnClickListener(v -> navController.popBackStack());
 
 
         binding.buttonVerify.setOnClickListener(v -> {

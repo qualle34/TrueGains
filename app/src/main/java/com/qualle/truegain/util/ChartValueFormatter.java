@@ -3,6 +3,7 @@ package com.qualle.truegain.util;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.time.temporal.IsoFields;
@@ -33,6 +34,21 @@ public class ChartValueFormatter {
 
                 return monday.getDayOfMonth() + " " + monday.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " - " +
                         sunday.getDayOfMonth() + " " + sunday.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+            }
+        };
+    }
+
+    public static ValueFormatter getDateDayValueFormatter() {
+        return new ValueFormatter() {
+
+            @Override
+            public String getFormattedValue(float value) {
+                int day = (int) value;
+                Instant.ofEpochSecond(day * 86400L);
+
+                LocalDate date = LocalDate.ofEpochDay(day);
+
+                return date.getDayOfMonth() + " " + date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
             }
         };
     }
