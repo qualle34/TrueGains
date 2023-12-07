@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -85,6 +87,9 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
         WorkoutRecordRecyclerViewAdapter adapter = new WorkoutRecordRecyclerViewAdapter(workoutViewModel, position, selectedItemPosition == position && View.VISIBLE == holder.records.getVisibility());
         recyclerView.setAdapter(adapter);
 
+        holder.editExercise.setOnClickListener(v -> {
+            holder.editExercise.showContextMenu(holder.editExercise.getX(), holder.editExercise.getY());
+        });
 
         holder.arrow.setOnClickListener(v -> {
             selectedItemPosition = position;
@@ -113,7 +118,16 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
         return workoutViewModel.getExercisesCount();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public int getPosition() {
+        return selectedItemPosition;
+    }
+
+    public long getExerciseIdByPosition() {
+        Exercise exercise = workoutViewModel.getExercise(selectedItemPosition);
+        return exercise.getId();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
         public final TextView exerciseTitle;
         public final TextView equipmentTitle;
@@ -123,6 +137,7 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
         public final ImageView arrow;
         public final RecyclerView recyclerView;
         public final ImageView addSet;
+        public final ImageView editExercise;
 
         public ViewHolder(ItemSaveWorkoutExerciseBinding binding) {
             super(binding.getRoot());
@@ -134,6 +149,16 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
             arrow = binding.recordCardArrow;
             recyclerView = binding.recordRecyclerView;
             addSet = binding.recordAddSet;
+            editExercise = binding.recordEdit;
+            binding.getRoot().setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
+                menu.add(Menu.NONE, 1, 1, "About exercise");
+                menu.add(Menu.NONE, 2, 2, "Delete empty sets");
+                menu.add(Menu.NONE, 3, 3, "Delete exercise");
         }
     }
 }

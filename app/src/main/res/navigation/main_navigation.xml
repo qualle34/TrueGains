@@ -124,6 +124,12 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/nav_greeting_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_save_workout_fragment_to_nav_exercise_detailed_fragment"
+            app:destination="@id/nav_exercise_detailed_fragment" />
+        <action
+            android:id="@+id/action_nav_save_workout_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
     </fragment>
 
     <fragment

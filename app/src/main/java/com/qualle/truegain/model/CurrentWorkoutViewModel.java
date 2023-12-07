@@ -6,9 +6,6 @@ import androidx.lifecycle.ViewModel;
 import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.client.api.Record;
 import com.qualle.truegain.client.api.Workout;
-import com.qualle.truegain.model.local.CurrentExerciseProto;
-import com.qualle.truegain.model.local.CurrentRecordProto;
-import com.qualle.truegain.model.local.CurrentWorkoutProto;
 import com.qualle.truegain.util.NumberValueFormatter;
 
 import java.util.ArrayList;
@@ -81,6 +78,40 @@ public class CurrentWorkoutViewModel extends ViewModel {
         records.forEach(savedRecords::set);
 
         exercise.setRecords(savedRecords);
+
+        workoutData.setValue(workout);
+    }
+
+    public void deleteWorkout() {
+        workoutData.setValue(new Workout());
+    }
+
+    public void deleteExercise(int exercisePosition) {
+
+        if (!workoutData.isInitialized()) {
+            throw new NullPointerException("Workout not initialized");
+        }
+
+        Workout workout = workoutData.getValue();
+        workout.getExercises().remove(exercisePosition);
+
+        workoutData.setValue(workout);
+    }
+
+    public void deleteEmptyRecords(int exercisePosition) {
+
+        if (!workoutData.isInitialized()) {
+            throw new NullPointerException("Workout not initialized");
+        }
+
+        Workout workout = workoutData.getValue();
+        Exercise exercise = workout.getExercises().get(exercisePosition);
+
+        List<Record> filledRecords = exercise.getRecords().stream()
+                .filter(item -> item.getReps() != 0)
+                .collect(Collectors.toList());
+
+        exercise.setRecords(filledRecords);
 
         workoutData.setValue(workout);
     }

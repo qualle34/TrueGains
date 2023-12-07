@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,9 +43,11 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         holder.equipment.setText(exercise.getEquipment());
         holder.image.setImageDrawable(getImage(holder.image.getContext(), exercise.getIconLink()));
 
-        holder.layout.setOnClickListener(v -> {
-            menuClickListener.onExerciseSelect(exercise.getId());
-        });
+        View.OnClickListener clickListener = v -> menuClickListener.onExerciseSelect(exercise.getId());
+
+        holder.layout.setOnClickListener(clickListener);
+        holder.title.setOnClickListener(clickListener);
+        holder.equipment.setOnClickListener(clickListener);
     }
 
     @Override

@@ -3,9 +3,11 @@ package com.qualle.truegain.ui.workout;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -82,28 +84,28 @@ public class SaveWorkoutFragment extends Fragment implements MenuExerciseClickLi
         client.getWorkoutByUserAndDate(service.getAuthorizationHeader(), DateFormatterUtil.toApiDate(LocalDateTime.now()))
                 .enqueue(new Callback<>() {
 
-            @Override
-            public void onResponse(Call<Workout> call, Response<Workout> response) {
+                    @Override
+                    public void onResponse(Call<Workout> call, Response<Workout> response) {
 
-                if (response.isSuccessful()) {
-                    workoutViewModel.setApiWorkout(response.body());
+                        if (response.isSuccessful()) {
+                            workoutViewModel.setApiWorkout(response.body());
 
-                    RecyclerView recyclerView = binding.saveWorkoutRecyclerView;
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    WorkoutExerciseRecyclerViewAdapter adapter = new WorkoutExerciseRecyclerViewAdapter(getActivity(), workoutViewModel);
-                    recyclerView.setAdapter(adapter);
+                            RecyclerView recyclerView = binding.saveWorkoutRecyclerView;
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                            WorkoutExerciseRecyclerViewAdapter adapter = new WorkoutExerciseRecyclerViewAdapter(getActivity(), workoutViewModel);
+                            recyclerView.setAdapter(adapter);
 
-                    workoutViewModel.getWorkout()
-                            .observe(getViewLifecycleOwner(), newName -> adapter.notifyDataSetChanged());
+                            workoutViewModel.getWorkout()
+                                    .observe(getViewLifecycleOwner(), newName -> adapter.notifyDataSetChanged());
 
-                }
-            }
+                        }
+                    }
 
-            @Override
-            public void onFailure(Call<Workout> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+                    @Override
+                    public void onFailure(Call<Workout> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
 
         binding.saveWorkoutAddExercise.setOnClickListener(v -> {
             BottomMenuFragment.newInstance(this)
@@ -133,8 +135,45 @@ public class SaveWorkoutFragment extends Fragment implements MenuExerciseClickLi
     @Override
     public void onStop() {
         super.onStop();
+        saveWorkout();
+    }
 
-        client.saveWorkout(service.getAuthorizationHeader(), workoutViewModel.getApiWorkout()).enqueue(new Callback<>() {
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        NavController navController = NavHostFragment.findNavController(this);
+        WorkoutExerciseRecyclerViewAdapter adapter = null;
+        int position = -1;
+
+        try {
+            adapter = (WorkoutExerciseRecyclerViewAdapter) binding.saveWorkoutRecyclerView.getAdapter();
+            position = adapter.getPosition();
+        } catch (Exception e) {
+            return super.onContextItemSelected(item);
+        }
+
+        switch (item.getItemId()) {
+            case 1:
+                Bundle args = new Bundle();
+                args.putLong("id", adapter.getExerciseIdByPosition());
+                navController.navigate(R.id.action_nav_save_workout_fragment_to_nav_exercise_detailed_fragment, args);
+                break;
+
+            case 2:
+                workoutViewModel.deleteEmptyRecords(position); // todo
+                saveWorkout();
+
+                break;
+            case 3:
+                workoutViewModel.deleteExercise(position);
+                saveWorkout();
+
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    public void saveWorkout(){
+        client.saveWorkout(service.getAuthorizationHeader(), workoutViewModel.getApiWorkout().getId(), workoutViewModel.getApiWorkout()).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Workout> call, Response<Workout> response) {
                 // todo print something
@@ -146,6 +185,4 @@ public class SaveWorkoutFragment extends Fragment implements MenuExerciseClickLi
             }
         });
     }
-
-
 }

@@ -20,6 +20,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -56,8 +57,11 @@ public interface BackendClient {
         // Create workout if not found
     Call<Workout> getWorkoutByUserAndDate(@Header("Authorization") String auth, @Query("date") String date);
 
-    @POST("/private/workout")
-    Call<Workout> saveWorkout(@Header("Authorization") String auth, @Body Workout workout);
+    @PUT("/private/workout/{id}")
+    Call<Workout> saveWorkout(@Header("Authorization") String auth, @Path("id") long id, @Body Workout workout);
+
+    @PUT("/private/workout/{id}")
+    Call<Workout> deleteWorkout(@Header("Authorization") String auth, @Path("id") long id);
 
     @GET("/private/main")
     Call<MainPageData> getMainPageData(@Header("Authorization") String auth);
