@@ -1,14 +1,14 @@
 package com.qualle.truegain.model.local;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class LocalUser {
 
     private long id;
     private String accessToken;
-    private LocalDateTime accessTokenExpiredAt;
+    private Instant accessTokenExpiredAt;
     private String refreshToken;
-    private LocalDateTime refreshTokenExpiredAt;
+    private Instant refreshTokenExpiredAt;
 
     public LocalUser() {
     }
@@ -19,7 +19,7 @@ public class LocalUser {
         this.refreshToken = refreshToken;
     }
 
-    public LocalUser(long id, String accessToken, LocalDateTime accessTokenExpiredAt, String refreshToken, LocalDateTime refreshTokenExpiredAt) {
+    public LocalUser(long id, String accessToken, Instant accessTokenExpiredAt, String refreshToken, Instant refreshTokenExpiredAt) {
         this.id = id;
         this.accessToken = accessToken;
         this.accessTokenExpiredAt = accessTokenExpiredAt;
@@ -43,11 +43,11 @@ public class LocalUser {
         this.accessToken = accessToken;
     }
 
-    public LocalDateTime getAccessTokenExpiredAt() {
+    public Instant getAccessTokenExpiredAt() {
         return accessTokenExpiredAt;
     }
 
-    public void setAccessTokenExpiredAt(LocalDateTime accessTokenExpiredAt) {
+    public void setAccessTokenExpiredAt(Instant accessTokenExpiredAt) {
         this.accessTokenExpiredAt = accessTokenExpiredAt;
     }
 
@@ -59,11 +59,11 @@ public class LocalUser {
         this.refreshToken = refreshToken;
     }
 
-    public LocalDateTime getRefreshTokenExpiredAt() {
+    public Instant getRefreshTokenExpiredAt() {
         return refreshTokenExpiredAt;
     }
 
-    public void setRefreshTokenExpiredAt(LocalDateTime refreshTokenExpiredAt) {
+    public void setRefreshTokenExpiredAt(Instant refreshTokenExpiredAt) {
         this.refreshTokenExpiredAt = refreshTokenExpiredAt;
     }
 }

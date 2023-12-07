@@ -53,13 +53,11 @@ public class WorkoutListFragment extends Fragment implements WorkoutListClickLis
                 .inject(this);
         WorkoutListFragment fragment = this;
 
-        if (authenticationHandler.isAuthenticationRequired()) {
-            navController.navigate(R.id.action_nav_workout_list_fragment_to_nav_greeting_fragment);
+        try {
+            authenticationHandler.holdAuthentication();
+        } catch (Exception e) {
+            navController.navigate(R.id.action_nav_main_fragment_to_nav_greeting_fragment);
             return binding.getRoot();
-        }
-
-        if (authenticationHandler.isRefreshRequired()) {
-            authenticationHandler.refresh();
         }
 
         binding.workoutListButtonBack.setOnClickListener(v -> navController.popBackStack());

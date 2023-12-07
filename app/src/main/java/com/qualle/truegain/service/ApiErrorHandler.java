@@ -4,10 +4,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.qualle.truegain.client.api.ErrorResponse;
-
-import java.lang.reflect.Type;
+import com.qualle.truegain.model.exception.ApiAuthenticationException;
 
 import okhttp3.ResponseBody;
 
@@ -21,9 +19,17 @@ public class ApiErrorHandler implements ErrorHandler {
 
     @Override
     public void handle(Context context, ResponseBody body) {
-        ErrorResponse errorResponse = gson.fromJson(body.charStream(), ErrorResponse.class);
+        ErrorResponse errorResponse;
+        try {
+            errorResponse = gson.fromJson(body.charStream(), ErrorResponse.class);
+        } catch (Exception e) {
+            return;
+        }
 
         switch (errorResponse.getType()) {
+
+            case ACCESS_DENIED:
+                throw new ApiAuthenticationException("Authentication exception: " + errorResponse.getMessage());
 
             case VALIDATION_FAIL:
 

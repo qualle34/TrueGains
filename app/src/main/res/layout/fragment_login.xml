@@ -48,6 +48,7 @@
             android:id="@+id/edit_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,20 +66,17 @@
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
     <Button
         android:id="@+id/button_login"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/background_round_corners"
         android:text="Login"

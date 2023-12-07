@@ -20,7 +20,10 @@ import com.qualle.truegain.client.api.SimpleExercise;
 import com.qualle.truegain.client.api.SimpleWorkout;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentMainBinding;
+import com.qualle.truegain.model.exception.ApiAuthenticationException;
+import com.qualle.truegain.service.ApiAuthenticationHandler;
 import com.qualle.truegain.service.AuthenticationHandler;
+import com.qualle.truegain.service.ErrorHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.adapter.MainExerciseListRecyclerViewAdapter;
 import com.qualle.truegain.ui.adapter.MainWorkoutListRecyclerViewAdapter;
@@ -52,6 +55,9 @@ public class MainFragment extends Fragment implements WorkoutListClickListener, 
     @Inject
     public AuthenticationHandler authenticationHandler;
 
+    @Inject
+    public ErrorHandler errorHandler;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentMainBinding.inflate(inflater, container, false);
@@ -64,13 +70,13 @@ public class MainFragment extends Fragment implements WorkoutListClickListener, 
 
         NavController navController = NavHostFragment.findNavController(this);
 
-        if (authenticationHandler.isAuthenticationRequired()) {
+        binding.mainProgressBar.setVisibility(View.VISIBLE);
+
+        try {
+            authenticationHandler.holdAuthentication();
+        } catch (Exception e) {
             navController.navigate(R.id.action_nav_main_fragment_to_nav_greeting_fragment);
             return binding.getRoot();
-        }
-
-        if (authenticationHandler.isRefreshRequired()) {
-            authenticationHandler.refresh();
         }
 
         binding.mainButtonProfile.setOnClickListener(v ->
@@ -121,16 +127,26 @@ public class MainFragment extends Fragment implements WorkoutListClickListener, 
 
                     getChildFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
-                            .replace(R.id.main_radar_chart_container, new ChartRadarFragment(), null)
+                            .replace(R.id.main_radar_chart_container, ChartRadarFragment.newInstance(dto.getMuscleDistributionChartData()), null)
                             .commit();
+                } else {
+
+                    try {
+                        errorHandler.handle(getContext(), response.errorBody());
+                    } catch (ApiAuthenticationException e) {
+                        navController.navigate(R.id.action_nav_main_fragment_to_nav_greeting_fragment);
+                    }
+
                 }
             }
 
             @Override
             public void onFailure(Call<MainPageData> call, Throwable t) {
-                t.printStackTrace();
+                navController.navigate(R.id.action_nav_main_fragment_to_nav_greeting_fragment);
             }
         });
+
+        binding.mainProgressBar.setVisibility(View.GONE);
 
         return binding.getRoot();
     }

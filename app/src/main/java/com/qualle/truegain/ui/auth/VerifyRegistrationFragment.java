@@ -73,19 +73,7 @@ public class VerifyRegistrationFragment extends Fragment {
                                 return;
                             }
 
-                            byte[] decodedBytes = Base64.getDecoder().decode(token.getAccessToken().split("\\.")[1]);
-                            String decodedString = new String(decodedBytes);
-                            Gson gson = new Gson();
-                            TokenClaims claims = gson.fromJson(decodedString, TokenClaims.class);
-
-
-                            LocalUser user = new LocalUser();
-                            user.setId(claims.getUid());
-                            user.setAccessToken(token.getAccessToken());
-                            user.setAccessTokenExpiredAt(DateFormatterUtil.fromApiDate(token.getAccessTokenExpiredAt()));
-                            user.setRefreshToken(token.getRefreshToken());
-                            user.setRefreshTokenExpiredAt(DateFormatterUtil.fromApiDate(token.getRefreshTokenExpiredAt()));
-                            service.saveUser(user);
+                            service.saveAuthToken(token);
 
                             navController.navigate(R.id.action_nav_verify_registration_fragment_to_nav_main_fragment);
                         }

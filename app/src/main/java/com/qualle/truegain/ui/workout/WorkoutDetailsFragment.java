@@ -19,16 +19,10 @@ import com.qualle.truegain.R;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.ClientModule;
 import com.qualle.truegain.client.api.Exercise;
-import com.qualle.truegain.client.api.Record;
-import com.qualle.truegain.client.api.User;
 import com.qualle.truegain.client.api.Workout;
 import com.qualle.truegain.client.api.WorkoutVolume;
-import com.qualle.truegain.config.ApplicationComponent;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentWorkoutDetailsBinding;
-import com.qualle.truegain.model.local.ExerciseDetailsProto;
-import com.qualle.truegain.model.local.VolumeProto;
-import com.qualle.truegain.model.local.WorkoutDetailsProto;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.adapter.ExerciseVolumeRecyclerViewAdapter;
@@ -37,8 +31,6 @@ import com.qualle.truegain.ui.chart.ChartPieFragment;
 import com.qualle.truegain.util.DateFormatterUtil;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -90,14 +82,14 @@ public class WorkoutDetailsFragment extends Fragment {
                 .clientModule(ClientModule.getInstance(getContext())).build()
                 .inject(this);
 
-        if (authenticationHandler.isAuthenticationRequired()) {
+
+        try {
+            authenticationHandler.holdAuthentication();
+        } catch (Exception e) {
             navController.navigate(R.id.action_nav_workout_details_fragment_to_nav_greeting_fragment);
             return binding.getRoot();
         }
 
-        if (authenticationHandler.isRefreshRequired()) {
-            authenticationHandler.refresh();
-        }
 
         binding.workoutButtonBack.setOnClickListener(v -> navController.popBackStack());
 

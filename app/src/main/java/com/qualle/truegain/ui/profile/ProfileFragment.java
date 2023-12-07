@@ -16,7 +16,6 @@ import com.qualle.truegain.client.ClientModule;
 import com.qualle.truegain.client.api.User;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentProfileBinding;
-import com.qualle.truegain.model.enums.ChartType;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.chart.ChartLineFragment;
@@ -53,13 +52,11 @@ public class ProfileFragment extends Fragment {
                 .clientModule(ClientModule.getInstance(getContext())).build()
                 .inject(this);
 
-        if (authenticationHandler.isAuthenticationRequired()) {
+        try {
+            authenticationHandler.holdAuthentication();
+        } catch (Exception e) {
             navController.navigate(R.id.action_nav_profile_fragment_to_nav_greeting_fragment);
             return binding.getRoot();
-        }
-
-        if (authenticationHandler.isRefreshRequired()) {
-            authenticationHandler.refresh();
         }
 
         binding.profileCardEditProfile.setOnClickListener(v ->
@@ -79,7 +76,7 @@ public class ProfileFragment extends Fragment {
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance( null, null), null)
+                .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance(null, null), null)
                 .commit();
 
         InputStream ims = null; // todo

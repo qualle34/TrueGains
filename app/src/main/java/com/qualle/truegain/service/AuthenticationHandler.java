@@ -1,10 +1,12 @@
 package com.qualle.truegain.service;
 
+import com.qualle.truegain.client.api.LoginPasswordAuthentication;
+
 public interface AuthenticationHandler {
 
-    boolean isAuthenticationRequired();
+    void holdAuthentication();
 
-    boolean isRefreshRequired();
+    void login(LoginPasswordAuthentication authentication);
 
     void refresh();
 

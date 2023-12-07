@@ -1,12 +1,26 @@
 package com.qualle.truegain.service;
 
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.qualle.truegain.R;
 import com.qualle.truegain.client.BackendClient;
+import com.qualle.truegain.client.api.LoginPasswordAuthentication;
 import com.qualle.truegain.client.api.Token;
 import com.qualle.truegain.client.api.TokenAuthentication;
+import com.qualle.truegain.client.api.TokenClaims;
 import com.qualle.truegain.model.local.LocalUser;
 import com.qualle.truegain.util.DateFormatterUtil;
 
+import java.io.IOException;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Base64;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,72 +36,88 @@ public class ApiAuthenticationHandler implements AuthenticationHandler {
         this.service = service;
     }
 
-    @Override
-    public boolean isAuthenticationRequired() {
+    public void holdAuthentication() {
         LocalUser user = service.getUser();
 
-        if (user == null || user.getId() == 0) {
-            return true;
+        if (user == null) {
+            throw new RuntimeException("Authentication required, Unable load user from memory");
         }
 
-        if (user.getRefreshToken() == null
-                || user.getAccessToken() == null
-                || user.getAccessTokenExpiredAt() == null
-                || user.getRefreshTokenExpiredAt() == null) {
-            return true;
+        if (user.getAccessToken() != null && Instant.now().isBefore(user.getAccessTokenExpiredAt())) {
+           return;
         }
 
-        // if >1 min before token expired
-        return LocalDateTime.now().minusMinutes(1)
-                .isAfter(user.getRefreshTokenExpiredAt());
+        if (user.getRefreshToken() != null && Instant.now().isBefore(user.getRefreshTokenExpiredAt())) {
+            refresh(user);
+            return;
+        }
+
+        throw new RuntimeException("Authentication required, we cant hold session");
     }
 
     @Override
-    public boolean isRefreshRequired() {
-        LocalUser user = service.getUser();
+    public void login(LoginPasswordAuthentication authentication) {
 
-        if (isAuthenticationRequired()) {
-            return true; // todo
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        Callable<Token> callableTask = () -> {
+            Response<Token> response = client.login(authentication).execute();
+
+            if (!response.isSuccessful()) {
+                throw new RuntimeException("Unable to login, response code: " + response.code());
+            }
+
+            return response.body();
+        };
+
+        try {
+            Future<Token> future = executorService.submit(callableTask);
+            Token token = future.get(20, TimeUnit.SECONDS);
+
+            if(token != null) {
+                service.saveAuthToken(token);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to login", e);
+        } finally {
+            executorService.shutdown();
         }
-
-        // if >1 min before token expired
-        return LocalDateTime.now().minusMinutes(1)
-                .isAfter(user.getAccessTokenExpiredAt());
     }
 
     @Override
     public void refresh() {
+        refresh(service.getUser());
+    }
 
-        LocalUser user = service.getUser();
-
+    private void refresh(LocalUser user) {
         TokenAuthentication authentication = new TokenAuthentication(user.getRefreshToken());
 
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-        client.refresh(authentication).enqueue(new Callback<Token>() {
-            @Override
-            public void onResponse(Call<Token> call, Response<Token> response) {
+        Callable<Token> callableTask = () -> {
+            Response<Token> response = client.refresh(authentication).execute();
 
-                Token token = response.body();
-
-                if (response.isSuccessful() && token != null) {
-
-                    LocalUser user = new LocalUser();
-                    user.setAccessToken(token.getAccessToken());
-                    user.setAccessTokenExpiredAt(DateFormatterUtil.fromApiDate(token.getAccessTokenExpiredAt()));
-                    user.setRefreshToken(token.getRefreshToken());
-                    user.setRefreshTokenExpiredAt(DateFormatterUtil.fromApiDate(token.getRefreshTokenExpiredAt()));
-                    service.saveUser(user);
-
-                } else {
-                    service.clearAuthentication();
-                }
+            if (!response.isSuccessful()) {
+                throw new RuntimeException("Unable to refresh token, response code: " + response.code());
             }
 
-            @Override
-            public void onFailure(Call<Token> call, Throwable t) {
-                t.printStackTrace();
+            return response.body();
+        };
+
+        try {
+            Future<Token> future = executorService.submit(callableTask);
+            Token result = future.get(20, TimeUnit.SECONDS);
+
+            if(result != null) {
+                service.saveAuthToken(result);
             }
-        });
+
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to refresh token", e);
+        } finally {
+            executorService.shutdown();
+        }
     }
 
     @Override
@@ -99,14 +129,19 @@ public class ApiAuthenticationHandler implements AuthenticationHandler {
         client.logout(authentication).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                service.clearAuthentication();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                service.clearAuthentication();
                 t.printStackTrace();
             }
         });
+
+        service.clearAuthentication();
+    }
+
+
+    private void saveToken(){
+
     }
 }

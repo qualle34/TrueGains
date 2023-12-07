@@ -7,13 +7,13 @@ public class MainPageData {
 
     private Map<Integer, Integer> workoutPerWeekChartData;
     private List<SimpleWorkout> recentWorkouts;
-    private Map<Float, Float> muscleDistributionChartData;
+    private MuscleDistributionChart muscleDistributionChartData;
     private List<SimpleExercise> frequentExercises;
 
     public MainPageData() {
     }
 
-    public MainPageData(Map<Integer, Integer> workoutPerWeekChartData, List<SimpleWorkout> recentWorkouts, Map<Float, Float> muscleDistributionChartData, List<SimpleExercise> frequentExercises) {
+    public MainPageData(Map<Integer, Integer> workoutPerWeekChartData, List<SimpleWorkout> recentWorkouts, MuscleDistributionChart muscleDistributionChartData, List<SimpleExercise> frequentExercises) {
         this.workoutPerWeekChartData = workoutPerWeekChartData;
         this.recentWorkouts = recentWorkouts;
         this.muscleDistributionChartData = muscleDistributionChartData;
@@ -36,11 +36,11 @@ public class MainPageData {
         this.recentWorkouts = recentWorkouts;
     }
 
-    public Map<Float, Float> getMuscleDistributionChartData() {
+    public MuscleDistributionChart getMuscleDistributionChartData() {
         return muscleDistributionChartData;
     }
 
-    public void setMuscleDistributionChartData(Map<Float, Float> muscleDistributionChartData) {
+    public void setMuscleDistributionChartData(MuscleDistributionChart muscleDistributionChartData) {
         this.muscleDistributionChartData = muscleDistributionChartData;
     }
 

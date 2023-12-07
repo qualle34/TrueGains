@@ -76,14 +76,13 @@ public class ExerciseDetailedFragment extends Fragment {
                 .clientModule(ClientModule.getInstance(getContext())).build()
                 .inject(this);
 
-        if (authenticationHandler.isAuthenticationRequired()) {
+        try {
+            authenticationHandler.holdAuthentication();
+        } catch (Exception e) {
             navController.navigate(R.id.action_nav_exercise_detailed_fragment_to_nav_greeting_fragment);
             return binding.getRoot();
         }
 
-        if (authenticationHandler.isRefreshRequired()) {
-            authenticationHandler.refresh();
-        }
 
         binding.exerciseButtonBack.setOnClickListener(v -> navController.popBackStack());
 

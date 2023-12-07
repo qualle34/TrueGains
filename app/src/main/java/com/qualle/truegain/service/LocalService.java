@@ -2,6 +2,9 @@ package com.qualle.truegain.service;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.qualle.truegain.client.api.Token;
+import com.qualle.truegain.client.api.TokenClaims;
 import com.qualle.truegain.model.UserData;
 import com.qualle.truegain.model.WorkoutData;
 import com.qualle.truegain.model.local.CurrentExerciseProto;
@@ -9,11 +12,13 @@ import com.qualle.truegain.model.local.CurrentRecordProto;
 import com.qualle.truegain.model.local.CurrentWorkoutProto;
 import com.qualle.truegain.model.local.LocalUser;
 import com.qualle.truegain.repository.LocalRepository;
+import com.qualle.truegain.util.DateFormatterUtil;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class LocalService {
@@ -21,6 +26,10 @@ public class LocalService {
     private static volatile LocalService instance;
 
     private final LocalRepository repository;
+
+    private LocalUser cachedUser;
+
+    private final Gson gson = new Gson();
 
     private LocalService(LocalRepository repository) {
         this.repository = repository;
@@ -105,14 +114,19 @@ public class LocalService {
     }
 
     public LocalUser getUser() {
+
+        if (cachedUser != null) {
+            return cachedUser;
+        }
+
         UserData data = repository.getUser();
 
         return new LocalUser(
                 data.getId(),
                 data.getAccessToken(),
-                LocalDateTime.ofInstant(Instant.ofEpochMilli(data.getAccessTokenExpiredAt()), ZoneOffset.UTC),
+                Instant.ofEpochSecond(data.getAccessTokenExpiredAt()),
                 data.getRefreshToken(),
-                LocalDateTime.ofInstant(Instant.ofEpochMilli(data.getRefreshTokenExpiredAt()), ZoneOffset.UTC)
+                Instant.ofEpochSecond(data.getRefreshTokenExpiredAt())
         );
     }
 
@@ -132,15 +146,29 @@ public class LocalService {
     }
 
 
-    public void saveUser(LocalUser user) {
+    public void saveAuthToken(Token token) {
+
+        byte[] accessBytes = Base64.getDecoder().decode(token.getAccessToken().split("\\.")[1]);
+        TokenClaims accessClaims = gson.fromJson(new String(accessBytes), TokenClaims.class);
+
+        byte[] refreshBytes = Base64.getDecoder().decode(token.getRefreshToken().split("\\.")[1]);
+        TokenClaims refreshClaims = gson.fromJson(new String(refreshBytes), TokenClaims.class);
+
         UserData data = UserData.newBuilder()
-                .setId(user.getId())
-                .setAccessToken(user.getAccessToken())
-                .setAccessTokenExpiredAt(user.getAccessTokenExpiredAt().toInstant(ZoneOffset.UTC).toEpochMilli())
-                .setRefreshToken(user.getRefreshToken())
-                .setRefreshTokenExpiredAt(user.getRefreshTokenExpiredAt().toInstant(ZoneOffset.UTC).toEpochMilli())
+                .setId(accessClaims.getUid())
+                .setAccessToken(token.getAccessToken())
+                .setAccessTokenExpiredAt(accessClaims.getExp())
+                .setRefreshToken(token.getRefreshToken())
+                .setRefreshTokenExpiredAt(refreshClaims.getExp())
                 .build();
 
+        cachedUser = new LocalUser(
+                data.getId(),
+                data.getAccessToken(),
+                Instant.ofEpochSecond(data.getAccessTokenExpiredAt()),
+                data.getRefreshToken(),
+                Instant.ofEpochSecond(data.getRefreshTokenExpiredAt())
+        );
         repository.saveUser(data);
     }
 

@@ -18,16 +18,39 @@ import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import com.qualle.truegain.R;
+import com.qualle.truegain.client.api.MuscleDistributionChart;
 import com.qualle.truegain.databinding.FragmentChartRadarBinding;
 
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.Map;
 
 public class ChartRadarFragment extends Fragment {
 
+    private static final String ARG_DATA = "data";
+
     private FragmentChartRadarBinding binding;
 
-    public ChartRadarFragment() {
+    private Map<Float, String> labels;
+    private List<RadarEntry> data;
+
+    private ChartRadarFragment() {
+    }
+
+    public static ChartRadarFragment newInstance(MuscleDistributionChart data) {
+        ChartRadarFragment fragment = new ChartRadarFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_DATA, data);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            setData((MuscleDistributionChart) getArguments().getSerializable(ARG_DATA));
+        }
     }
 
     @Override
@@ -43,30 +66,18 @@ public class ChartRadarFragment extends Fragment {
 
         chart.getDescription().setEnabled(false);
 
-        Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(true);
-        l.setXOffset(14f);
-        l.setYOffset(-38f);
-        l.setForm(Legend.LegendForm.CIRCLE);
-        l.setTextColor(getResources().getColor(R.color.black_russian));
-
+        chart.getLegend().setEnabled(false);
 
         XAxis x = chart.getXAxis();
         x.setTextSize(10f);
         x.setValueFormatter(new ValueFormatter() {
-
-            private final String[] activities = new String[]{"Chest", "Back", "Legs", "Arms", "Shoulders"};
-
             public String getFormattedValue(float value) {
-                return activities[(int) value % activities.length];
+                return getLabelName(value);
             }
         });
 
         YAxis y = chart.getYAxis();
-        y.setLabelCount(5, true);
+        y.setLabelCount(6, true);
         y.setDrawLabels(false);
 
 
@@ -74,50 +85,22 @@ public class ChartRadarFragment extends Fragment {
         chart.invalidate();
         chart.animateXY(1400, 1400, Easing.EaseInOutQuad);
 
-
         return binding.getRoot();
     }
 
     private RadarData getData() {
 
-        float mul = 80;
-        float min = 20;
-        int cnt = 5;
-
-        ArrayList<RadarEntry> entries1 = new ArrayList<>();
-        ArrayList<RadarEntry> entries2 = new ArrayList<>();
-
-        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-        // the chart.
-        for (int i = 0; i < cnt; i++) {
-            float val1 = (float) (Math.random() * mul) + min;
-            entries1.add(new RadarEntry(val1));
-
-            float val2 = (float) (Math.random() * mul) + min;
-            entries2.add(new RadarEntry(val2));
-        }
-
-        RadarDataSet set1 = new RadarDataSet(entries1, "Last Month");
-        set1.setColor(getResources().getColor(R.color.black_russian));
-        set1.setFillColor(getResources().getColor(R.color.black_russian));
+        RadarDataSet set1 = new RadarDataSet(data, "Data");
+        set1.setColor(getResources().getColor(R.color.twine));
+        set1.setFillColor(getResources().getColor(R.color.twine));
         set1.setDrawFilled(true);
         set1.setFillAlpha(200);
         set1.setLineWidth(2f);
         set1.setDrawHighlightCircleEnabled(true);
         set1.setDrawHighlightIndicators(false);
 
-        RadarDataSet set2 = new RadarDataSet(entries2, "This Month");
-        set2.setColor(getResources().getColor(R.color.twine));
-        set2.setFillColor(getResources().getColor(R.color.twine));
-        set2.setDrawFilled(true);
-        set2.setFillAlpha(200);
-        set2.setLineWidth(2f);
-        set2.setDrawHighlightCircleEnabled(true);
-        set2.setDrawHighlightIndicators(false);
-
         ArrayList<IRadarDataSet> sets = new ArrayList<>();
         sets.add(set1);
-        sets.add(set2);
 
         RadarData data = new RadarData(sets);
         data.setValueTextSize(8f);
@@ -128,4 +111,71 @@ public class ChartRadarFragment extends Fragment {
         return data;
     }
 
+    private void setData(MuscleDistributionChart distributionChart) {
+
+        data = getEmptyArray();
+
+        if (distributionChart.getThisMonthData() == null || distributionChart.getThisMonthData().isEmpty()) {
+            return;
+        }
+
+        for (Map.Entry<String, Float> entry : distributionChart.getThisMonthData().entrySet()) {
+            data.set(getLabelId(entry.getKey()), new RadarEntry(entry.getValue()));
+        }
+
+    }
+
+    // todo
+    private int getLabelId(String category) {
+
+        switch (category.toLowerCase()) {
+            case "chest":
+                return 0;
+            case "back":
+            case "trapezius":
+                return 1;
+            case "biceps":
+            case "triceps":
+                return 2;
+            case "shoulders":
+                return 3;
+            case "quads":
+            case "hamstrings":
+            case "glutes":
+            case "calves":
+                return 4;
+            default:
+                return 5;
+        }
+    }
+
+    private String getLabelName(float id) {
+        switch ((int) id) {
+            case 0:
+                return "Chest";
+            case 1:
+                return "Back";
+            case 2:
+                return "Arms";
+            case 3:
+                return "Shoulders";
+            case 4:
+                return "Legs";
+            case 5:
+            default:
+                return "Others";
+        }
+    }
+
+    private List<RadarEntry> getEmptyArray() {
+
+        List<RadarEntry> d = new ArrayList<>();
+        d.add(new RadarEntry(0));
+        d.add(new RadarEntry(0));
+        d.add(new RadarEntry(0));
+        d.add(new RadarEntry(0));
+        d.add(new RadarEntry(0));
+        d.add(new RadarEntry(0));
+        return d;
+    }
 }
