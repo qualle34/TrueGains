@@ -24,6 +24,7 @@ import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.databinding.ItemSaveWorkoutExerciseBinding;
 import com.qualle.truegain.model.CurrentWorkoutViewModel;
 import com.qualle.truegain.model.local.CurrentExerciseProto;
+import com.qualle.truegain.util.AssetManagerUtil;
 
 public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<WorkoutExerciseRecyclerViewAdapter.ViewHolder> {
 
@@ -53,6 +54,8 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
 
         holder.exerciseTitle.setText(exercise.getName());
         holder.equipmentTitle.setText(exercise.getEquipment());
+        holder.image.setImageDrawable(AssetManagerUtil.getImage(holder.image.getContext(), exercise.getIconLink()));
+
 
         if (workoutViewModel.isAvailable()){
             selectedItemPosition = getItemCount() - 1;
@@ -138,6 +141,7 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
         public final RecyclerView recyclerView;
         public final ImageView addSet;
         public final ImageView editExercise;
+        public final ImageView image;
 
         public ViewHolder(ItemSaveWorkoutExerciseBinding binding) {
             super(binding.getRoot());
@@ -150,6 +154,8 @@ public class WorkoutExerciseRecyclerViewAdapter extends RecyclerView.Adapter<Wor
             recyclerView = binding.recordRecyclerView;
             addSet = binding.recordAddSet;
             editExercise = binding.recordEdit;
+            image = binding.recordCardIcon;
+
             binding.getRoot().setOnCreateContextMenuListener(this);
         }
 

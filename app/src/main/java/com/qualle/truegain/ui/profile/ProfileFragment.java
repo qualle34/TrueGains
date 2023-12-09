@@ -1,11 +1,15 @@
 package com.qualle.truegain.ui.profile;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -13,16 +17,20 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.qualle.truegain.R;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.ClientModule;
-import com.qualle.truegain.client.api.User;
+import com.qualle.truegain.client.api.UserProfile;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentProfileBinding;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.chart.ChartLineFragment;
 import com.qualle.truegain.ui.menu.BottomMenuFragment;
+import com.qualle.truegain.util.DateFormatterUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.Period;
 
 import javax.inject.Inject;
 
@@ -79,33 +87,47 @@ public class ProfileFragment extends Fragment {
                 .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance(null, null), null)
                 .commit();
 
-        InputStream ims = null; // todo
         try {
-            ims = getContext().getAssets().open("philipp.jpg");
-            Drawable d = Drawable.createFromStream(ims, null);
-            binding.profileImageView.setImageDrawable(d);
+            File imagePath = new File(requireContext().getFilesDir(), "images");
+            File newFile = new File(imagePath, "user_image.jpg");
+
+            Uri contentUri = FileProvider.getUriForFile(requireContext(), "com.qualle.truegain.provider", newFile);
+
+            InputStream inputStream = requireActivity().getContentResolver().openInputStream(contentUri);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+            binding.profileImageView.setImageBitmap(bitmap);
+
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            try {
+                InputStream ims = getContext().getAssets().open("base_photo.jpg");
+                Drawable d = Drawable.createFromStream(ims, null);
+                binding.profileImageView.setImageDrawable(d);
+
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
 
-        client.getUser(service.getAuthorizationHeader()).enqueue(new Callback<>() {
+        client.getUserProfile(service.getAuthorizationHeader()).enqueue(new Callback<>() {
 
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
 
                 if (response.isSuccessful()) {
 
-                    User dto = response.body();
+                    UserProfile dto = response.body();
 
-                    binding.profileNameAge.setText(dto.getName() + ", " + 22);
-                    binding.profileWorkoutCount.setText("Workout count: " + 4);
+                    binding.profileNameAge.setText(dto.getUser().getName() + ", " + Period.between(DateFormatterUtil.fromApiSimpleDate(dto.getUser().getBirthday()), LocalDate.now()).getYears());
+                    binding.profileWorkoutCount.setText("Workout count: " + dto.getWorkoutsCount());
+                    binding.profileVolume.setText(dto.getTotalLoad() + " Kg");
                 }
 
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<UserProfile> call, Throwable t) {
                 t.printStackTrace();
             }
         });

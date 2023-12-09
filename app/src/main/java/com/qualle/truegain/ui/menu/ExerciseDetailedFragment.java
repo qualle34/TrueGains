@@ -21,6 +21,7 @@ import com.qualle.truegain.model.enums.ChartType;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.chart.ChartLineFragment;
+import com.qualle.truegain.util.AssetManagerUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -103,19 +104,7 @@ public class ExerciseDetailedFragment extends Fragment {
                 binding.exerciseDescription.setText(exercise.getDescription());
                 binding.exerciseTechnique.setText(exercise.getTechnique().replace("\\n", "\n"));
 
-                try {
-                    AssetManager manager = getContext().getAssets();
-
-                    if (manager != null) {
-
-                        InputStream ims = manager.open("image_barbell_bench_press.png");
-                        Drawable d = Drawable.createFromStream(ims, null);
-                        binding.exerciseImageView.setImageDrawable(d);
-                    }
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                binding.exerciseImageView.setImageDrawable(AssetManagerUtil.getImage(getContext(), exercise.getImageLink()));
 
                 if (exercise.getLoadData() != null && !exercise.getLoadData().isEmpty()) {
                     binding.exerciseChartContainerSecondary.setVisibility(View.VISIBLE);

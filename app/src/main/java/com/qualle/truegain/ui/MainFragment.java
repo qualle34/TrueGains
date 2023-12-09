@@ -120,15 +120,19 @@ public class MainFragment extends Fragment implements WorkoutListClickListener, 
 
                     exercisesRecyclerView.setAdapter(new MainExerciseListRecyclerViewAdapter(fragment, exercises));
 
-                    getChildFragmentManager().beginTransaction()
-                            .setReorderingAllowed(true)
-                            .replace(R.id.main_chart_container, ChartBarFragment.newInstance(dto.getWorkoutPerWeekChartData()), null)
-                            .commit();
+                    if (isAdded() && !getActivity().isChangingConfigurations()) {
 
-                    getChildFragmentManager().beginTransaction()
-                            .setReorderingAllowed(true)
-                            .replace(R.id.main_radar_chart_container, ChartRadarFragment.newInstance(dto.getMuscleDistributionChartData()), null)
-                            .commit();
+                        getChildFragmentManager().beginTransaction()
+                                .setReorderingAllowed(true)
+                                .replace(R.id.main_chart_container, ChartBarFragment.newInstance(dto.getWorkoutPerWeekChartData()), null)
+                                .commit();
+
+                        getChildFragmentManager().beginTransaction()
+                                .setReorderingAllowed(true)
+                                .replace(R.id.main_radar_chart_container, ChartRadarFragment.newInstance(dto.getMuscleDistributionChartData()), null)
+                                .commit();
+                    }
+
                 } else {
 
                     try {

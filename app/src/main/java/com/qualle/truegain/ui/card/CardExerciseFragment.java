@@ -17,6 +17,7 @@ import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.client.api.Record;
 import com.qualle.truegain.databinding.FragmentCardExerciseBinding;
 import com.qualle.truegain.model.local.ExerciseDetailsProto;
+import com.qualle.truegain.util.AssetManagerUtil;
 import com.qualle.truegain.util.SizeConverter;
 
 import java.util.List;
@@ -55,6 +56,7 @@ public class CardExerciseFragment extends Fragment {
 
         binding.recordCardEquipmentTitle.setText(exercise.getEquipment());
         binding.recordCardExerciseTitle.setText(exercise.getName());
+        binding.recordCardIcon.setImageDrawable(AssetManagerUtil.getImage(getContext(), exercise.getIconLink()));
 
         List<Record> records = exercise.getRecords();
 

@@ -42,6 +42,16 @@ public class DateFormatterUtil {
         }
     }
 
+    public static LocalDate fromApiSimpleDate(String date) {
+
+        try {
+            return LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+        }
+    }
+
+
     public static LocalDateTime fromApiDate(String date) {
 
         try {

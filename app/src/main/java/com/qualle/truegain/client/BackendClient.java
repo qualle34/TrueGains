@@ -11,6 +11,7 @@ import com.qualle.truegain.client.api.TemporaryToken;
 import com.qualle.truegain.client.api.Token;
 import com.qualle.truegain.client.api.TokenAuthentication;
 import com.qualle.truegain.client.api.User;
+import com.qualle.truegain.client.api.UserProfile;
 import com.qualle.truegain.client.api.Workout;
 
 import java.util.List;
@@ -44,8 +45,11 @@ public interface BackendClient {
     @GET("/private/user")
     Call<User> getUser(@Header("Authorization") String auth);
 
-    @GET("/private/profile")
-    Call<User> getProfile(@Header("Authorization") String auth);
+    @GET("/private/user/profile")
+    Call<UserProfile> getUserProfile(@Header("Authorization") String auth);
+
+    @PUT("/private/user")
+    Call<User> saveUser(@Header("Authorization") String auth, @Body User user);
 
     @GET("/private/workout/simple")
     Call<List<SimpleWorkout>> getWorkoutsByUser(@Header("Authorization") String auth);

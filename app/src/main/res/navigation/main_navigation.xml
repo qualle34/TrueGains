@@ -95,7 +95,7 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_nav_profile_fragment_to_nav_profile_data_fragment"
-            app:destination="@id/nav_profile_data_fragment"
+            app:destination="@id/nav_profile_edit_fragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -193,9 +193,16 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_profile_data_fragment"
+        android:id="@+id/nav_profile_edit_fragment"
         android:name="com.qualle.truegain.ui.profile.ProfileEditFragment"
-        tools:layout="@layout/fragment_profile_edit" />
+        tools:layout="@layout/fragment_profile_edit" >
+        <action
+            android:id="@+id/action_nav_profile_edit_fragment_to_nav_profile_fragment"
+            app:destination="@id/nav_profile_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_edit_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_profile_security_fragment"

@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -172,7 +171,12 @@ public class SaveWorkoutFragment extends Fragment implements MenuExerciseClickLi
         return super.onContextItemSelected(item);
     }
 
-    public void saveWorkout(){
+    public void saveWorkout() {
+
+        if (workoutViewModel.getApiWorkout() == null) {
+            return;
+        }
+
         client.saveWorkout(service.getAuthorizationHeader(), workoutViewModel.getApiWorkout().getId(), workoutViewModel.getApiWorkout()).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Workout> call, Response<Workout> response) {
