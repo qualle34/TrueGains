@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -36,7 +37,7 @@ public class DateFormatterUtil {
     public static LocalDateTime fromTokenDate(long date) {
 
         try {
-           return LocalDateTime.ofInstant(Instant.ofEpochMilli(date), ZoneId.systemDefault());
+            return LocalDateTime.ofInstant(Instant.ofEpochMilli(date), ZoneId.systemDefault());
         } catch (RuntimeException e) {
             throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
         }
@@ -68,5 +69,19 @@ public class DateFormatterUtil {
         } catch (RuntimeException e) {
             throw new RuntimeException("Unable to format date: " + e.getMessage(), e);
         }
+    }
+
+    public static String dayNumberToDate(float value) {
+        int day = (int) value;
+        Instant.ofEpochSecond(day * 86400L);
+
+        LocalDate date = LocalDate.ofEpochDay(day);
+
+        return date.getDayOfMonth() + " " + date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+    }
+
+
+    public static float dateToDayNumber(LocalDateTime dateTime) {
+        return (float) (dateTime.toInstant(ZoneOffset.UTC).getEpochSecond() / 86400);
     }
 }

@@ -5,12 +5,14 @@ import com.qualle.truegain.client.api.ConfirmRegistration;
 import com.qualle.truegain.client.api.Exercise;
 import com.qualle.truegain.client.api.LoginPasswordAuthentication;
 import com.qualle.truegain.client.api.MainPageData;
+import com.qualle.truegain.client.api.Measure;
 import com.qualle.truegain.client.api.NewRegistration;
 import com.qualle.truegain.client.api.SimpleWorkout;
 import com.qualle.truegain.client.api.TemporaryToken;
 import com.qualle.truegain.client.api.Token;
 import com.qualle.truegain.client.api.TokenAuthentication;
 import com.qualle.truegain.client.api.User;
+import com.qualle.truegain.client.api.UserMeasure;
 import com.qualle.truegain.client.api.UserProfile;
 import com.qualle.truegain.client.api.Workout;
 
@@ -81,4 +83,14 @@ public interface BackendClient {
 
     @GET("/private/exercise/{id}")
     Call<Exercise> getExerciseByIdForUser(@Header("Authorization") String auth, @Path("id") long id);
+
+    @GET("/measure")
+    Call<List<Measure>> getMeasures();
+
+    @GET("/private/measure/{id}")
+    Call<Measure> getMeasureByUser(@Header("Authorization") String auth, @Path("id") long id);
+
+    @POST("/private/measure/{id}")
+    Call<Measure> saveMeasure(@Header("Authorization") String auth, @Path("id") long id, @Body UserMeasure measure);
+
 }

@@ -1,6 +1,7 @@
 package com.qualle.truegain.config;
 
 import com.qualle.truegain.MainActivity;
+import com.qualle.truegain.ui.profile.MeasureDetailsFragment;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.ClientModule;
 import com.qualle.truegain.model.BottomMenuViewModel;
@@ -14,6 +15,7 @@ import com.qualle.truegain.ui.auth.RegistrationFragment;
 import com.qualle.truegain.ui.auth.VerifyRegistrationFragment;
 import com.qualle.truegain.ui.menu.BottomMenuFragment;
 import com.qualle.truegain.ui.menu.ExerciseDetailedFragment;
+import com.qualle.truegain.ui.profile.MeasureListFragment;
 import com.qualle.truegain.ui.profile.ProfileEditFragment;
 import com.qualle.truegain.ui.profile.ProfileFragment;
 import com.qualle.truegain.ui.profile.ProfileSecurityFragment;
@@ -62,6 +64,10 @@ public interface ApplicationComponent {
     void inject(CurrentWorkoutViewModel viewModel);
 
     void inject(BottomMenuViewModel viewModel);
+
+    void inject(MeasureListFragment measureListFragment);
+
+    void inject(MeasureDetailsFragment measureDetailsFragment);
 
     BackendClient backendClient();
 

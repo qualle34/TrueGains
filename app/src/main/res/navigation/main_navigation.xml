@@ -109,6 +109,15 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/nav_greeting_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_measure_list_fragment"
+            app:destination="@id/nav_measure_list_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_to_nav_measure_details_fragment"
+            app:destination="@id/nav_measure_details_fragment" />
+        <action
+            android:id="@+id/action_nav_profile_fragment_self"
+            app:destination="@id/nav_profile_fragment" />
     </fragment>
 
     <fragment
@@ -195,7 +204,7 @@
     <fragment
         android:id="@+id/nav_profile_edit_fragment"
         android:name="com.qualle.truegain.ui.profile.ProfileEditFragment"
-        tools:layout="@layout/fragment_profile_edit" >
+        tools:layout="@layout/fragment_profile_edit">
         <action
             android:id="@+id/action_nav_profile_edit_fragment_to_nav_profile_fragment"
             app:destination="@id/nav_profile_fragment" />
@@ -342,6 +351,34 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_measure_details_fragment"
+        android:name="com.qualle.truegain.ui.profile.MeasureDetailsFragment"
+        tools:layout="@layout/fragment_measure_details" >
+        <action
+            android:id="@+id/action_nav_measure_details_fragment_to_nav_measure_list_fragment"
+            app:destination="@id/nav_measure_list_fragment" />
+        <action
+            android:id="@+id/action_nav_measure_details_fragment_to_nav_profile_fragment"
+            app:destination="@id/nav_profile_fragment" />
+        <action
+            android:id="@+id/action_nav_measure_details_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_measure_list_fragment"
+        android:name="com.qualle.truegain.ui.profile.MeasureListFragment"
+        tools:layout="@layout/fragment_measure_list" >
+        <action
+            android:id="@+id/action_nav_measure_list_fragment_to_nav_profile_fragment"
+            app:destination="@id/nav_profile_fragment" />
+        <action
+            android:id="@+id/action_nav_measure_list_fragment_to_nav_measure_details_fragment"
+            app:destination="@id/nav_measure_details_fragment" />
+        <action
+            android:id="@+id/action_nav_measure_list_fragment_to_nav_greeting_fragment"
+            app:destination="@id/nav_greeting_fragment" />
     </fragment>
 
 </navigation>

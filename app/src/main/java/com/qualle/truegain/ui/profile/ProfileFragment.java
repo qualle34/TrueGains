@@ -23,7 +23,6 @@ import com.qualle.truegain.databinding.FragmentProfileBinding;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.chart.ChartLineFragment;
-import com.qualle.truegain.ui.menu.BottomMenuFragment;
 import com.qualle.truegain.util.DateFormatterUtil;
 
 import java.io.File;
@@ -77,7 +76,7 @@ public class ProfileFragment extends Fragment {
                 navController.navigate(R.id.action_nav_profile_fragment_to_nav_profile_security_fragment));
 
         binding.profileCardMeasure.setOnClickListener(v -> {
-            BottomMenuFragment.newInstance().show(getChildFragmentManager(), null); // todo add click logic
+            navController.navigate(R.id.action_nav_profile_fragment_to_nav_measure_list_fragment);
         });
 
         binding.profileButtonBack.setOnClickListener(v -> navController.popBackStack());

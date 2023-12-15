@@ -48,7 +48,7 @@ public class ChartLineFragment extends Fragment {
         ChartLineFragment fragment = new ChartLineFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATA, (Serializable) data);
-        args.putSerializable(ARG_TYPE, (Serializable) type != null ? type : ChartType.SECONDARY);
+        args.putSerializable(ARG_TYPE, type != null ? type : ChartType.SECONDARY);
         fragment.setArguments(args);
         return fragment;
     }
