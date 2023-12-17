@@ -115,7 +115,9 @@ public class ChartRadarFragment extends Fragment {
 
         data = getEmptyArray();
 
-        if (distributionChart.getThisMonthData() == null || distributionChart.getThisMonthData().isEmpty()) {
+        if (distributionChart == null
+                || distributionChart.getThisMonthData() == null
+                || distributionChart.getThisMonthData().isEmpty()) {
             return;
         }
 

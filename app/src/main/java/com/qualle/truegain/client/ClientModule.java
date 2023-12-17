@@ -68,8 +68,8 @@ public class ClientModule {
     @Singleton
     public Retrofit provideRetrofit() {
         return new Retrofit.Builder()
-//                .baseUrl("https://truegain-api.fly.dev/") // todo to external properties
-                .baseUrl("http://10.0.2.2:8080/") // todo to external properties
+                .baseUrl("https://truegain-api.fly.dev/") // todo to external properties
+//                .baseUrl("http://10.0.2.2:8080/") // todo to external properties
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

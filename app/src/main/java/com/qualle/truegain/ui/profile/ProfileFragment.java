@@ -17,9 +17,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.qualle.truegain.R;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.ClientModule;
+import com.qualle.truegain.client.api.Measure;
 import com.qualle.truegain.client.api.UserProfile;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentProfileBinding;
+import com.qualle.truegain.model.enums.ChartType;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.LocalService;
 import com.qualle.truegain.ui.chart.ChartLineFragment;
@@ -118,7 +120,13 @@ public class ProfileFragment extends Fragment {
 
                     UserProfile dto = response.body();
 
-                    binding.profileNameAge.setText(dto.getUser().getName() + ", " + Period.between(DateFormatterUtil.fromApiSimpleDate(dto.getUser().getBirthday()), LocalDate.now()).getYears());
+                    String age = "";
+
+                    try {
+                        age = ", " + Period.between(DateFormatterUtil.fromApiSimpleDate(dto.getUser().getBirthday()), LocalDate.now()).getYears();
+                    } catch (Exception e) {}
+
+                    binding.profileNameAge.setText(dto.getUser().getName() + age);
                     binding.profileWorkoutCount.setText("Workout count: " + dto.getWorkoutsCount());
                     binding.profileVolume.setText(dto.getTotalLoad() + " Kg");
                 }
@@ -127,6 +135,24 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onFailure(Call<UserProfile> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        client.getMeasureByUser(service.getAuthorizationHeader(), 1).enqueue(new Callback<Measure>() {
+            @Override
+            public void onResponse(Call<Measure> call, Response<Measure> response) {
+
+                Measure dto = response.body();
+
+                getChildFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .add(binding.profileChartWeight.getId(), ChartLineFragment.newInstance(dto.getData(), ChartType.PRIMARY), null)
+                        .commit();
+            }
+
+            @Override
+            public void onFailure(Call<Measure> call, Throwable t) {
                 t.printStackTrace();
             }
         });
