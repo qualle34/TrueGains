@@ -1,21 +1,12 @@
 package com.qualle.truegain.service;
 
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.qualle.truegain.R;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.api.LoginPasswordAuthentication;
 import com.qualle.truegain.client.api.Token;
 import com.qualle.truegain.client.api.TokenAuthentication;
-import com.qualle.truegain.client.api.TokenClaims;
 import com.qualle.truegain.model.local.LocalUser;
-import com.qualle.truegain.util.DateFormatterUtil;
 
-import java.io.IOException;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,7 +35,7 @@ public class ApiAuthenticationHandler implements AuthenticationHandler {
         }
 
         if (user.getAccessToken() != null && Instant.now().isBefore(user.getAccessTokenExpiredAt())) {
-           return;
+            return;
         }
 
         if (user.getRefreshToken() != null && Instant.now().isBefore(user.getRefreshTokenExpiredAt())) {
@@ -74,12 +65,12 @@ public class ApiAuthenticationHandler implements AuthenticationHandler {
             Future<Token> future = executorService.submit(callableTask);
             Token token = future.get(20, TimeUnit.SECONDS);
 
-            if(token != null) {
+            if (token != null) {
                 service.saveAuthToken(token);
             }
 
         } catch (Exception e) {
-            throw new RuntimeException("Unable to login", e);
+            service.clearAuthentication();
         } finally {
             executorService.shutdown();
         }
@@ -109,7 +100,7 @@ public class ApiAuthenticationHandler implements AuthenticationHandler {
             Future<Token> future = executorService.submit(callableTask);
             Token result = future.get(20, TimeUnit.SECONDS);
 
-            if(result != null) {
+            if (result != null) {
                 service.saveAuthToken(result);
             }
 
@@ -140,8 +131,4 @@ public class ApiAuthenticationHandler implements AuthenticationHandler {
         service.clearAuthentication();
     }
 
-
-    private void saveToken(){
-
-    }
 }

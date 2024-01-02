@@ -49,6 +49,10 @@ public class ChartPieFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             volume = (List<WorkoutVolume>) getArguments().getSerializable(ARG_DATA);
+
+            if (volume == null) {
+                volume = new ArrayList<>();
+            }
         }
     }
 

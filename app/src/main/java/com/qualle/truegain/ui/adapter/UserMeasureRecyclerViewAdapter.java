@@ -21,9 +21,15 @@ public class UserMeasureRecyclerViewAdapter extends RecyclerView.Adapter<UserMea
     private final List<Map.Entry<Float, Float>> data;
 
     public UserMeasureRecyclerViewAdapter(Measure dto) {
-        data = new ArrayList<>(dto.getData().entrySet()).stream()
-                .sorted(Map.Entry.comparingByKey())
-                .collect(Collectors.toList());
+
+        if (dto == null) {
+            data = new ArrayList<>();
+
+        } else {
+            data = new ArrayList<>(dto.getData().entrySet()).stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .collect(Collectors.toList());
+        }
     }
 
     @Override

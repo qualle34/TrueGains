@@ -12,14 +12,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.qualle.truegain.R;
 import com.qualle.truegain.client.BackendClient;
 import com.qualle.truegain.client.ClientModule;
-import com.qualle.truegain.client.InMemoryBackendClient;
-import com.qualle.truegain.client.api.User;
+import com.qualle.truegain.client.api.UserProfile;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentProfileSecurityBinding;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.LocalService;
 
 import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileSecurityFragment extends Fragment {
 
@@ -52,10 +55,25 @@ public class ProfileSecurityFragment extends Fragment {
 
         binding.profileSecurityButtonBack.setOnClickListener(v -> navController.popBackStack());
 
-        User user = InMemoryBackendClient.getUser();
+        client.getUserProfile(service.getAuthorizationHeader()).enqueue(new Callback<>() {
 
-        binding.profileSecurityEmail.setText(user.getEmail());
-        binding.profileSecurityPassword.setText("* * * * * * * * * *");
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+
+                if (response.isSuccessful()) {
+
+                    UserProfile dto = response.body();
+                    binding.profileSecurityEmail.setText(dto.getUser().getEmail());
+                    binding.profileSecurityPassword.setText("* * * * * * * * * *");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
         binding.profileSecurityEmail.setOnClickListener(v ->
                 navController.navigate(R.id.action_nav_profile_security_fragment_to_nav_profile_security_email_fragment));

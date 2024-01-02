@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class MainPageData {
 
-    private Map<Integer, Integer> workoutPerWeekChartData;
+    private List<WorkoutPerWeek> workoutPerWeekChartData;
     private List<SimpleWorkout> recentWorkouts;
     private MuscleDistributionChart muscleDistributionChartData;
     private List<SimpleExercise> frequentExercises;
@@ -13,18 +13,18 @@ public class MainPageData {
     public MainPageData() {
     }
 
-    public MainPageData(Map<Integer, Integer> workoutPerWeekChartData, List<SimpleWorkout> recentWorkouts, MuscleDistributionChart muscleDistributionChartData, List<SimpleExercise> frequentExercises) {
+    public MainPageData(List<WorkoutPerWeek> workoutPerWeekChartData, List<SimpleWorkout> recentWorkouts, MuscleDistributionChart muscleDistributionChartData, List<SimpleExercise> frequentExercises) {
         this.workoutPerWeekChartData = workoutPerWeekChartData;
         this.recentWorkouts = recentWorkouts;
         this.muscleDistributionChartData = muscleDistributionChartData;
         this.frequentExercises = frequentExercises;
     }
 
-    public Map<Integer, Integer> getWorkoutPerWeekChartData() {
+    public List<WorkoutPerWeek> getWorkoutPerWeekChartData() {
         return workoutPerWeekChartData;
     }
 
-    public void setWorkoutPerWeekChartData(Map<Integer, Integer> workoutPerWeekChartData) {
+    public void setWorkoutPerWeekChartData(List<WorkoutPerWeek> workoutPerWeekChartData) {
         this.workoutPerWeekChartData = workoutPerWeekChartData;
     }
 

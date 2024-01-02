@@ -140,6 +140,10 @@ public class MeasureDetailsFragment extends Fragment {
                 }
             });
 
+            if (recyclerView.getAdapter() == null) {
+                recyclerView.setAdapter(new UserMeasureRecyclerViewAdapter(null));
+            }
+
             ((UserMeasureRecyclerViewAdapter) recyclerView.getAdapter())
                     .addItem(DateFormatterUtil.dateToDayNumber(now), val);
             ((UserMeasureRecyclerViewAdapter) recyclerView.getAdapter())

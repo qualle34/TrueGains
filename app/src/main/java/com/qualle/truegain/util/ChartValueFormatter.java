@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.time.temporal.IsoFields;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class ChartValueFormatter {
@@ -19,13 +20,37 @@ public class ChartValueFormatter {
             public String getFormattedValue(float value) {
                 int week = (int) value; // todo HOW TO GET CORRECT WEEK
 
-                LocalDate monday = LocalDate.now()
-                        .with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, week)
-                        .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+//                int day = (int) value; // it is monday of week
+//
+//                LocalDate monday = LocalDate.ofEpochDay(day);
+//
+//                LocalDate sunday = monday
+//                        .with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
 
-                LocalDate sunday = LocalDate.now()
-                        .with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, week)
-                        .with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+                LocalDate now = LocalDate.now();
+                LocalDate monday;
+                LocalDate sunday;
+
+                if (value <= 0) {
+
+                    int weeksOfYear = Calendar.getInstance().getActualMaximum(Calendar.WEEK_OF_YEAR);
+
+                    monday = now.minusYears(1)
+                            .with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, weeksOfYear + week)
+                            .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+
+                    sunday = now.minusYears(1)
+                            .with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, weeksOfYear + week)
+                            .with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+
+                } else {
+
+                    monday = now.with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, week)
+                            .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+
+                    sunday = now.with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, week)
+                            .with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+                }
 
                 if (monday.getMonth().equals(sunday.getMonth())) {
                     return monday.getDayOfMonth() + " - " + sunday.getDayOfMonth() + " " +
@@ -49,6 +74,16 @@ public class ChartValueFormatter {
                 LocalDate date = LocalDate.ofEpochDay(day);
 
                 return date.getDayOfMonth() + " " + date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+            }
+        };
+    }
+
+    public static ValueFormatter getDefaultValueFormatter() {
+        return new ValueFormatter() {
+
+            @Override
+            public String getFormattedValue(float value) {
+                return value + "";
             }
         };
     }

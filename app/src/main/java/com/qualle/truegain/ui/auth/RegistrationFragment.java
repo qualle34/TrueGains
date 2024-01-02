@@ -53,11 +53,19 @@ public class RegistrationFragment extends Fragment {
 
         binding.registrationButtonNext.setOnClickListener(v -> {
 
+                    String pass = binding.registrationEditPassword.getText().toString();
+                    String passRep = binding.registrationEditPasswordRepeat.getText().toString();
+
+                    if (!pass.equals(passRep)) {
+                        Toast.makeText(getContext(), "Check your passwords", Toast.LENGTH_SHORT).show();
+                    }
+
+
                     NewRegistration registration = new NewRegistration();
                     registration.setName(binding.registrationEditName.getText().toString());
                     registration.setLogin(binding.registrationEditName.getText().toString());
                     registration.setEmail(binding.registrationEditEmail.getText().toString());
-                    registration.setPassword(binding.registrationEditPassword.getText().toString());
+                    registration.setPassword(pass);
 
                     client.registerNewUser(registration).enqueue(new Callback<TemporaryToken>() {
                         @Override

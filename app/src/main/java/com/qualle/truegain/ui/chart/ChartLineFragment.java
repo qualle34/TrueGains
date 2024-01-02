@@ -1,5 +1,7 @@
 package com.qualle.truegain.ui.chart;
 
+import static com.qualle.truegain.util.ChartValueFormatter.getDefaultValueFormatter;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.qualle.truegain.R;
 import com.qualle.truegain.databinding.FragmentChartLineBinding;
 import com.qualle.truegain.model.enums.ChartType;
@@ -92,11 +95,14 @@ public class ChartLineFragment extends Fragment {
         y.setDrawGridLines(false);
         y.setAxisLineColor(getResources().getColor(R.color.black_russian));
         y.setTextColor(getResources().getColor(R.color.black_russian));
-        y.setAxisMinimum(0f);
         y.setLabelCount(4);
 
         chart.getAxisRight().setEnabled(false);
         chart.getLegend().setEnabled(false);
+
+        XYMarkerView mv = new XYMarkerView(this.getContext());
+        mv.setChartView(chart);
+        chart.setMarker(mv);
 
         chart.animateX(1000);
 

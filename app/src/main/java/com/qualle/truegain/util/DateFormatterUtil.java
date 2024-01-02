@@ -21,7 +21,8 @@ public class DateFormatterUtil {
         try {
             return dateTime.format(simpleDateFormatter);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+//            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+            return "Loading error";
         }
     }
 
@@ -30,7 +31,8 @@ public class DateFormatterUtil {
             LocalDate date = LocalDate.ofEpochDay(epochDay);
             return date.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()) + " " + date.getDayOfMonth();
         } catch (RuntimeException e) {
-            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+//            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+            return "Loading error";
         }
     }
 
@@ -39,7 +41,8 @@ public class DateFormatterUtil {
         try {
             return LocalDateTime.ofInstant(Instant.ofEpochMilli(date), ZoneId.systemDefault());
         } catch (RuntimeException e) {
-            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+//            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+            return LocalDateTime.MIN;
         }
     }
 
@@ -48,7 +51,8 @@ public class DateFormatterUtil {
         try {
             return LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+//            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+            return LocalDate.MIN;
         }
     }
 
@@ -58,7 +62,8 @@ public class DateFormatterUtil {
         try {
             return LocalDateTime.parse(date, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+//            throw new RuntimeException("Unable to parse date: " + e.getMessage(), e);
+            return LocalDateTime.MIN;
         }
     }
 
@@ -67,17 +72,22 @@ public class DateFormatterUtil {
         try {
             return date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Unable to format date: " + e.getMessage(), e);
+//            throw new RuntimeException("Unable to format date: " + e.getMessage(), e);
+            return "Loading error";
         }
     }
 
     public static String dayNumberToDate(float value) {
-        int day = (int) value;
-        Instant.ofEpochSecond(day * 86400L);
+        try {
+            int day = (int) value;
+            Instant.ofEpochSecond(day * 86400L);
 
-        LocalDate date = LocalDate.ofEpochDay(day);
+            LocalDate date = LocalDate.ofEpochDay(day);
 
-        return date.getDayOfMonth() + " " + date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+            return date.getDayOfMonth() + " " + date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+        } catch (Exception e) {
+            return "Loading error";
+        }
     }
 
 

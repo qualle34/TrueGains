@@ -21,7 +21,7 @@ public class CurrentWorkoutViewModel extends ViewModel {
     public void createEmptyExercise(Exercise exercise) {
 
         if (!workoutData.isInitialized()) {
-            throw new NullPointerException("Workout not initialized");
+            workoutData.setValue(new Workout());
         }
 
         List<Record> currentRecords;
@@ -51,7 +51,7 @@ public class CurrentWorkoutViewModel extends ViewModel {
     public void createEmptyRecord(int exercisePosition) {
 
         if (!workoutData.isInitialized()) {
-            throw new NullPointerException("Workout not initialized");
+            workoutData.setValue(new Workout());
         }
 
         Workout workout = workoutData.getValue();
@@ -67,7 +67,7 @@ public class CurrentWorkoutViewModel extends ViewModel {
     public void updateRecords(int exercisePosition, Map<Integer, Record> records) {
 
         if (!workoutData.isInitialized()) {
-            throw new NullPointerException("Workout not initialized");
+            workoutData.setValue(new Workout());
         }
 
         Workout workout = workoutData.getValue();
@@ -89,7 +89,7 @@ public class CurrentWorkoutViewModel extends ViewModel {
     public void deleteExercise(int exercisePosition) {
 
         if (!workoutData.isInitialized()) {
-            throw new NullPointerException("Workout not initialized");
+            workoutData.setValue(new Workout());
         }
 
         Workout workout = workoutData.getValue();
@@ -101,7 +101,7 @@ public class CurrentWorkoutViewModel extends ViewModel {
     public void deleteEmptyRecords(int exercisePosition) {
 
         if (!workoutData.isInitialized()) {
-            throw new NullPointerException("Workout not initialized");
+            workoutData.setValue(new Workout());
         }
 
         Workout workout = workoutData.getValue();

@@ -86,13 +86,25 @@ public class ProfileEditFragment extends Fragment {
 
         initializeFields();
 
-        InputStream ims = null; // todo
         try {
-            ims = getContext().getAssets().open("base_photo.jpg");
-            Drawable d = Drawable.createFromStream(ims, null);
-            binding.profileEditImageView.setImageDrawable(d);
+            File imagePath = new File(requireContext().getFilesDir(), "images");
+            File newFile = new File(imagePath, "user_image.jpg");
+
+            Uri contentUri = FileProvider.getUriForFile(requireContext(), "com.qualle.truegain.provider", newFile);
+
+            InputStream inputStream = requireActivity().getContentResolver().openInputStream(contentUri);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+            binding.profileEditImageView.setImageBitmap(bitmap);
+
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            try {
+                InputStream ims = getContext().getAssets().open("base_photo.jpg");
+                Drawable d = Drawable.createFromStream(ims, null);
+                binding.profileEditImageView.setImageDrawable(d);
+
+            } catch (IOException ex) {
+            }
         }
 
         client.getUser(service.getAuthorizationHeader()).enqueue(new Callback<User>() {

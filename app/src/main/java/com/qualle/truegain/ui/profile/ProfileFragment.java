@@ -106,7 +106,6 @@ public class ProfileFragment extends Fragment {
                 binding.profileImageView.setImageDrawable(d);
 
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
             }
         }
 

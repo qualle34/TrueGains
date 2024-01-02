@@ -17,13 +17,18 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.qualle.truegain.R;
+import com.qualle.truegain.client.api.WorkoutPerWeek;
 import com.qualle.truegain.databinding.FragmentChartBarBinding;
 import com.qualle.truegain.util.ChartValueFormatter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -38,7 +43,7 @@ public class ChartBarFragment extends Fragment {
     public ChartBarFragment() {
     }
 
-    public static ChartBarFragment newInstance(Map<Integer, Integer> data) {
+    public static ChartBarFragment newInstance(List<WorkoutPerWeek> data) {
         ChartBarFragment fragment = new ChartBarFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATA, (Serializable) data);
@@ -50,7 +55,7 @@ public class ChartBarFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            data = convertData((Map<Integer, Integer>) getArguments().getSerializable(ARG_DATA));
+            data = convertData((List<WorkoutPerWeek>) getArguments().getSerializable(ARG_DATA));
         }
     }
 
@@ -63,8 +68,12 @@ public class ChartBarFragment extends Fragment {
         chart.getDescription().setEnabled(false);
         chart.getLegend().setEnabled(false);
 
+        chart.setTouchEnabled(true);
+
         chart.setDragEnabled(true);
-        chart.setScaleEnabled(false);
+        chart.setScaleXEnabled(true);
+        chart.setPinchZoom(false);
+
         chart.setPinchZoom(false);
         chart.setDrawBarShadow(false);
         chart.setDrawGridBackground(false);
@@ -122,24 +131,42 @@ public class ChartBarFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private ArrayList<BarEntry> convertData(Map<Integer, Integer> data) {
-        ArrayList<BarEntry> values = new ArrayList<>();
+    private ArrayList<BarEntry> convertData(List<WorkoutPerWeek> data) {
 
         if (data == null || data.isEmpty()) {
-            return values;
+            return new ArrayList<>();
         }
 
-        int weekOfYear = LocalDate.now().get(WeekFields.of(Locale.getDefault()).weekOfYear());
+        Map<Integer, Integer> values = new HashMap<>();
+        LocalDate startOfYear = LocalDate.now().with(TemporalAdjusters.firstDayOfYear());
 
-        values.add(new BarEntry(weekOfYear, data.get(weekOfYear)));
-        values.add(new BarEntry(weekOfYear - 1, data.get(weekOfYear - 1)));
-        values.add(new BarEntry(weekOfYear - 2, data.get(weekOfYear - 2)));
-        values.add(new BarEntry(weekOfYear - 3, data.get(weekOfYear - 3)));
+        for (WorkoutPerWeek week : data) {
 
-//        data.forEach((k, v) -> {
-//            values.add(new BarEntry(k, v));
-//        });
-        return values;
+            LocalDate monday = LocalDate.ofEpochDay(week.getDay());
+
+            if (startOfYear.isBefore(monday) || startOfYear.isEqual(monday)) {
+
+                values.put(week.getWeek(), week.getCount());
+
+            } else {
+                int weeksOfYear = Calendar.getInstance().getActualMaximum(Calendar.WEEK_OF_YEAR);
+
+                values.put(week.getWeek() - weeksOfYear, week.getCount());
+            }
+
+        }
+
+        ArrayList<BarEntry> result = new ArrayList<>();
+
+        int currentWeek = LocalDate.now().get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
+
+        for (int i = 0; i < 4; i++) {
+            if (values.containsKey(currentWeek - i)) {
+                result.add(new BarEntry(currentWeek - i, values.get(currentWeek - i)));
+            }
+        }
+
+        return result;
     }
 
     private int[] colors() {

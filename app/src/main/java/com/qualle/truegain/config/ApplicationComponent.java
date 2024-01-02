@@ -18,7 +18,9 @@ import com.qualle.truegain.ui.menu.ExerciseDetailedFragment;
 import com.qualle.truegain.ui.profile.MeasureListFragment;
 import com.qualle.truegain.ui.profile.ProfileEditFragment;
 import com.qualle.truegain.ui.profile.ProfileFragment;
+import com.qualle.truegain.ui.profile.ProfileSecurityEmailFragment;
 import com.qualle.truegain.ui.profile.ProfileSecurityFragment;
+import com.qualle.truegain.ui.profile.ProfileSecurityPasswordFragment;
 import com.qualle.truegain.ui.workout.SaveWorkoutFragment;
 import com.qualle.truegain.ui.workout.WorkoutDetailsFragment;
 import com.qualle.truegain.ui.workout.WorkoutListFragment;
@@ -56,6 +58,10 @@ public interface ApplicationComponent {
     void inject(WorkoutDetailsFragment fragment);
 
     void inject(ProfileFragment fragment);
+
+    void inject(ProfileSecurityEmailFragment fragment);
+
+    void inject(ProfileSecurityPasswordFragment fragment);
 
     void inject(ProfileEditFragment fragment);
 
