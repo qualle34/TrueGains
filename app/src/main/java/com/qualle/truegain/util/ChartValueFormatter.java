@@ -31,7 +31,7 @@ public class ChartValueFormatter {
                 LocalDate monday;
                 LocalDate sunday;
 
-                if (value <= 0) {
+                if (week <= 0) {
 
                     int weeksOfYear = Calendar.getInstance().getActualMaximum(Calendar.WEEK_OF_YEAR);
 
