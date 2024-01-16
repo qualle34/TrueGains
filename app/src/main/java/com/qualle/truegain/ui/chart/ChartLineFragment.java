@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.qualle.truegain.R;
+import com.qualle.truegain.databinding.FragmentChartBarBinding;
 import com.qualle.truegain.databinding.FragmentChartLineBinding;
 import com.qualle.truegain.model.enums.ChartType;
 import com.qualle.truegain.util.ChartValueFormatter;
@@ -66,8 +67,17 @@ public class ChartLineFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentChartLineBinding.inflate(inflater, container, false);
+        try {
+            return onCreateViewInternal();
+
+        } catch (Exception ignored) {
+            return binding.getRoot();
+        }
+    }
+
+    public View onCreateViewInternal() {
 
         LineChart chart = binding.lineChart;
 

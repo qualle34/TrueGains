@@ -113,26 +113,35 @@ public class WorkoutDetailsFragment extends Fragment {
                     ExerciseVolumeRecyclerViewAdapter adapter = new ExerciseVolumeRecyclerViewAdapter(volumeForExercises);
                     recyclerView.setAdapter(adapter);
 
+                    try {
 
-                    getChildFragmentManager().beginTransaction()
-                            .setReorderingAllowed(true)
-                            .replace(R.id.workout_chart_container, ChartPieFragment.newInstance(dto.getVolumeForBodyParts()), null)
-                            .commit();
+                        getChildFragmentManager().beginTransaction()
+                                .setReorderingAllowed(true)
+                                .replace(R.id.workout_chart_container, ChartPieFragment.newInstance(dto.getVolumeForBodyParts()), null)
+                                .commit();
+                    } catch (Exception ignored) {
 
-                    List<Exercise> exercises = dto.getExercises();
-
-                    FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-                    LinearLayout linearLayout = binding.workoutLinearLayoutExercises;
-
-                    for (int i = 0; i < exercises.size(); i++) {
-                        FrameLayout card = new FrameLayout(getContext());
-                        card.setId(i + 20);
-
-                        ft.add(card.getId(), CardExerciseFragment.newInstance(exercises.get(i)));
-                        linearLayout.addView(card);
                     }
 
-                    ft.commit();
+                    try {
+                        List<Exercise> exercises = dto.getExercises();
+
+                        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                        LinearLayout linearLayout = binding.workoutLinearLayoutExercises;
+
+                        for (int i = 0; i < exercises.size(); i++) {
+                            FrameLayout card = new FrameLayout(getContext());
+                            card.setId(i + 20);
+
+                            ft.add(card.getId(), CardExerciseFragment.newInstance(exercises.get(i)));
+                            linearLayout.addView(card);
+                        }
+
+                        ft.commit();
+
+                    } catch (Exception ignored) {
+
+                    }
 
                 }
             }

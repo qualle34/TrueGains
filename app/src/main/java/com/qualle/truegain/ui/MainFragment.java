@@ -21,7 +21,6 @@ import com.qualle.truegain.client.api.SimpleWorkout;
 import com.qualle.truegain.config.DaggerApplicationComponent;
 import com.qualle.truegain.databinding.FragmentMainBinding;
 import com.qualle.truegain.model.exception.ApiAuthenticationException;
-import com.qualle.truegain.service.ApiAuthenticationHandler;
 import com.qualle.truegain.service.AuthenticationHandler;
 import com.qualle.truegain.service.ErrorHandler;
 import com.qualle.truegain.service.LocalService;
@@ -122,15 +121,25 @@ public class MainFragment extends Fragment implements WorkoutListClickListener, 
 
                     if (isAdded() && !getActivity().isChangingConfigurations()) {
 
-                        getChildFragmentManager().beginTransaction()
-                                .setReorderingAllowed(true)
-                                .replace(R.id.main_chart_container, ChartBarFragment.newInstance(dto.getWorkoutPerWeekChartData()), null)
-                                .commit();
+                        try {
+                            getChildFragmentManager().beginTransaction()
+                                    .setReorderingAllowed(true)
+                                    .replace(R.id.main_chart_container, ChartBarFragment.newInstance(dto.getWorkoutPerWeekChartData()), null)
+                                    .commit();
 
-                        getChildFragmentManager().beginTransaction()
-                                .setReorderingAllowed(true)
-                                .replace(R.id.main_radar_chart_container, ChartRadarFragment.newInstance(dto.getMuscleDistributionChartData()), null)
-                                .commit();
+                        } catch (Exception ignored) {
+
+                        }
+
+                        try {
+                            getChildFragmentManager().beginTransaction()
+                                    .setReorderingAllowed(true)
+                                    .replace(R.id.main_radar_chart_container, ChartRadarFragment.newInstance(dto.getMuscleDistributionChartData()), null)
+                                    .commit();
+
+                        } catch (Exception ignored) {
+
+                        }
                     }
 
                 } else {

@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.qualle.truegain.R;
 import com.qualle.truegain.client.api.WorkoutVolume;
+import com.qualle.truegain.databinding.FragmentChartLineBinding;
 import com.qualle.truegain.databinding.FragmentChartPieBinding;
 import com.qualle.truegain.model.local.VolumeProto;
 import com.qualle.truegain.util.PieChartFormatter;
@@ -59,6 +60,15 @@ public class ChartPieFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentChartPieBinding.inflate(inflater, container, false);
+        try {
+            return onCreateViewInternal();
+
+        } catch (Exception ignored) {
+            return binding.getRoot();
+        }
+    }
+
+    public View onCreateViewInternal() {
 
         PieChart chart = binding.pieChart;
         chart.setUsePercentValues(true);

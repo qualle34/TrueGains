@@ -60,10 +60,17 @@ public class ChartBarFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentChartBarBinding.inflate(inflater, container, false);
+        try {
+            return onCreateViewInternal();
 
+        } catch (Exception ignored) {
+            return binding.getRoot();
+        }
+    }
+
+    public View onCreateViewInternal() {
         BarChart chart = binding.barChart;
         chart.getDescription().setEnabled(false);
         chart.getLegend().setEnabled(false);
@@ -161,9 +168,9 @@ public class ChartBarFragment extends Fragment {
         int currentWeek = LocalDate.now().get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
 
         for (int i = 0; i < 4; i++) {
-            if (values.containsKey(currentWeek - i)) {
-                result.add(new BarEntry(currentWeek - i, values.get(currentWeek - i)));
-            }
+            int count = values.getOrDefault(currentWeek - i, 0);
+
+            result.add(new BarEntry(currentWeek - i, count));
         }
 
         return result;

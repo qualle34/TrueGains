@@ -19,6 +19,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import com.qualle.truegain.R;
 import com.qualle.truegain.client.api.MuscleDistributionChart;
+import com.qualle.truegain.databinding.FragmentChartPieBinding;
 import com.qualle.truegain.databinding.FragmentChartRadarBinding;
 
 import java.util.ArrayList;
@@ -56,7 +57,15 @@ public class ChartRadarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentChartRadarBinding.inflate(inflater, container, false);
+        try {
+            return onCreateViewInternal();
 
+        } catch (Exception ignored) {
+            return binding.getRoot();
+        }
+    }
+
+    public View onCreateViewInternal() {
         RadarChart chart = binding.radarChart;
 
         chart.setWebLineWidth(1f);
